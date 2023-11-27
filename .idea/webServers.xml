@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="86ea2f6c-5337-4e55-a844-17986ee01f3f" name="demo host" url="https://rhan.work/">
+        <fileTransfer rootFolder="/var/www/rhan.work/htdocs" accessType="SFTP" host="139.162.76.12" port="22" sshConfigId="65993a48-539b-415f-923c-a972b3372163" sshConfig="demo">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

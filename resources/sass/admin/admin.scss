@@ -1,0 +1,32 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import '../variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Template
+@import 'template/adminlte';
+
+@import '~@fortawesome/fontawesome-free/css/fontawesome';
+@import '~@fortawesome/fontawesome-free/css/regular';
+@import '~@fortawesome/fontawesome-free/css/solid';
+@import '~@fortawesome/fontawesome-free/css/brands';
+
+/**
+select2
+ */
+@import "~select2/dist/css/select2.min.css";
+/**
+Slider
+ */
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+/**
+DataTables
+ */
+@import "~datatables.net-bs5/css/dataTables.bootstrap5.min.css";
+@import "~datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css";

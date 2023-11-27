@@ -1,0 +1,62 @@
+<?php
+
+return[
+
+    'order'=>[
+        'status'=>[
+            '1'=>[
+                'title'=>'等待付款中',
+                'badge'=>'badge-secondary',
+            ],
+            '2'=>[
+                'title'=>'處理中',
+                'badge'=>'badge-warning',
+            ],
+            '3'=>[
+                'title'=>'已出貨',
+                'badge'=>'badge-info',
+            ],
+            '4'=>[
+                'title'=>'完成',
+                'badge'=>'badge-success',
+            ],
+            '5'=>[
+                'title'=>'取消',
+                'badge'=>'badge-danger',
+            ],
+        ],
+        'payment'=>[
+            'COD'=>[
+                'title'=>'貨到付款',
+                'badge'=>'badge-success',
+            ],
+            'Credit'=>[
+                'title'=>'信用卡',
+                'badge'=>'badge-primary',
+            ],
+            'ATM'=>[
+                'title'=>'ATM轉帳',
+                'badge'=>'badge-warring',
+            ],
+        ],
+        'shipment'=>[
+            'inStore'=>[
+                'title'=>'到店取貨',
+                'badge'=>'badge-success',
+            ],
+            'homeDelivery'=>[
+                'title'=>'宅配',
+                'badge'=>'badge-warring',
+            ],
+            '7-11'=>[
+                'title'=>'7-11',
+                'badge'=>'badge-danger',
+            ],
+            'Family'=>[
+                'title'=>'全家',
+                'badge'=>'badge-info',
+            ],
+        ],
+    ],
+
+];
