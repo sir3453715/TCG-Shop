@@ -1,55 +1,28 @@
 
-<div class="ToTopDiv">
-    <a href="#" class="scrollToTop"><i class="fas fa-angle-double-up"></i></a>
-</div>
+
 <!-- FOOTER START -->
-<section class="footer bg-dark">
-    <div class="container">
+<section id="footer">
         <div class="row">
-            <div class="col-lg-4">
-                <div class="footer-menu">
-                    <h5 class="mb-4 text-uppercase">Han</h5>
-                    <div>
-                        <img src="/storage/image/Han.jpg">
-                    </div>
-                </div>
+            <div class="col-lg-2 col-md-3 bg-black">
+                
             </div>
-
-            <div class="col-lg-4">
-                <div class="footer-menu">
-                    <h5 class="mb-4 text-uppercase">SiteMap</h5>
-                    <ul class="text-muted list-unstyled">
-                        <li>
-                            <a href="#home">Home</a>
-                        </li>
-                        <li>
-                            <a href="#Select2">Select2</a>
-                        </li>
-                        <li>
-                            <a href="#Slider">Slider</a>
-                        </li>
-                        <li>
-                            <a href="#Editor">Editor</a>
-                        </li>
-                        <li>
-                            <a href="#Popup">Popup</a>
-                        </li>
-                        <li>
-                            <a href="#Form">Form Validation</a>
-                        </li>
+            <div class="col-md-9 col-lg-10 footer-menu">
+                    <ul class="d-flex justify-content-evenly m-0">
+                      <li class="list-group-item">
+                        <p class="m-0">© 2024 Trading Card. All rights reserved.</p>
+                      </li>
+                      <li class="list-group-item">
+                        <a href="">Terms of Service.</a>
+                      </li>
+                      <li class="list-group-item">
+                        <a href="">Privacy Policy</a>
+                      </li>
                     </ul>
-                </div>
+                <div id="to-top-btn">
+    <a href="#" class="scrollToTop"><i class="fa-solid fa-arrow-up"></i></a>
+</div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="text-center mt-5">
-                    <p class="mb-0">2021  © Han</p>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>
 
 <!-- FOOTER END -->
