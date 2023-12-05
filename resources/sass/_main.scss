@@ -8,15 +8,6 @@ html {
     background: #E7E7E7;
 }
 
-#app {
-    &.container-full {
-        margin-top: 70px;
-        @media (max-width: 493px){
-            margin-top: 121px;
-        }
-    }
-}
-
 #header-nav {
     background: $white;
     box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.12);
