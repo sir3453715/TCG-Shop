@@ -1,5 +1,5 @@
 <aside id="sidebar-menu">
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-auto fixed-top">
         <li class="nav-item">
             <a class="nav-link" href="">最新活動</a>
         </li>
