@@ -96,17 +96,17 @@ html {
         font-size: 20px;
         color: $black;
         background: $white;
-        @media (max-width: 992px)
-        {
+
+        @media (max-width: 992px) {
             font-size: 14px;
         }
 
         ul {
-            @media (max-width: 992px){
-              flex-direction: column-reverse;
-              align-items: center;  
+            @media (max-width: 992px) {
+                flex-direction: column-reverse;
+                align-items: center;
             }
-            
+
         }
 
         a {
@@ -129,9 +129,10 @@ html {
     background: $black;
 
     a {
-        color: $white!important;
+        color: $white !important;
+
         &:hover {
-            color: $yellow!important;
+            color: $yellow !important;
         }
     }
 }
@@ -208,6 +209,23 @@ html {
             color: $black;
         }
     }
+
+    &-sm {
+        padding: 5px;
+        &:hover {
+            background: $orange;   
+        }
+        &-yellow {
+            background: $yellow;
+            color: $black;
+        }
+
+        &-black {
+            background: $black;
+            color: $white;
+        }
+
+    }
 }
 
 .news-list {
@@ -220,21 +238,226 @@ html {
         border-radius: 10px;
         border: 2px solid #281000;
         background: #FFF;
-        @media (max-width: 576px){
+
+        @media (max-width: 576px) {
             flex-direction: column;
-            }
+        }
     }
 }
 
-.cus-card-info {
+.cus-store-info {
     display: flex;
-height: 408px;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 24px;
-background: $yellow;
-text-align: center;
-border-radius: 10px;
-padding: 5%;
+    height: 408px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    background: $yellow;
+    text-align: center;
+    border-radius: 10px;
+    padding: 5%;
 }
+
+// card style
+
+.cus-card {
+    background: $white;
+    border: none;
+
+    .card-img-top {
+        padding: 10%;
+        background: #D9D9D9;
+        display: flex;
+        justify-content: center;
+
+        img {
+            filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+
+            &:hover {
+                filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.5));
+            }
+        }
+    }
+
+    .card {
+        &-title {
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        &-top {
+            font-size: 18px;
+        }
+
+        &-price {
+            color: #B40000;
+        }
+    }
+
+}
+
+// card search 
+.cus-card-search {
+    padding: 5%;
+    background: $yellow;
+    border-radius: 10px;
+
+    .form {
+        &-group {
+            margin-bottom: 10px;
+        }
+
+        &-control {
+            background: $white;
+        }
+    }
+
+
+    .select2-container {
+        width: 100% !important;
+    }
+
+    .select2-container .select2-search--inline .select2-search__field {
+        width: 100% !important;
+    }
+
+    .select2-container--default .select2-selection--multiple {
+        border: none;
+
+    }
+
+}
+
+#cus-card-info-modal {
+    .modal {
+        &-header {
+            border: none;
+            padding-bottom: 0;
+            justify-content: space-around;
+            font-size: 20px;
+            font-weight: bold;
+            @media (max-width: 992px) {
+                font-size: 18px;
+            }
+        }
+
+        &-content {
+            background-color: transparent;
+            border: none;
+        }
+
+        &-body {
+            background-color: $white;
+            border-radius: 10px;
+            padding: 5%;
+            @media (max-width: 992px) {
+                padding: 10% 5%;
+            }
+        }
+
+        &-tag-1 {
+            background: $yellow;
+            max-width: 45%;
+            border-radius: 10px 10px 0 0;
+            padding: 10px;
+        }
+
+        &-tag-2 {
+            background: $orange;
+            max-width: 45%;
+            border-radius: 10px 10px 0 0;
+            padding: 10px;
+        }
+    }
+    .price {
+        color: #B40000;
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    .btn-close {
+position: absolute;
+    top: 15px;
+    right: 15px;
+    }
+
+}
+
+.badge{
+&-pill {
+border-radius: 100px;
+}
+
+&-outline {
+    border: 1px solid #000;
+    max-width: 70px;
+}
+
+&-gray {
+    background:#D9D9D9;
+}
+
+&-black {
+    background: $black;
+    color: $white;
+}
+&-sm {
+    padding: 4px;
+    text-align: center;
+}
+}
+
+// add to cart 
+
+.addtocart-selector{
+    
+    .addtocart-qty{
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+      flex: 1 0 auto;
+      max-width: 180px;
+  
+      .addtocart-button,
+      .addtocart-input{
+        flex: 1 1 33%;
+        text-align:center;
+        width: 33%;
+        height: 45px;
+        line-height: 45px;
+        padding: 0;
+        font-size: 16px;
+        
+      }
+      
+      .addtocart-button{
+        border: 1px solid #c6c6c6;
+        text-align:center;
+        cursor: pointer;
+        background-color: #efefef;
+        transition: all 0.25s;      
+             
+        &.button-down{
+          border-radius: 5px 0 0 5px
+        }
+        
+        &.button-up{
+          border-radius: 0 5px 5px 0;
+        }
+        
+        &:hover{
+          background-color: $orange;
+          color: #fff;
+        }
+      }
+      
+      .addtocart-input{
+        border: 1px solid #c6c6c6;
+        border-left:none;
+        border-right:none;
+        font-weight: bold;
+        font-size: 12px;
+      }
+    }
+    
+  }

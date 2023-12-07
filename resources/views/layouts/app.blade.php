@@ -17,8 +17,11 @@
     @stack('app-styles')
 </head>
 <body>
-<div id="app" class="container-fluid p-0">
-    @include('component.header')
+<div id="app" class="container-fluid">
+    <div class="row sticky-top">
+       @include('component.header') 
+    </div>
+    
     <div class="row">
     <div class="d-none d-md-block col-md-3 col-lg-2 p-0">
     @include('component.sidebar')

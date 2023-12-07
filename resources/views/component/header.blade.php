@@ -1,5 +1,5 @@
 <!-- NAVBAR -->
-<nav id="header-nav" class="navbar navbar-expand-lg navbar-custom sticky-top">
+<nav id="header-nav" class="navbar navbar-expand-lg navbar-custom">
     <div class="container-fluid">
         <div class="col-md-4">
             <button class="btn btn-menu d-md-none p-0 me-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">

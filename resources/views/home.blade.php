@@ -19,7 +19,6 @@
                 <= 3; $i++) <img class="img-fluid" alt="Bootstrap Image Preview" src="https://placehold.co/820x615" />
                 @endfor
             </div>
-
         </div>
     </div>
     <!-- news -->
@@ -60,10 +59,9 @@
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3637.66250801265!2d120.720984!3d24.253579999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34691a0e56b5349f%3A0xf4131754898862d7!2s5%E6%A8%93%2C%20No.%2065%E8%99%9F%2C%20Sanmin%20Rd%2C%20Fengyuan%20District%2C%20Taichung%20City%2C%20420!5e0!3m2!1sen!2stw!4v1701716724415!5m2!1sen!2stw"
             width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"></iframe>
-
     </div>
     <div class="col-lg-4 mb-4">
-        <div class="cus-card-info">
+        <div class="cus-store-info">
             <h5 class="fs-1 fw-bold">店鋪資訊</h5>
             <p>規劃路線</p>
             <div>
