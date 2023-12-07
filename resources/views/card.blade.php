@@ -2,22 +2,7 @@
 
 @push('app-styles')
 <style>
-    @media (min-width: 576px) {
-        #card_info_modal .modal-dialog {
-            max-width: 50% !important;
-        }
 
-    }
-
-    .energy-image {
-        width: 20px;
-        height: 100%;
-        margin-left: 5px;
-    }
-
-    .hp {
-        margin-left: 5px;
-    }
 </style>
 @endpush
 @section('content')
