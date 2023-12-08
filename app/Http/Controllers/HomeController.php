@@ -149,6 +149,13 @@ class HomeController extends Controller
 
     }
 
+    public function news()
+    {
+
+        return view('news');
+
+    }
+
     public function addToDeck(Request $request){
         $CID = $request->get('id');
         $number = $request->get('number');

@@ -1,7 +1,7 @@
 <aside id="sidebar-menu">
     <ul class="navbar-nav ml-auto fixed-top">
         <li class="nav-item">
-            <a class="nav-link" href="">最新活動</a>
+            <a class="nav-link" href="{{route('news')}}">最新活動</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="">最新賽事</a>
