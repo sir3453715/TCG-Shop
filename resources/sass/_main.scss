@@ -255,6 +255,24 @@ html {
         }
 
     }
+
+    &-md {
+        height: 50px;
+
+        &:hover {
+            background: $orange;
+        }
+
+        &-yellow {
+            background: $yellow;
+            color: $black;
+        }
+
+        &-black {
+            background: $black;
+            color: $white;
+        }
+    }
 }
 
 .news-list {
@@ -544,14 +562,18 @@ html {
 .news-post {
     background: $white;
     padding: 5%;
+
     &-date {
         font-size: 36px;
+
         @media (max-width: 992px) {
             font-size: 20px;
         }
     }
+
     &-content {
         padding: 5%;
+
         @media (max-width: 992px) {
             padding: 0;
         }
@@ -581,4 +603,54 @@ html {
             }
         }
     }
+}
+
+#social-btn {
+    &-g {
+        background: $white;
+        white-space: nowrap;
+        color: $secondary;
+        font-size: 14px;
+        padding: 5px 10px;
+
+        &:hover {
+            box-shadow: $box-shadow-sm;
+        }
+    }
+
+    &-f {
+        background: #1877F2;
+        white-space: nowrap;
+        font-size: 14px;
+        color: $white;
+        padding: 5px 10px;
+
+        &:hover {
+            box-shadow: $box-shadow-sm;
+        }
+
+        i {
+            font-size: 25px;
+            width: 30px;
+        }
+    }
+
+}
+
+.login-form {
+    max-width: 400px;
+}
+
+// form style
+
+.form-control {
+    background: $white;
+
+    &:focus {
+        background: $white;
+    }
+}
+
+.form-control::placeholder {
+    opacity: 0.5;
 }
