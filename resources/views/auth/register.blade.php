@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container login-form p-4">
+<div class="container register-form p-4">
     <div class="row justify-content-center">
             <h1 class="fs-40">註冊</h1>
                     <form method="POST" action="{{ route('register') }}">

@@ -23,6 +23,14 @@
     color: #B40000;
 }
 
+.bg-white {
+background: $white;
+}
+
+.bg-yellow {
+    background: $yellow;
+}
+
 
 html {
     overflow-x: clip;
@@ -653,4 +661,17 @@ html {
 
 .form-control::placeholder {
     opacity: 0.5;
+}
+
+// dashboard
+
+.user-info {
+    img {
+        border-radius: 50%;
+    }
+p{
+    font-size: 20px;
+    color: $black;
+    font-weight: 400;
+}
 }

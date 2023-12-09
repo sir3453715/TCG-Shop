@@ -19,6 +19,7 @@ Route::get('/card', 'HomeController@card')->name('card');
 Route::get('/deck', 'HomeController@deck')->name('deck');
 Route::get('/news', 'HomeController@news')->name('news');
 Route::get('/newsPost', 'HomeController@newsPost')->name('newsPost');
+Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
 
 Route::post('/orderCreate','HomeController@orderCreate')->name('orderCreate');
 
