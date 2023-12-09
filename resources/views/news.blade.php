@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="news-top p-4 p-lg-5">
     <h1 class="fs-40 fw-bold mb-4 mb-lg-5">賽事內容</h1>
     <img class="img-fluid w-100" src="https://placehold.co/1095x628" alt="">
@@ -48,8 +47,7 @@
             </div>
         </div>
     @endfor
-
-</div>
+    </div>
 </div>
 @endsection
 

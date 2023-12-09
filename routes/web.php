@@ -18,6 +18,7 @@ Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/card', 'HomeController@card')->name('card');
 Route::get('/deck', 'HomeController@deck')->name('deck');
 Route::get('/news', 'HomeController@news')->name('news');
+Route::get('/newsPost', 'HomeController@newsPost')->name('newsPost');
 
 Route::post('/orderCreate','HomeController@orderCreate')->name('orderCreate');
 

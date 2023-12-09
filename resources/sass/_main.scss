@@ -11,6 +11,14 @@
     }
 }
 
+.fs-36 {
+    font-size: 36px;
+
+    @media (max-width: 992px) {
+        font-size: 30px;
+    }
+}
+
 .text-red {
     color: #B40000;
 }
@@ -531,6 +539,23 @@ html {
         }
     }
 
+}
+
+.news-post {
+    background: $white;
+    padding: 5%;
+    &-date {
+        font-size: 36px;
+        @media (max-width: 992px) {
+            font-size: 20px;
+        }
+    }
+    &-content {
+        padding: 5%;
+        @media (max-width: 992px) {
+            padding: 0;
+        }
+    }
 }
 
 .card-wrapper {
