@@ -184,6 +184,13 @@ class HomeController extends Controller
 
     }
 
+    public function order()
+    {
+
+        return view('order');
+
+    }
+
 
     public function addToDeck(Request $request){
         $CID = $request->get('id');
