@@ -1,6 +1,12 @@
 @extends('layouts.app')
 @section('content')
 <div id="my-deck-list" class="m-4 m-lg-5">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="">我的排組</a></li>
+    <li class="breadcrumb-item active" aria-current="page">排組明細</li>
+  </ol>
+</nav>
     <div class="row deck-list bg-yellow rounded-3 p-3 align-items-center">
         <div class="col-sm-9 mb-2">
             <div class="d-flex flex-wrap mb-sm-3">

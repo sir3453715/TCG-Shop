@@ -292,6 +292,21 @@ html {
     }
 }
 
+// breadcrumb
+.breadcrumb {
+    &-item.active{
+        color: #000;
+    }
+    
+    a {
+        color:#888;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
 .news-list {
     &-item {
         display: flex;
