@@ -191,6 +191,13 @@ class HomeController extends Controller
 
     }
 
+    public function wishlist()
+    {
+
+        return view('wishlist');
+
+    }
+
 
     public function addToDeck(Request $request){
         $CID = $request->get('id');

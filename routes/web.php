@@ -23,6 +23,7 @@ Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
 Route::get('/myDeck', 'HomeController@myDeck')->name('myDeck');
 Route::get('/myDeckDetail', 'HomeController@myDeckDetail')->name('myDeckDetail');
 Route::get('/order', 'HomeController@order')->name('order');
+Route::get('/wishlist', 'HomeController@wishlist')->name('wishlist');
 
 
 Route::post('/orderCreate','HomeController@orderCreate')->name('orderCreate');
