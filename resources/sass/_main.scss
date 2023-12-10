@@ -226,6 +226,7 @@ html {
     &-text {
         color: $black;
         text-decoration: none;
+        white-space: nowrap;
         &:hover{
             text-decoration: underline;
         }
@@ -701,7 +702,7 @@ p{
             float: right;
         }
     }
-    &-date, &-del {
+    &-date, &-del, &-edit {
         font-size: 20px;
         @media (max-width: 992px) {
             font-size: 16px;
@@ -723,5 +724,35 @@ p{
         @media (max-width: 576px) {
 margin-left: auto;
         }
+        @media (max-width: 340px) {
+            margin-left: 0;
+            margin-bottom: 1rem;
+                    }
     }
+    &-list-card {
+        position: relative;
+    }
+
+    &-list-content {
+        border-bottom: solid 1px #000;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    }
+    &-card-count {
+    align-items: center;
+    background:$white;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    border: solid 1px #000;
+    font-weight: bold;
+    font-size: 16px;
+    position: absolute;
+    right: 0;
+    top: -10px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    }
+        
 }
