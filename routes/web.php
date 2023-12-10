@@ -20,6 +20,7 @@ Route::get('/deck', 'HomeController@deck')->name('deck');
 Route::get('/news', 'HomeController@news')->name('news');
 Route::get('/newsPost', 'HomeController@newsPost')->name('newsPost');
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+Route::get('/myDeck', 'HomeController@myDeck')->name('myDeck');
 
 Route::post('/orderCreate','HomeController@orderCreate')->name('orderCreate');
 

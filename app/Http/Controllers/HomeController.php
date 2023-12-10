@@ -170,6 +170,13 @@ class HomeController extends Controller
 
     }
 
+    public function myDeck()
+    {
+
+        return view('myDeck');
+
+    }
+
     public function addToDeck(Request $request){
         $CID = $request->get('id');
         $number = $request->get('number');
