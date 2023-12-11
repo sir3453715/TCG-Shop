@@ -198,6 +198,27 @@ class HomeController extends Controller
 
     }
 
+    public function orderDetail()
+    {
+
+        return view('orderDetail');
+
+    }
+
+    public function cart()
+    {
+
+        return view('cart');
+
+    }
+
+    public function invoice()
+    {
+
+        return view('invoice');
+
+    }
+
 
     public function addToDeck(Request $request){
         $CID = $request->get('id');
