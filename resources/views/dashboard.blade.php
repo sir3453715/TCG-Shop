@@ -17,7 +17,7 @@
         </div>
         <div class="user-form">
             <div class="mb-3 fs-5">
-                 <a href=""><i class="fa-regular fa-pen-to-square me-2"></i>編輯會員資料</a> 
+                 <a href="" class="btn btn-text fs-5 ps-0"><i class="fa-regular fa-pen-to-square me-2"></i>編輯會員資料</a> 
             </div>
           
             <div class="row">

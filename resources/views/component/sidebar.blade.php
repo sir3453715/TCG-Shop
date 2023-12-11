@@ -4,10 +4,10 @@
             <a class="nav-link" href="{{route('news')}}">最新活動</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="">最新賽事</a>
+            <a class="nav-link" href="{{route('news')}}">最新賽事</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{route('deck')}}">推薦牌組</a>
+            <a class="nav-link" href="{{route('card')}}">推薦牌組</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{route('card')}}">卡牌列表</a>
@@ -32,7 +32,13 @@
                     </li>
                     @else
                     <li class="nav-item sub-nav-item">
-                        <a class="nav-link" href="{{route('login')}}">登入 / 註冊</a>
+                        <a class="nav-link" href="{{route('dashboard')}}">會員資料</a>
+                        <a class="nav-link" href="{{route('myDeck')}}">我的牌組</a>
+                        <a class="nav-link" href="{{route('wishlist')}}">願望清單</a>
+                        <a class="nav-link" href="{{route('order')}}">我的訂單</a>
+                        <a class="nav-link" href="{{route('login')}}">登入</a>
+                        <a class="nav-link" href="{{route('register')}}">註冊</a>
+                        
                     </li>
                     @endif
                 </ul>

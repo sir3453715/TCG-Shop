@@ -266,9 +266,8 @@
                         <p>若您於付款程序中，不小心跳離或是關閉頁面，請重新下單即可；若您多次遇到付款失敗，請嘗試更換信用卡再次下單，或洽詢發卡行。<br>
 【提醒您！】本公司不會透過電話要求顧客操作網路銀行或是ATM！若您接到不明來電提及上述內容，切勿提供個人資料！切勿聽信電話指示操作任何動作！並立刻撥打165反詐騙專線或者與我們聯繫！</p>
                     </div>
-                    <button type="submit" class="btn btn-md btn-md-yellow fs-5 w-100 mb-5 bg-light-yellow">
-                    下一步
-                            </button>
+                    <a href="{{route('invoice')}}" class="btn btn-md btn-md-yellow fs-5 w-100 mb-5 bg-light-yellow">
+                    下一步</a>
                 </div>
 
             </div>
