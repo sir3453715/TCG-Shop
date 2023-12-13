@@ -1,125 +1,13 @@
 @extends('layouts.app')
 @section('content')
-<!-- //add to mian.scss later -->
-<style>
-    .table {
-        font-size: 15px;
-        border-collapse: collapse;
-        outline: solid 1px #c6c6c6;
-        width: 100%;
-        background-color: #fff;
-    }
 
-    .table> :not(caption)>*>* {
-        background-color: #fff;
-    }
-
-    .table .addtocart-selector .addtocart-qty {
-        max-width: 130px;
-
-    }
-
-    .cus-table-header {
-        font-size: 20px;
-        color: #fff;
-        padding: 10px 20px;
-        background: #000;
-    }
-
-    tbody {
-        outline: solid 1px #c6c6c6;
-        border: transparent;
-    }
-
-    tbody td {
-        padding: 20px 10px !important;
-    }
-
-    .product-title {
-        font-size: 15px;
-    }
-
-    td {
-        vertical-align: middle;
-    }
-
-    tr {
-        text-align: center;
-    }
-
-    .product-media {
-        max-width: 70px;
-    }
-
-    @media (max-width: 576px) {
-        tbody tr {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            box-sizing: border-box;
-            padding: 20px 0;
-        }
-
-        tbody td {
-            width: 100%;
-            padding: 5px !important;
-        }
-
-        thead {
-            display: none;
-        }
-
-        .product {
-            padding: 0 5%
-        }
-
-        .product-title {
-            text-align: left;
-        }
-
-    }
-
-    /* cart style */
-    .steps-col {
-        position: relative;
-    }
-    .steps-col hr{
-        width: 70%;
-    border: solid 0.5px black;
-    opacity: 1;
-    position: absolute;
-    top: 30%;
-    left: 15%;
-    z-index: 1;
-    }
-.steps-col-items {
-    position: relative;
-    height: 50px;
-    width: 50px;
-    display: inline-flex;
-    background: #D9D9D9;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-weight:bold;
-    margin-bottom:5px;
-    z-index: 10;
-}
-    /* utility */
-
-    .bg-light-yellow {
-    background: #FDF0AB;
-}
-
-    /* end add */
-</style>
 <div id="cart" class="m-3 m-lg-5">
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="">首頁</a></li>
-    <li class="breadcrumb-item active" aria-current="page">購物車</li>
-  </ol>
-</nav>
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">首頁</a></li>
+            <li class="breadcrumb-item active" aria-current="page">購物車</li>
+        </ol>
+    </nav>
     <div class="steps-col row text-center my-5">
         <div class="col-4">
             <span class="steps-col-items">1</span>
@@ -136,7 +24,7 @@
         <hr>
     </div>
     <!--end .steps-col-->
-
+<form action="" method="">
     <div class="row mb-3 mb-lg-5">
         <div>
             <div class="cus-table-header">
@@ -241,7 +129,7 @@
                         <div class="fw-bold">NT$ 6700</div>
                     </div>
                     <div class="col mb-2 d-flex justify-content-between">
-                    <div>折抵購物金:</div>
+                        <div>折抵購物金:</div>
                         <div class="fw-bold">-NT$0 購物金</div>
                     </div>
                     <div class="col mb-2 d-flex justify-content-between">
@@ -252,7 +140,7 @@
                         <div>合計</div>
                         <div class="fw-bold">NT$6795</div>
                     </div>
-                
+
                     <div class="col mb-2">
                         <label for="" class="form-label">付款方式:</label>
                         <select class="form-select bg-white" id="">
@@ -264,16 +152,17 @@
                     </div>
                     <div class="my-5">
                         <p>若您於付款程序中，不小心跳離或是關閉頁面，請重新下單即可；若您多次遇到付款失敗，請嘗試更換信用卡再次下單，或洽詢發卡行。<br>
-【提醒您！】本公司不會透過電話要求顧客操作網路銀行或是ATM！若您接到不明來電提及上述內容，切勿提供個人資料！切勿聽信電話指示操作任何動作！並立刻撥打165反詐騙專線或者與我們聯繫！</p>
+                            【提醒您！】本公司不會透過電話要求顧客操作網路銀行或是ATM！若您接到不明來電提及上述內容，切勿提供個人資料！切勿聽信電話指示操作任何動作！並立刻撥打165反詐騙專線或者與我們聯繫！
+                        </p>
                     </div>
                     <a href="{{route('invoice')}}" class="btn btn-md btn-md-yellow fs-5 w-100 mb-5 bg-light-yellow">
-                    下一步</a>
+                        下一步</a>
                 </div>
 
             </div>
         </div>
     </div>
-
+</form>
 </div>
 
 @endsection

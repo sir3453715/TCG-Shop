@@ -12,12 +12,10 @@
         <li class="nav-item">
             <a class="nav-link" href="{{route('card')}}">卡牌列表</a>
         </li>
-
-        <li class="nav-item">
-            <a class="btn-toggle collapsed nav-link" type="button" data-bs-toggle="collapse" data-bs-target="#account-collapse"
+            <li class="btn-toggle collapsed nav-link" data-bs-toggle="collapse" data-bs-target="#account-collapse"
                 aria-expanded="false">
                 會員中心
-            </a>
+            </li>
             <div class="collapse" id="account-collapse">
                 <ul class="btn-toggle-nav list-unstyled">
                     @if(\Illuminate\Support\Facades\Auth::check())
@@ -43,7 +41,5 @@
                     @endif
                 </ul>
             </div>
-        </li>
-
     </ul>
 </aside>

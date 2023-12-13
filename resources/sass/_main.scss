@@ -227,6 +227,11 @@ html {
 // btn style
 
 .btn {
+    &-remove {
+&:hover{
+    color: $red;
+}
+    }
     &-text {
         color: $black;
         text-decoration: none;
@@ -775,3 +780,141 @@ margin-left: auto;
     }
         
 }
+
+// order
+
+.order-list {
+    font-size: 20px;
+    font-weight: 400;
+    max-width: 940px;
+    margin:auto;
+    }
+    .order-number {
+        background:#F9D61D;
+        padding:0 10px;
+    }
+    .order-status{
+    background:#FFCCB6;
+    padding: 0 10px;
+        border-radius: 4px;
+    }
+    
+    @media (max-width: 576px) {
+        .order-list {
+    font-size: 16px;
+    }
+    }
+
+// cart
+
+.table {
+    font-size: 15px;
+    border-collapse: collapse;
+    outline: solid 1px #c6c6c6;
+    width: 100%;
+    background-color: #fff;
+}
+
+.table> :not(caption)>*>* {
+    background-color: #fff;
+}
+
+.table .addtocart-selector .addtocart-qty {
+    max-width: 130px;
+
+}
+
+.cus-table-header {
+    font-size: 20px;
+    color: #fff;
+    padding: 10px 20px;
+    background: #000;
+}
+
+tbody {
+    outline: solid 1px #c6c6c6;
+    border: transparent;
+}
+
+tbody td {
+    padding: 20px 10px !important;
+}
+
+.product-title {
+    font-size: 15px;
+}
+
+td {
+    vertical-align: middle;
+}
+
+tr {
+    text-align: center;
+}
+
+.product-media {
+    max-width: 70px;
+}
+
+@media (max-width: 576px) {
+    tbody tr {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px 0;
+    }
+
+    tbody td {
+        width: 100%;
+        padding: 5px !important;
+    }
+
+    thead {
+        display: none;
+    }
+
+    .product {
+        padding: 0 5%
+    }
+
+    .product-title {
+        text-align: left;
+    }
+
+}
+
+/* cart style */
+.steps-col {
+    position: relative;
+}
+
+.steps-col hr {
+    width: 67%;
+    border: solid 0.5px black;
+    opacity: 1;
+    position: absolute;
+    top: 30%;
+    left: 17%;
+    z-index: 1;
+}
+
+.steps-col-items {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    display: inline-flex;
+    background: #D9D9D9;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-bottom: 5px;
+    z-index: 10;
+}
+
+.sub-title {
+    min-width: fit-content;
+margin-right: 40px;
+}
+

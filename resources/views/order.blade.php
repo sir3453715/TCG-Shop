@@ -1,28 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<style>
-.order-list {
-font-size: 20px;
-font-weight: 400;
-max-width: 940px;
-margin:auto;
-}
-.order-number {
-    background:#F9D61D;
-    padding:0 10px;
-}
-.order-status{
-background:#FFCCB6;
-padding: 0 10px;
-    border-radius: 4px;
-}
 
-@media (max-width: 576px) {
-    .order-list {
-font-size: 16px;
-}
-}
-</style>
 <div id="my-order" class="m-3 m-lg-5 pt-lg-0 pt-4">
 @for($i = 1; $i <= 4; $i++) 
     <div class="row order-list bg-white rounded-3 border border-dark p-3 mb-4">
@@ -43,6 +21,7 @@ font-size: 16px;
             <div class="d-flex flex-wrap justify-content-md-end">
                 <div class="me-2">訂單狀態</div>
                 <div class="order-status"> 處理中</div>
+                <!-- <div class="order-status bg-success"> 完成</div> -->
             </div>
         </div>
         <div class="col-sm-3 d-flex align-items-end">
