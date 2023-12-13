@@ -89,6 +89,7 @@
                                     </div>
                                     <div class="col-2 text-end fs-3">
                                         <a><i class="fa-regular fa-heart"></i></a>
+                                        <!-- <a> <i class="fa-solid fa-heart"></i></a> -->
                                     </div>
                                 </div>
                                 <div class="row">
@@ -98,8 +99,6 @@
                                     </div>
                                     <div class="col-6 text-end fw-bold">SAR</div>
                                 </div>
-                                <span class="badge badge-warning CardCount"
-                                    id="CardCount-{{$TWCard->id}}">{{ ($deck[$TWCard->id]['number'])??'' }}</span>
                             </div>
                         </div>
                         <!-- end card  -->
