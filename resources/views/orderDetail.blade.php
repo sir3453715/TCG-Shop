@@ -191,16 +191,7 @@
                             </div>
                         </td>
                         <td class="quantity-col">
-                            <div class="addtocart-selector d-flex justify-content-center">
-                                <div class="addtocart-qty">
-                                    <div class="addtocart-button button-down"><span class="fas fa-minus"
-                                            aria-label="increase quantity"></span></div>
-                                    <input type="text" class="addtocart-input" value="1">
-                                    <div class="addtocart-button button-up">
-                                        <span class="fas fa-plus" aria-label="increase quantity"></span>
-                                    </div>
-                                </div>
-                            </div>
+                        <span class="d-inline d-sm-none fw-bold">數量：</span>5
                         </td>
                         <td class="price-col"><span class="d-inline d-sm-none fw-bold">單價：</span>$84.00</td>
                         <td class="total-col"><span class="d-inline d-sm-none fw-bold">小計：</span>$11600</td>
