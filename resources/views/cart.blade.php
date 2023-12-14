@@ -26,7 +26,7 @@
     <!--end .steps-col-->
 <form action="" method="">
     <div class="row mb-3 mb-lg-5">
-        <div>
+        <div class="cus-table">
             <div class="cus-table-header">
                 購物車
             </div>

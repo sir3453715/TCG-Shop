@@ -23,7 +23,7 @@
         </div>
         </div>
         
-        <div>
+        <div class="cus-table">
             <div class="cus-table-header">
                 訂單內容
             </div>
