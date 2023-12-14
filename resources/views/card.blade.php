@@ -7,7 +7,7 @@
 @endpush
 @section('content')
 <!-- // 卡牌列表 start-->
-<div class="m-4 m-lg-5">
+<div class="m-3 m-lg-5">
     <div class="row">
         <!-- search -->
         <div class="col-12 mb-4">
@@ -67,9 +67,9 @@
         <!-- cards -->
         <div class="col-12 mt-5">
             <div class=" scrolling-pagination">
-                <div class="row">
+                <div class="row gx-md-4 gx-3">
                     @foreach($TWCards as $TWCard)
-                    <div class="col-sm-6 col-xl-4 mb-4">
+                    <div class="col-6 col-xl-3 mb-4">
                         <div class="card cus-card">
                             <a href="javascript:void(0)" class="info-modal float-right text-dark"
                                 data-id="{{$TWCard->id}}" data-bs-toggle="modal" data-bs-target="#cus-card-info-modal">
@@ -79,15 +79,15 @@
                             </a>
                             <div class="card-body">
                                 <div class="row card-top mb-2">
-                                    <div class="col-6 fw-bold card-number">240/172</div>
-                                    <div class="col-6 text-end fw-bold card-price">9,999元</div>
+                                    <div class="col-sm-6 fw-bold card-number">240/172</div>
+                                    <div class="col-6 text-end fw-bold card-price d-none d-sm-block">9,999元</div>
                                 </div>
                                 <div class="row align-items-center mb-2">
-                                    <div class="col-10">
+                                    <div class="col-sm-10">
                                         <h5 class="card-title">{{$TWCard->name}}</h5>
                                         <p class="card-text">sv3a F 強化擴充包「激狂駭浪」</p>
                                     </div>
-                                    <div class="col-2 text-end fs-3">
+                                    <div class="col-2 text-end fs-3 d-none d-sm-block">
                                         <a><i class="fa-regular fa-heart"></i></a>
                                         <!-- <a> <i class="fa-solid fa-heart"></i></a> -->
                                     </div>
@@ -98,6 +98,13 @@
                                         <a><i class="fas fa-plus"></i></a>
                                     </div>
                                     <div class="col-6 text-end fw-bold">SAR</div>
+                                </div>
+                                <div class="cus-card-footer d-flex d-sm-none">
+                                <div class="col-10 fw-bold card-price">9,999元</div>
+                                <div class="col-2 text-end fs-3">
+                                        <a><i class="fa-regular fa-heart"></i></a>
+                                        <!-- <a> <i class="fa-solid fa-heart"></i></a> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
