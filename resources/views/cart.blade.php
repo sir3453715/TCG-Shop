@@ -75,7 +75,7 @@
         </div>
     </div>
     <!-- 訂單資訊 -->
-    <div class="row gx-5">
+    <div class="row gx-5 cus-table">
         <div class="col-lg-6 mb-4 mb-lg-0">
             <div class="bg-white">
                 <div class="cus-table-header">
