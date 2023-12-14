@@ -17,9 +17,16 @@
     @stack('app-styles')
 </head>
 <body>
-<div id="app" class="wrapper">
-    @include('component.header')
-    <div class="content-wrapper">
+<div id="app" class="container-fluid">
+    <div class="row sticky-top">
+       @include('component.header') 
+    </div>
+    
+    <div class="row">
+    <div class="d-none d-md-block col-md-3 col-lg-2 p-0">
+    @include('component.sidebar')
+    </div>
+    <div class="content-wrapper col-md-9 col-lg-10 p-0">
         @if (\Session::has('message'))
             <div class="alert alert-success alert-dismissible">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -34,11 +41,23 @@
         @endif
         @yield('content')
     </div>
+    </div>
 
-    @if(\Request::route()->getName() == 'template')
         @include('component.footer')
-    @endif
 </div>
+<!-- off canvas menu -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuleLabel">
+  <div class="offcanvas-header">
+    <button type="button" class="btn cus-close-btn" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div>
+  @include('component.sidebar')
+  </div>
+</div>
+
+
+
+
 @section('app-scripts')
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.js"></script>

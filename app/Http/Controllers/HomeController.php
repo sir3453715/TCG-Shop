@@ -149,6 +149,77 @@ class HomeController extends Controller
 
     }
 
+    public function news()
+    {
+
+        return view('news');
+
+    }
+
+    public function newsPost()
+    {
+
+        return view('newsPost');
+
+    }
+
+    public function dashboard()
+    {
+
+        return view('dashboard');
+
+    }
+
+    public function myDeck()
+    {
+
+        return view('myDeck');
+
+    }
+
+    public function myDeckDetail()
+    {
+
+        return view('myDeckDetail');
+
+    }
+
+    public function order()
+    {
+
+        return view('order');
+
+    }
+
+    public function wishlist()
+    {
+
+        return view('wishlist');
+
+    }
+
+    public function orderDetail()
+    {
+
+        return view('orderDetail');
+
+    }
+
+    public function cart()
+    {
+
+        return view('cart');
+
+    }
+
+    public function invoice()
+    {
+
+        return view('invoice');
+
+    }
+
+
     public function addToDeck(Request $request){
         $CID = $request->get('id');
         $number = $request->get('number');

@@ -17,6 +17,17 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/card', 'HomeController@card')->name('card');
 Route::get('/deck', 'HomeController@deck')->name('deck');
+Route::get('/news', 'HomeController@news')->name('news');
+Route::get('/newsPost', 'HomeController@newsPost')->name('newsPost');
+Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+Route::get('/myDeck', 'HomeController@myDeck')->name('myDeck');
+Route::get('/myDeckDetail', 'HomeController@myDeckDetail')->name('myDeckDetail');
+Route::get('/order', 'HomeController@order')->name('order');
+Route::get('/wishlist', 'HomeController@wishlist')->name('wishlist');
+Route::get('/orderDetail', 'HomeController@orderDetail')->name('orderDetail');
+Route::get('/cart', 'HomeController@cart')->name('cart');
+Route::get('/invoice', 'HomeController@invoice')->name('invoice');
+
 
 Route::post('/orderCreate','HomeController@orderCreate')->name('orderCreate');
 

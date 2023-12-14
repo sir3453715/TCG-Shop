@@ -1,80 +1,15 @@
 @extends('layouts.app')
-
-@push('app-styles')
-<style>
-
-</style>
-@endpush
 @section('content')
-<!-- // 卡牌列表 start-->
-<div class="m-4 m-lg-5">
-    <div class="row">
-        <!-- search -->
-        <div class="col-12 mb-4">
-            <form role="form" class="cus-card-search">
-                <div class="row">
-                    <div class="form-group col-lg-4 col-6">
-                        <label class="w-100" for="keyword">關鍵字</label>
-                        <input class="form-control" type="text" id="keyword" name="keyword"
-                            value="{{$queried['keyword']}}" placeholder="輸入名稱">
-                    </div>
-                    <div class="form-group col-lg-4 col-6">
-                        <label class="w-100" for="supertypes">卡牌類型</label>
-                        <select name="supertypes[]" id="supertypes" class="form-control select2" multiple>
-                            @foreach($supertypes as $supertype)
-                            <option value="{{$supertype}}"
-                                {{ in_array($supertype,$queried['supertypes'])?'selected':'' }}>{{$supertype}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-lg-4 col-6">
-                        <label class="w-100" for="supertypes">卡牌屬性</label>
-                        <select name="types[]" id="types" class="form-control select2" multiple>
-                            @foreach($types as $key=> $type)
-                            <option value="{{$key}}" {{ in_array($key,$queried['types'])?'selected':'' }}>{{$type}}
-                            </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-lg-4 col-6">
-                        <label class="w-100" for="supertypes">稀有度</label>
-                        <select name="rarity[]" id="rarity" class="form-control select2" multiple>
-                            @foreach($rarities as $rarity)
-                            <option value="{{$rarity}}" {{ in_array($rarity,$queried['rarity'])?'selected':'' }}>
-                                {{$rarity}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-lg-4 col-6">
-                        <label for="supertypes">賽制</label>
-                        <select name="competition" id="competition" class="form-control">
-
-                        </select>
-                    </div>
-                    <div class="form-group col-lg-4 col-6">
-                        <label for="supertypes">系列</label>
-                        <select name="" id="" class="form-control">
-
-                        </select>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-yellow col-12 mt-3">
-                    搜尋
-                </button>
-            </form>
-        </div>
-
-        <!-- cards -->
-        <div class="col-12 mt-5">
-            <div class=" scrolling-pagination">
-                <div class="row">
-                    @foreach($TWCards as $TWCard)
-                    <div class="col-sm-6 col-xl-4 mb-4">
+<div id="my-wishlist" class="m-4 m-lg-5">
+    <div class="row deck-list-content gx-3 gy-3">
+        <h2 class="col-12 fs-3">支援者</h2>
+        @for($i = 1; $i <= 10; $i++)
+        <div class="col-sm-6 col-xl-3 mb-4">
                         <div class="card cus-card">
                             <a href="javascript:void(0)" class="info-modal float-right text-dark"
-                                data-id="{{$TWCard->id}}" data-bs-toggle="modal" data-bs-target="#cus-card-info-modal">
+                                data-id="" data-bs-toggle="modal" data-bs-target="#cus-card-info-modal">
                                 <div class="card-img-top">
-                                    <img class="img-fluid" src="{{$TWCard->image}}" />
+                                    <img class="img-fluid" src="https://asia.pokemon-card.com/tw/card-img/tw00004614.png" />
                                 </div>
                             </a>
                             <div class="card-body">
@@ -84,12 +19,12 @@
                                 </div>
                                 <div class="row align-items-center mb-2">
                                     <div class="col-10">
-                                        <h5 class="card-title">{{$TWCard->name}}</h5>
+                                        <h5 class="card-title">天空之柱</h5>
                                         <p class="card-text">sv3a F 強化擴充包「激狂駭浪」</p>
                                     </div>
                                     <div class="col-2 text-end fs-3">
-                                        <a><i class="fa-regular fa-heart"></i></a>
-                                        <!-- <a> <i class="fa-solid fa-heart"></i></a> -->
+                                        <!-- <a><i class="fa-regular fa-heart"></i></a> -->
+                                       <a> <i class="fa-solid fa-heart"></i></a>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -103,13 +38,7 @@
                         </div>
                         <!-- end card  -->
                     </div>
-                    @endforeach
-                </div>
-                <div id="pagination">
-                    {{ $TWCards->links() }}
-                </div>
-            </div>
-        </div>
+         @endfor
     </div>
 </div>
 <!-- card detail info modal-->
@@ -128,7 +57,7 @@
                 <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="row gx-5">
                     <div class="col-lg-6 mb-3 mb-lg-0" id="">
-                        <img class="img-fluid w-100" src="{{$TWCard->image}}" />
+                        <img class="img-fluid w-100" src="https://asia.pokemon-card.com/tw/card-img/tw00004614.png" />
                         <div class="row align-items-center my-4">
                             <div class="addtocart-selector col-6">
                                 <div class="addtocart-qty">
@@ -211,49 +140,5 @@
 
 
 @endsection
-
 @push('app-scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js"></script>
-<script type="text/javascript">
-    $(".card-image").lazyload({
-        effect: "fadeIn"
-    });
-
-
-    $('ul.pagination').hide();
-    $(function () {
-        $('.scrolling-pagination').jscroll({
-            autoTrigger: true,
-            padding: 0,
-            nextSelector: '.pagination li.active + li a',
-            contentSelector: 'div.scrolling-pagination',
-            callback: function () {
-                $('ul.pagination').remove();
-            }
-        });
-    });
-
-    // $('body').on('click', '.info-modal', function (e) {
-    //     let id = $(this).data('id');
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "./GetCardData",
-    //         dataType: "json",
-    //         data: {
-    //             '_token': $('meta[name="csrf-token"]').attr('content'),
-    //             'id': id,
-    //         },
-    //         success: function (object) {
-    //             if (object.result === '1') {
-    //                 $('#ModalCardInfoHtml').html(object.html);
-    //                 $('#ModalCardImage').attr('src', object.image);
-    //             } else {
-    //                 alert(object.message);
-    //             }
-    //         }
-    //     });
-    // });
-</script>
 @endpush
