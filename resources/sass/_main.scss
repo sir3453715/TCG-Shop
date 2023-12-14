@@ -24,7 +24,7 @@
 }
 
 .bg-white {
-background: $white;
+    background: $white;
 }
 
 .bg-yellow {
@@ -43,6 +43,7 @@ html {
 
 #app {
     overflow-x: hidden;
+
     .content-wrapper {
         min-height: calc(100vh - (3.5rem + 1px) - (3.5rem + 1px));
     }
@@ -229,18 +230,21 @@ html {
 
 .btn {
     &-remove {
-&:hover{
-    color: $red;
-}
+        &:hover {
+            color: $red;
+        }
     }
+
     &-text {
         color: $black;
         text-decoration: none;
         white-space: nowrap;
-        &:hover{
+
+        &:hover {
             text-decoration: underline;
         }
     }
+
     &-yellow {
         background: $orange;
         font-size: 16px;
@@ -304,13 +308,14 @@ html {
 
 // breadcrumb
 .breadcrumb {
-    &-item.active{
+    &-item.active {
         color: #000;
     }
-    
+
     a {
-        color:#888;
+        color: #888;
         text-decoration: none;
+
         &:hover {
             text-decoration: underline;
         }
@@ -352,6 +357,9 @@ html {
 .cus-card {
     background: $white;
     border: none;
+    height: 100%;
+    align-items: stretch;
+    display: grid;
 
     .card-img-top {
         padding: 10%;
@@ -372,10 +380,17 @@ html {
         &-title {
             font-size: 20px;
             font-weight: 400;
+            @media (max-width: 576px) {
+                font-size: 18px;
+            }
         }
 
         &-top {
             font-size: 18px;
+
+            @media (max-width: 576px) {
+                font-size: 16px;
+            }
         }
 
         &-price {
@@ -383,13 +398,25 @@ html {
         }
     }
 
+    &-footer {
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 5px;
+        border-top: solid 1px #dfdfdf;
+        margin-top: 10px;
+    }
+
 }
 
 // card search 
 .cus-card-search {
-    padding: 5%;
+    padding: 40px;
     background: $yellow;
     border-radius: 10px;
+
+    @media (max-width: 992px) {
+        padding: 5%;
+    }
 
     .form {
         &-group {
@@ -679,7 +706,8 @@ html {
 
 }
 
-.login-form, .register-form {
+.login-form,
+.register-form {
     max-width: 400px;
 }
 
@@ -703,11 +731,12 @@ html {
     img {
         border-radius: 50%;
     }
-p{
-    font-size: 20px;
-    color: $black;
-    font-weight: 400;
-}
+
+    p {
+        font-size: 20px;
+        color: $black;
+        font-weight: 400;
+    }
 }
 
 // dashboard my deck
@@ -715,24 +744,41 @@ p{
     &-title {
         margin-right: 5%;
     }
-    &-title, &-number {
+
+    &-title,
+    &-number {
         font-size: 24px;
         font-weight: 400;
+
         @media (max-width: 992px) {
             font-size: 18px;
         }
     }
-    &-del {
+
+    &-btn-group {
         @media (max-width: 576px) {
+            display: flex;
+            flex-direction: column;
             float: right;
+            text-align: right;
         }
     }
-    &-date, &-del, &-edit {
+
+    &-edit {
+        color: #2F7316;
+    }
+
+
+    &-date,
+    &-del,
+    &-edit {
         font-size: 20px;
+
         @media (max-width: 992px) {
             font-size: 16px;
         }
     }
+
     &-btn {
         background: $white;
         border-radius: 5px;
@@ -740,46 +786,52 @@ p{
         padding: 2px 10px;
         height: 30px;
         white-space: nowrap;
+
         &:hover {
             background: $orange;
         }
+
         i {
             transform: rotate(270deg);
         }
+
         @media (max-width: 576px) {
-margin-left: auto;
+            margin-left: auto;
         }
+
         @media (max-width: 340px) {
             margin-left: 0;
             margin-bottom: 1rem;
-                    }
+        }
     }
+
     &-list-card {
         position: relative;
     }
 
     &-list-content {
         border-bottom: solid 1px #000;
-    padding-bottom: 50px;
-    padding-top: 50px;
+        padding-bottom: 50px;
+        padding-top: 50px;
     }
+
     &-card-count {
-    align-items: center;
-    background:$white;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    border-radius: 50%;
-    border: solid 1px #000;
-    font-weight: bold;
-    font-size: 16px;
-    position: absolute;
-    right: 0;
-    top: -10px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        align-items: center;
+        background: $white;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        border-radius: 50%;
+        border: solid 1px #000;
+        font-weight: bold;
+        font-size: 16px;
+        position: absolute;
+        right: 0;
+        top: -10px;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     }
-        
+
 }
 
 // order
@@ -788,23 +840,25 @@ margin-left: auto;
     font-size: 20px;
     font-weight: 400;
     max-width: 940px;
-    margin:auto;
-    }
-    .order-number {
-        background:#F9D61D;
-        padding:0 10px;
-    }
-    .order-status{
-    background:#FFCCB6;
+    margin: auto;
+}
+
+.order-number {
+    background: #F9D61D;
     padding: 0 10px;
-        border-radius: 4px;
+}
+
+.order-status {
+    background: #FFCCB6;
+    padding: 0 10px;
+    border-radius: 4px;
+}
+
+@media (max-width: 576px) {
+    .order-list {
+        font-size: 16px;
     }
-    
-    @media (max-width: 576px) {
-        .order-list {
-    font-size: 16px;
-    }
-    }
+}
 
 // cart
 
@@ -916,6 +970,5 @@ tr {
 
 .sub-title {
     min-width: fit-content;
-margin-right: 40px;
+    margin-right: 40px;
 }
-

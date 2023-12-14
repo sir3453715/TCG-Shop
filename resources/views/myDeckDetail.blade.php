@@ -18,8 +18,11 @@
         </div>
         <div class="col-sm-3 text-sm-end">
             <div class="deck-number mb-sm-3">60張</div>
-            <a href="" class="deck-edit btn-text me-3">編輯</a>
-            <a href="" class="deck-del btn-text">刪除</a>
+            <div class="deck-btn-group">
+               <a href="" class="deck-edit btn-text me-sm-3">編輯</a>
+            <a href="" class="deck-del btn-text">刪除</a> 
+            </div>
+            
         </div>
     </div>
     <div class="row deck-list-content gx-3 gy-3">

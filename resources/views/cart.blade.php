@@ -28,7 +28,7 @@
     <div class="row mb-3 mb-lg-5">
         <div>
             <div class="cus-table-header">
-                訂單內容
+                購物車
             </div>
             <table class="table table-cart table-mobile">
                 <thead>
