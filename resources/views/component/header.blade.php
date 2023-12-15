@@ -13,12 +13,12 @@
         <div class="d-flex">
             <div id="navbarNav" class="me-3">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="">需求詢價</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Q&A</a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a class="nav-link" href="">需求詢價</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a class="nav-link" href="">Q&A</a>--}}
+{{--                    </li>--}}
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('cart')}}">購物車</a>
                     </li>
