@@ -95,24 +95,31 @@
                 </thead>
 
                 <tbody>
-                    @for($i = 1; $i <= 4; $i++) <tr>
-                        <td class="product-col">
-                            <div class="product d-flex align-items-center">
-                                <img class="product-media me-3"
-                                    src="https://asia.pokemon-card.com/tw/card-img/tw00004614.png">
-                                <h3 class="product-title">
-                                    老大的指令（赤日）
-                                </h3>
-                            </div>
-                        </td>
-                        <td class="quantity-col">
-                        <span class="d-inline d-sm-none fw-bold">數量：</span>5
-                        </td>
-                        <td class="price-col"><span class="d-inline d-sm-none fw-bold">單價：</span>$84.00</td>
-                        <td class="total-col"><span class="d-inline d-sm-none fw-bold">小計：</span>$11600</td>
-                        </td>
+                    @for($i = 1; $i <= 4; $i++)
+                        <tr>
+                            <td class="product-col">
+                                <div class="product d-block align-items-center">
+                                    <img class="product-media me-3"
+                                        src="https://asia.pokemon-card.com/tw/card-img/tw00004614.png">
+                                    <h3 class="product-title">
+                                        老大的指令（赤日）
+                                    </h3>
+                                </div>
+                            </td>
+                            <td class="quantity-col">
+{{--                                <span class="d-inline d-sm-none fw-bold">數量：</span>--}}
+                                5
+                            </td>
+                            <td class="price-col">
+{{--                                <span class="d-inline d-sm-none fw-bold">單價：</span>--}}
+                                $84.00
+                            </td>
+                            <td class="total-col">
+{{--                                <span class="d-inline d-sm-none fw-bold">小計：</span>--}}
+                                $11600
+                            </td>
                         </tr>
-                        @endfor
+                    @endfor
                 </tbody>
             </table>
         </div>

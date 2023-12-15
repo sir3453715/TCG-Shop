@@ -82,6 +82,16 @@ $(() => {
             $('.slider-autoplay').slick('refresh');
         });
 
+        $('.table-cart').DataTable({
+            responsive: false,
+            autoWidth: false,
+            paging: false,
+            searching: false,
+            info: false,
+            ordering : false,
+        });
+
+
     });
 
 
