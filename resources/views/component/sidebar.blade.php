@@ -7,7 +7,7 @@
             <a class="nav-link" href="{{route('news')}}">最新賽事</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{route('card')}}">推薦牌組</a>
+            <a class="nav-link" href="{{route('deck')}}">推薦牌組</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{route('card')}}">卡牌列表</a>
