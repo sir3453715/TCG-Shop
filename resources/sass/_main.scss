@@ -43,6 +43,7 @@ html {
 #app {
     .content-wrapper {
         min-height: calc(100vh - (3.5rem + 1px) - (3.5rem + 1px));
+        overflow-x: hidden;
     }
 }
 
@@ -922,12 +923,18 @@ html {
 
     @media (max-width: 576px) {
         .addtocart-qty {
-            flex-direction: column;
+            flex-direction: column-reverse;
             align-items: center;
         }
         .addtocart-button {
         border-radius: 0!important;
         line-height: 25px!important;
+        &.button-up {
+            border-radius: 4px 4px 0 0!important;
+        }
+        &.button-down {
+            border-radius: 0 0 4px 4px!important;
+        }
         }
         .addtocart-input{
             line-height: 30px!important;
