@@ -37,13 +37,10 @@
 
 
 html {
-    overflow-x: clip;
     background: #E7E7E7;
 }
 
 #app {
-    overflow-x: hidden;
-
     .content-wrapper {
         min-height: calc(100vh - (3.5rem + 1px) - (3.5rem + 1px));
     }
@@ -577,6 +574,7 @@ html {
             border-right: none;
             font-weight: bold;
             font-size: 12px;
+            border-radius: 0;
         }
     }
 
@@ -862,6 +860,7 @@ html {
 
 // cart
 .cus-table {
+
     .table {
         font-size: 15px;
         border-collapse: collapse;
@@ -919,6 +918,26 @@ html {
             margin-bottom: 5px;
             max-width: 50px;
         }
+    }
+
+    @media (max-width: 576px) {
+        .addtocart-qty {
+            flex-direction: column;
+            align-items: center;
+        }
+        .addtocart-button {
+        border-radius: 0!important;
+        line-height: 25px!important;
+        }
+        .addtocart-input{
+            line-height: 30px!important;
+            font-size: 14px!important;
+            border-left: 1px solid #c6c6c6!important;
+            border-right:1px solid #c6c6c6!important;
+            border-top:none!important;
+            border-bottom: none!important;
+        }
+  
     }
     
 }
