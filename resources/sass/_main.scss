@@ -861,83 +861,86 @@ html {
 }
 
 // cart
-
-.table {
-    font-size: 15px;
-    border-collapse: collapse;
-    outline: solid 1px #c6c6c6;
-    width: 100%;
-    background-color: #fff;
-}
-
-.table> :not(caption)>*>* {
-    background-color: #fff;
-}
-
-.table .addtocart-selector .addtocart-qty {
-    max-width: 130px;
-
-}
-
-.cus-table-header {
-    font-size: 20px;
-    color: #fff;
-    padding: 10px 20px;
-    background: #000;
-}
-
-tbody {
-    outline: solid 1px #c6c6c6;
-    border: transparent;
-}
-
-tbody td {
-    padding: 20px 10px !important;
-}
-
-.product-title {
-    font-size: 15px;
-}
-
-td {
-    vertical-align: middle;
-}
-
-tr {
-    text-align: center;
-}
-
-.product-media {
-    max-width: 70px;
-}
-
-@media (max-width: 576px) {
-    tbody tr {
-        display: flex;
-        flex-direction: column;
+.cus-table {
+    .table {
+        font-size: 15px;
+        border-collapse: collapse;
+        outline: solid 1px #c6c6c6;
         width: 100%;
-        box-sizing: border-box;
-        padding: 20px 0;
+        background-color: #fff;
     }
-
+    
+    .table> :not(caption)>*>* {
+        background-color: #fff;
+    }
+    
+    .table .addtocart-selector .addtocart-qty {
+        max-width: 130px;
+    
+    }
+    
+    .cus-table-header {
+        font-size: 20px;
+        color: #fff;
+        padding: 10px 20px;
+        background: #000;
+    }
+    
+    tbody {
+        outline: solid 1px #c6c6c6;
+        border: transparent;
+    }
+    
     tbody td {
-        width: 100%;
-        padding: 5px !important;
+        padding: 20px 10px !important;
     }
-
-    thead {
-        display: none;
-    }
-
-    .product {
-        padding: 0 5%
-    }
-
+    
     .product-title {
-        text-align: left;
+        font-size: 15px;
     }
-
+    
+    td {
+        vertical-align: middle;
+    }
+    
+    tr {
+        text-align: center;
+    }
+    
+    .product-media {
+        max-width: 70px;
+    }
+    
+    @media (max-width: 576px) {
+        tbody tr {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 20px 0;
+        }
+    
+        tbody td {
+            width: 100%;
+            padding: 5px !important;
+        }
+    
+        thead {
+            display: none;
+        }
+    
+        .product {
+            padding: 0 5%
+        }
+    
+        .product-title {
+            text-align: left;
+        }
+    
+    }
+    
 }
+
 
 /* cart style */
 .steps-col {

@@ -1,85 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<!-- //add to mian.scss later -->
-<style>
-    .table {
-        font-size: 15px;
-        border-collapse: collapse;
-        outline: solid 1px #c6c6c6;
-        width: 100%;
-        background-color: #fff;
-    }
 
-    .table> :not(caption)>*>* {
-        background-color: #fff;
-    }
-
-    .table .addtocart-selector .addtocart-qty {
-        max-width: 130px;
-
-    }
-
-    .cus-table-header {
-        font-size: 20px;
-        color: #fff;
-        padding: 10px 20px;
-        background: #000;
-    }
-
-    tbody {
-        outline: solid 1px #c6c6c6;
-        border: transparent;
-    }
-
-    tbody td {
-        padding: 20px 10px !important;
-    }
-
-    .product-title {
-        font-size: 15px;
-    }
-
-    td {
-        vertical-align: middle;
-    }
-
-    tr {
-        text-align: center;
-    }
-
-    .product-media {
-        max-width: 70px;
-    }
-
-    @media (max-width: 576px) {
-        tbody tr {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            box-sizing: border-box;
-            padding: 20px 0;
-        }
-
-        tbody td {
-            width: 100%;
-            padding: 5px !important;
-        }
-
-        thead {
-            display: none;
-        }
-
-        .product {
-            padding: 0 5%
-        }
-
-        .product-title {
-            text-align: left;
-        }
-
-    }
-
-    /* end add */
 </style>
 <div id="order-detail" class="m-4 m-lg-5">
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -105,7 +26,7 @@
     <!-- 訂單狀態 -->
     <div class="border border-dark rounded shadow-sm p-4 bg-white mb-4 mb-sm-5">
         <div class="row">
-            <h3 class="fs-4 fw-normal">訂單狀態 <span>處理中</span></h3>
+            <h3 class="fs-4 fw-normal">訂單狀態 <span class="order-status ms-5">處理中</span><!-- <span class="order-status ms-5 bg-success"> 完成</span> --></h3>
             <h4 class="fs-4 fw-normal">收件地址</h4>
         </div>
         <div class="row">
@@ -157,15 +78,9 @@
 
 
     </div>
-    <!-- <div class="steps-col row">
-                            <div class="steps-col-items col-sm-4 active">訂購清單確認</div>
-                            <div class="steps-col-items col-sm-4">填寫配送與發票資訊</div>
-                            <div class="steps-col-items col-sm-4">訂單成立與明細</div>
-                        </div> -->
-    <!--end .steps-col-->
 
     <div class="row">
-        <div class="">
+        <div class="cus-table">
             <div class="cus-table-header">
                 訂單內容
             </div>

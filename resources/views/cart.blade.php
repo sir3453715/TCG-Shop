@@ -26,7 +26,7 @@
     <!--end .steps-col-->
 <form action="" method="">
     <div class="row mb-3 mb-lg-5">
-        <div>
+        <div class="cus-table">
             <div class="cus-table-header">
                 購物車
             </div>
@@ -75,7 +75,7 @@
         </div>
     </div>
     <!-- 訂單資訊 -->
-    <div class="row gx-5">
+    <div class="row gx-5 cus-table">
         <div class="col-lg-6 mb-4 mb-lg-0">
             <div class="bg-white">
                 <div class="cus-table-header">
