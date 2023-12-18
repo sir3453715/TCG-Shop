@@ -19,4 +19,17 @@ class Card extends Model
     {
         return $this->hasMany(HistoryPrice::class,'card_id');
     }
+
+    public function nowPrice(){
+        $price = $this->default_price;
+        $productPrices = Product::where('card_id',$this->id)->pluck('price')->toArray();
+        if(!empty($productPrices)){
+            $SortProductPrices = sort($productPrices);
+            $count = sizeof($SortProductPrices);
+            $getNum = ceil($count/10)-$count;
+            $price = array_slice($SortProductPrices,$getNum,1);
+        }
+
+        return $price;
+    }
 }
