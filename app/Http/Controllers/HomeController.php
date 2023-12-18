@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Card;
+use App\Models\Deck;
+use App\Models\Event;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PtcgTwCard;
@@ -33,10 +36,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $banners = Banner::where('status','1')->orderBy('sort','DESC')->get();
+        $events = Event::where('status','1')->orderBy('top','DESC')->orderBy('dateTime','DESC')->limit(5)->get();
+        $biggestEvent = $events[0];
+        unset($events[0]);
+        $eventsList = $events;
 
-        $TWCards = Card::inRandomOrder()->limit(12)->get();
         return view('home',[
-            'TWCards'=>$TWCards,
+            'banners'=>$banners,
+            'biggestEvent'=>$biggestEvent,
+            'eventsList'=>$eventsList,
         ]);
     }
     public function card(Request $request)
@@ -70,7 +79,8 @@ class HomeController extends Controller
             $queried['rarity'] = $raritiesSelected;
         }
 
-        $TWCards = $TWCards->orderBy('created_at','DESC')->paginate(24);
+        $TWCards = $TWCards->orderBy('created_at','ASC')->paginate(24);
+
 
         return view('card',[
             'queried'=>$queried,
@@ -81,78 +91,18 @@ class HomeController extends Controller
         ]);
     }
     public function deck(Request $request){
-
-        $supertypes = ['寶可夢卡','寶可夢道具','支援者卡','物品卡','競技場卡','能量卡'];
-        $types = ['Grass'=>'草', 'Fire'=>'火', 'Water'=>'水', 'Lightning'=>'雷', 'Psychic'=>'超', 'Fighting'=>'鬥','Darkness'=>'惡', 'Metal'=>'鋼', 'Fairy'=>'妖', 'Dragon'=>'龍', 'Colorless'=>'無'];
-        $rarities =['C','U','R','RR','RRR','PR','TR','SR','K','AR','SAR','無標記'];
-        $competitions = ['E,F,G'=>'標準','A,B,C,D'=>'開放'];
-
-        $queried = ['keyword'=>'','supertypes'=>[''],'types'=>[''],'rarity'=>[''],'competition'=>''];
-        $TWCards = Card::whereNotNull('id');
-
-        if($request->get('keyword')) {
-            $keyword = $request->get('keyword');
-            $TWCards = $TWCards->where('name','LIKE',"%$keyword%");
-            $queried['keyword'] = $request->get('keyword');
-        }
-        if($request->get('supertypes')) {
-            $supertypesSelected = $request->get('supertypes');
-            if(in_array('能量卡',$supertypesSelected)){
-                $supertypesSelected = array_merge($supertypesSelected,['基本能量卡','特殊能量卡']);
-            }
-            $TWCards = $TWCards->whereIn('supertypes',$supertypesSelected);
-            $queried['supertypes'] = $supertypesSelected;
-        }
-        if($request->get('types')) {
-            $typesSelected = $request->get('types');
-            $TWCards = $TWCards->whereIn('type',$typesSelected);
-            $queried['types'] = $typesSelected;
-        }
-        if($request->get('rarity')) {
-            $raritiesSelected = $request->get('rarity');
-            $TWCards = $TWCards->whereIn('rarity',$raritiesSelected);
-            $queried['rarity'] = $raritiesSelected;
-        }
-        if($request->get('competition')) {
-            $competitionSelected = $request->get('competition');
-            $competitionSelectedArray = explode(',',$competitionSelected);
-            $TWCards = $TWCards->whereIn('Competition_number',$competitionSelectedArray);
-            $queried['competition'] = $competitionSelected;
-        }
-
-        $TWCards = $TWCards->orderBy('created_at','DESC')->paginate(24);
-
-        $deck = session()->get('deck');
-
-        if(!$deck){
-            $deck=[];        $count = 0;
-        }else{
-            $count = $deck['count'];
-            unset($deck['count']);
-        }
-
+        $decks = Deck::where('is_recommend',1)->paginate(16);
         return view('deck',[
-            'queried'=>$queried,
-            'TWCards'=>$TWCards,
-            'deck'=>$deck,
-            'count'=>$count,
-            'supertypes'=>$supertypes,
-            'types'=>$types,
-            'rarities'=>$rarities,
-            'competitions'=>$competitions,
+            'decks'=>$decks,
         ]);
-    }
-    public function home()
-    {
-
-        return view('welcome');
-
     }
 
     public function news()
     {
-
-        return view('news');
+        $news = Event::where('class_id',1)->paginate(12);
+        return view('news',[
+            'news'=>$news,
+        ]);
 
     }
 
@@ -160,6 +110,20 @@ class HomeController extends Controller
     {
 
         return view('newsPost');
+
+    }
+
+    public function competitions()
+    {
+        $competitions = Event::where('class_id',2)->paginate(12);
+        return view('competitions',[
+            'competitions'=>$competitions,
+        ]);
+
+    }
+    public function competitionsPost(){
+
+        return view('competitionsPost');
 
     }
 
