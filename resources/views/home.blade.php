@@ -2,9 +2,13 @@
 
 @section('content')
 <div class="col-12 slider">
-    @for($i = 1; $i
-    <= 4; $i++) <img class="img-fluid" alt="Bootstrap Image Preview" src="https://placehold.co/1220x775" />
-    @endfor
+    @foreach($banners as $banner)
+        @for($i = 1; $i <= 3; $i++)
+            <a href="{{$banner->link}}" target="_blank">
+                <img class="img-fluid" alt="Bootstrap Image Preview" src="{{$banner->image}}" />
+            </a>
+        @endfor
+    @endforeach
 </div>
 <div class="m-4 m-lg-5">
     <div class="row align-items-center">
@@ -15,8 +19,8 @@
         </div>
         <div class="col-lg-8">
             <div class="col-12 slider">
-                @for($i = 1; $i
-                <= 3; $i++) <img class="img-fluid" alt="Bootstrap Image Preview" src="https://placehold.co/820x615" />
+                @for($i = 1; $i <= 3; $i++)
+                    <img class="img-fluid" alt="Bootstrap Image Preview" src="/storage/uploads/news-card-price.webp" />
                 @endfor
             </div>
         </div>
@@ -24,33 +28,29 @@
     <!-- news -->
     <div class="row mt-5 gx-5">
         <div class="col-lg-6 mb-5">
-            <h3 class="fs-1 fw-bold mb-3">最新消息</h3>
-            <img class="img-fluid w-100" alt="Bootstrap Image Preview" src="https://placehold.co/540x500" />
-            <p class="fs-5 mt-3">2023/10/11 TL ｘｘｘ戰報</p>
-            <a href="#" type="button" class="btn btn-yellow">查看更多</a>
+            <a href="{{route('newsPost',['id'=>$biggestEvent->id])}}" target="_blank" class="text-decoration-none text-dark">
+                <h3 class="fs-1 fw-bold mb-3">最新消息</h3>
+                <img class="img-fluid w-100" alt="Bootstrap Image Preview" src="{{$biggestEvent->image}}" />
+                <p class="fs-5 mt-3">{{$biggestEvent->title}}</p>
+            </a>
+            <a href="{{route('news')}}" type="button" class="btn btn-yellow">查看更多</a>
         </div>
         <div class="col-lg-6 mt-lg-4">
-            <div class="news-list-item mb-3">
-                <div class="news-list-img">
-                    <img class="" alt="Bootstrap Image Preview" src="https://placehold.co/105x105" />
-                </div>
-                <div class="news-list-des">
-                    <h4 class="fs-5 fw-bold">台灣首間Pokémon Center</h4>
-                    <p>眾所期待即將在新光三越台北信義新天地A11盛大開幕！</p>
-                </div>
-            </div>
-            @for($i = 1; $i<= 3; $i++) <div class="news-list-item mb-3">
-                <div class="news-list-img">
-                    <img class="" alt="Bootstrap Image Preview" src="https://placehold.co/105x105" />
-                </div>
-                <div class="news-list-des">
-                    <h4 class="fs-5 fw-bold">搶先購買可獲得特典卡「名偵探皮卡丘」！</h4>
-                    <p>盒裝版《名偵探皮卡丘 閃電回歸》的搶先購買特典，可獲得能在寶可夢卡牌遊戲使用的特典卡「名偵探皮卡丘」！特典卡「名偵探皮卡丘」是使用全新插畫的新卡片。</p>
-                </div>
+            @foreach($eventsList as $event)
+                <a href="{{route('newsPost',['id'=>$event->id])}}" target="_blank" class="text-decoration-none text-dark">
+                    <div class="news-list-item mb-3">
+                        <div class="news-list-img">
+                            <img class="news-description-image" alt="Bootstrap Image Preview" src="{{$event->image}}" />
+                        </div>
+                        <div class="news-list-des">
+                            <h4 class="fs-5 fw-bold">{{$event->title}}</h4>
+                            <p class="news-description">{{ strip_tags($event->content) }}</p>
+                        </div>
+                    </div>
+                </a>
+            @endforeach
         </div>
-        @endfor
     </div>
-</div>
 <div class="spacer row p-lg-4"></div>
 <!-- location -->
 <div class="row align-items-center my-5">

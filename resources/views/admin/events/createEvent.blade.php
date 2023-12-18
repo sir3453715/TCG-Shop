@@ -42,7 +42,7 @@
                                     <div class="col-12 col-md-4 row">
                                         <div class="col-6 col-md-12">
                                             <label class="field-name" for="image">活動圖片</label>
-                                            <input type="file" class="form-control" name="image" id="image">
+                                            <input type="file" class="form-control-file" name="image" id="image">
                                         </div>
                                         <div class="col-6 col-md-12">
                                             <img id="cardUploadImg" class="w-100 p-3" src="/storage/image/Admin/600x400UploadImageBackground.webp">
@@ -99,8 +99,8 @@
                                     <div class="form-group col-12">
                                         <label class="field-name" for="top">置頂</label>
                                         <select class="form-control" name="top" id="top">
-                                            <option value="1" >是</option>
                                             <option value="0" >否</option>
+                                            <option value="1" >是</option>
                                         </select>
                                     </div>
                                 </div>

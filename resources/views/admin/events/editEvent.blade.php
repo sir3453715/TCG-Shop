@@ -43,7 +43,7 @@
                                     <div class="col-12 col-md-4 row">
                                         <div class="col-6 col-md-12">
                                             <label class="field-name" for="image">活動圖片</label>
-                                            <input type="file" class="form-control" name="image" id="image">
+                                            <input type="file" class="form-control-file" name="image" id="image">
                                         </div>
                                         <div class="col-6 col-md-12">
                                             <img id="cardUploadImg" class="w-100 p-3" src="{{$event->image}}">

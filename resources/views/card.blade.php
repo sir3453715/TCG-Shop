@@ -79,30 +79,30 @@
                             </a>
                             <div class="card-body">
                                 <div class="row card-top mb-2">
-                                    <div class="col-sm-6 fw-bold card-number">240/172</div>
-                                    <div class="col-6 text-end fw-bold card-price d-none d-sm-block">9,999元</div>
+                                    <div class="col-sm-6 fw-bold card-number">{{$TWCard->serial_number}}</div>
+                                    <div class="col-6 text-end fw-bold card-price d-none d-sm-block">{{$TWCard->nowPrice()}}元</div>
                                 </div>
                                 <div class="row align-items-center mb-2">
                                     <div class="col-sm-10">
                                         <h5 class="card-title">{{$TWCard->name}}</h5>
-                                        <p class="card-text">sv3a F 強化擴充包「激狂駭浪」</p>
+                                        <p class="card-text">{{$TWCard->series}}</p>
                                     </div>
                                     <div class="col-2 text-end fs-3 d-none d-sm-block">
-                                        <a><i class="fa-regular fa-heart"></i></a>
+                                        <a href="#"><i class="fa-regular fa-heart"></i></a>
                                         <!-- <a> <i class="fa-solid fa-heart"></i></a> -->
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <a><i class="fas fa-minus me-3"></i></a>
-                                        <a><i class="fas fa-plus"></i></a>
+                                        <a href="#"><i class="fas fa-minus me-3"></i></a>
+                                        <a href="#"><i class="fas fa-plus"></i></a>
                                     </div>
-                                    <div class="col-6 text-end fw-bold">SAR</div>
+                                    <div class="col-6 text-end fw-bold">{{$TWCard->rarity}}</div>
                                 </div>
                                 <div class="cus-card-footer d-flex d-sm-none">
-                                <div class="col-10 fw-bold card-price">9,999元</div>
+                                <div class="col-10 fw-bold card-price">{{$TWCard->nowPrice()}}元</div>
                                 <div class="col-2 text-end fs-3">
-                                        <a><i class="fa-regular fa-heart"></i></a>
+                                        <a href="#"><i class="fa-regular fa-heart"></i></a>
                                         <!-- <a> <i class="fa-solid fa-heart"></i></a> -->
                                     </div>
                                 </div>

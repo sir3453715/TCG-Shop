@@ -96,7 +96,10 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <a href="{{route('admin.event.edit',['event'=>$event->id])}}">{{$event->title}}</a>
+                                    <a href="{{route('admin.event.edit',['event'=>$event->id])}}">
+                                        <img  src="{{$event->image}}" width="100px">
+                                        {{$event->title}}
+                                    </a>
                                 </td>
                                 <td>{{$event->eventClass->title}}</td>
                                 <td>

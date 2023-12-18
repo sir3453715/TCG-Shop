@@ -9,7 +9,7 @@
         @include('admin.component.title')
         @stack('admin-app-head-scripts')
         @section('admin-app-styles')
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css" />
+            <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
             <link rel="dns-prefetch" href="//fonts.gstatic.com">
             <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
             <link href="{{ asset('css/admin/admin.css') }}" rel="stylesheet">
@@ -39,8 +39,9 @@
             @include('admin.component.footer')
         </div>
         @section('admin-app-scripts')
-            <script src="{{ asset('js/admin/admin.js') }}"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.js"></script>
+            <script src="{{ asset('js/admin/admin.js') }}"></script><!-- Bootstrap JS --><!-- jQuery --><!-- Summernote JS -->
+            <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
             <script src="{{ asset('js/admin/app.js') }}"></script>
         @show
         @stack('admin-app-scripts')
