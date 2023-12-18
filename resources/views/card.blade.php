@@ -88,22 +88,22 @@
                                         <p class="card-text">{{$TWCard->series}}</p>
                                     </div>
                                     <div class="col-2 text-end fs-3 d-none d-sm-block">
-                                        <a href="#"><i class="fa-regular fa-heart"></i></a>
-                                        <!-- <a> <i class="fa-solid fa-heart"></i></a> -->
+                                        <a class="btn-link" href="#"><i class="fa-regular fa-heart"></i></a>
+                                        <!-- <a class="btn-link href="#"> <i class="fa-solid fa-heart"></i></a> -->
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <a href="#"><i class="fas fa-minus me-3"></i></a>
-                                        <a href="#"><i class="fas fa-plus"></i></a>
+                                        <a class="btn-link" href="#"><i class="fas fa-minus me-3"></i></a>
+                                        <a class="btn-link" href="#"><i class="fas fa-plus"></i></a>
                                     </div>
                                     <div class="col-6 text-end fw-bold">{{$TWCard->rarity}}</div>
                                 </div>
                                 <div class="cus-card-footer d-flex d-sm-none">
                                 <div class="col-10 fw-bold card-price">{{$TWCard->nowPrice()}}元</div>
                                 <div class="col-2 text-end fs-3">
-                                        <a href="#"><i class="fa-regular fa-heart"></i></a>
-                                        <!-- <a> <i class="fa-solid fa-heart"></i></a> -->
+                                        <a class="btn-link" href="#"><i class="fa-regular fa-heart"></i></a>
+                                        <!-- <a class="btn-link href="#"> <i class="fa-solid fa-heart"></i></a> -->
                                     </div>
                                 </div>
                             </div>

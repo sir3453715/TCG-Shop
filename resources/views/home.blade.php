@@ -5,7 +5,7 @@
     @foreach($banners as $banner)
         @for($i = 1; $i <= 3; $i++)
             <a href="{{$banner->link}}" target="_blank">
-                <img class="img-fluid" alt="Bootstrap Image Preview" src="{{$banner->image}}" />
+                <img class="img-fluid w-100" alt="Bootstrap Image Preview" src="{{$banner->image}}" />
             </a>
         @endfor
     @endforeach

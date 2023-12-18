@@ -227,6 +227,12 @@ html {
 // btn style
 
 .btn {
+    &-link {
+        color: $black;
+        &:hover {
+            color: $orange;
+        }
+    }
     &-remove {
         &:hover {
             color: $red;
@@ -663,6 +669,16 @@ html {
     min-height: 100%;
 
     .card {
+        &-body {
+            justify-content: space-between;
+        }
+        &-img-top{
+            height: 320px;
+            object-fit: cover;
+            @media (max-width: 992px) {
+                height: 240px;
+            }
+        }
         &-section {
             padding: 25px 5% 35px 0;
 
@@ -990,6 +1006,8 @@ html {
 }
 .news-description-image{
     width: 105px;
+    height: 105px;
+    object-fit: cover;
 }
 .news-description{
     overflow: hidden;

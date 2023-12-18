@@ -34,8 +34,8 @@
                             </form>
                         </li>
                     @else
-                        <a class="nav-link" href="{{route('myAccount.login')}}">登入</a>
-                        <a class="nav-link" href="{{route('myAccount.register')}}">註冊</a>
+                        <a class="nav-link" href="{{route('login')}}">登入</a>
+                        <a class="nav-link" href="{{route('register')}}">註冊</a>
                     @endif
                 </li>
             </ul>
