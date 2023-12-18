@@ -74,3 +74,8 @@ table.dataTable.dtr-inline.collapsed>tbody>tr.parent>th.dtr-control:before{
   border: 1px solid #dc3545 !important;
   border-radius: 5px;
 }
+
+
+.table > :not(caption) > * > * {
+  background-color: #fff;
+}
