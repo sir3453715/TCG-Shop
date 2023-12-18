@@ -13,6 +13,14 @@ return[
         ],
         [
             'type' => 'item',
+            'title' => 'Banner設置',
+            'func_name' => 'banner',
+            'icon' => 'fa fa-images',
+            'permission' => 'admin banner',
+            'controller' => Menu\BannersController::class,
+        ],
+        [
+            'type' => 'item',
             'title' => '卡牌管理',
             'func_name' => 'card',
             'icon' => 'fa fa-chess-king',

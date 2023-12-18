@@ -18,6 +18,11 @@ return[
             'assignTo'     => ['manager','vendor','staff'],
         ],
         [
+            'name'         => 'admin banner',
+            'displayName'  => 'Banner設置',
+            'assignTo'     => ['manager'],
+        ],
+        [
             'name'         => 'admin card',
             'displayName'  => '卡牌管理',
             'assignTo'     => ['manager'],

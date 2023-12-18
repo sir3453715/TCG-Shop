@@ -90,6 +90,14 @@ return [
             'visibility' => 'public',
         ],
 
+        /** Banner相關儲存空間 */
+        'Banners' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/banners'),
+            'url' => env('APP_URL').'/storage/banners',
+            'visibility' => 'public',
+        ],
+
 
 
 
