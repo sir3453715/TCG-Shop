@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="news-top">
-    <img class="img-fluid w-100" src="https://placehold.co/1000x400" alt="">
+    <img class="img-fluid w-100" src="https://placehold.co/1000x250" alt="">
 </div>
 
 <div class="news-section m-4 m-lg-5">
