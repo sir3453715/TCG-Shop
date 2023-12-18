@@ -983,3 +983,18 @@ html {
     min-width: fit-content;
     margin-right: 40px;
 }
+
+/* news-description */
+.news-biggest-image{
+    width: 500px;
+}
+.news-description-image{
+    width: 105px;
+}
+.news-description{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
