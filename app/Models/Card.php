@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Card extends Model
 {
@@ -32,4 +33,13 @@ class Card extends Model
 
         return $price;
     }
+
+
+    public function wishlistCheck(){
+        $user_id = Auth::id();
+        $wishlist_exists = Wishlist::where('card_id',$this->id)->where('user_id',$user_id)->exists();
+
+        return $wishlist_exists;
+    }
+
 }

@@ -2,51 +2,55 @@
 @section('content')
 <div id="my-wishlist" class="m-3 m-lg-5">
     <div class="row deck-list-content gx-3 gy-3">
-        <h2 class="col-12 fs-3">支援者</h2>
-        @for($i = 1; $i <= 10; $i++)
-           <!-- cards -->
-        <div class="col-6 col-xl-3 mb-4">
-                        <div class="card cus-card">
-                            <a href="javascript:void(0)" class="info-modal float-right text-dark"
-                                data-id="" data-bs-toggle="modal" data-bs-target="#cus-card-info-modal">
-                                <div class="card-img-top">
-                                    <img class="img-fluid" src="https://asia.pokemon-card.com/tw/card-img/tw00004614.png" />
+        @foreach($wishlistArray as $key => $wishlists)
+            <h2 class="col-12 fs-3">{{$key}}</h2>
+               <!-- cards -->
+            @foreach($wishlists as $card_id => $card)
+                <div class="col-6 col-xl-3 mb-4">
+                    <div class="card cus-card">
+                        <a href="javascript:void(0)" class="info-modal float-right text-dark"
+                            data-id="" data-bs-toggle="modal" data-bs-target="#cus-card-info-modal">
+                            <div class="card-img-top">
+                                <img class="img-fluid" src="{{$card->image}}" />
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <div class="row card-top mb-2">
+                                <div class="col-sm-6 fw-bold card-number">{{$card->serial_number}}</div>
+                                <div class="col-6 text-end fw-bold card-price d-none d-sm-block">{{$card->nowPrice()}}元</div>
+                            </div>
+                            <div class="row align-items-center mb-2">
+                                <div class="col-sm-10">
+                                    <h5 class="card-title">{{$card->name}}</h5>
+                                    <p class="card-text">{{$card->series}}</p>
                                 </div>
-                            </a>
-                            <div class="card-body">
-                                <div class="row card-top mb-2">
-                                    <div class="col-sm-6 fw-bold card-number">240/172</div>
-                                    <div class="col-6 text-end fw-bold card-price d-none d-sm-block">9,999元</div>
+                                <div class="col-2 text-end fs-3 d-none d-sm-block">
+                                    <a class="btn-link {{ ($card->wishlistCheck())?'remove-wishlist':'add-to-wishlist' }}" href="javascript:void(0);" data-id="{{$card->id}}">
+                                        <i class="{{ ($card->wishlistCheck())?'fa-solid':'fa-regular' }} fa-heart"></i>
+                                    </a>
                                 </div>
-                                <div class="row align-items-center mb-2">
-                                    <div class="col-sm-10">
-                                        <h5 class="card-title">天空之柱</h5>
-                                        <p class="card-text">sv3a F 強化擴充包「激狂駭浪」</p>
-                                    </div>
-                                    <div class="col-2 text-end fs-3 d-none d-sm-block">
-                                        <!-- <a><i class="fa-regular fa-heart"></i></a> -->
-                                        <a> <i class="fa-solid fa-heart"></i></a>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <a><i class="fas fa-minus me-3"></i></a>
+                                    <a><i class="fas fa-plus"></i></a>
                                 </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <a><i class="fas fa-minus me-3"></i></a>
-                                        <a><i class="fas fa-plus"></i></a>
-                                    </div>
-                                    <div class="col-6 text-end fw-bold">SAR</div>
-                                </div>
-                                <div class="cus-card-footer d-flex d-sm-none">
-                                <div class="col-10 fw-bold card-price">9,999元</div>
+                                <div class="col-6 text-end fw-bold">{{$card->rarity}}</div>
+                            </div>
+                            <div class="cus-card-footer d-flex d-sm-none">
+                                <div class="col-10 fw-bold card-price">{{$card->nowPrice()}}元</div>
                                 <div class="col-2 text-end fs-3">
-                                        <!-- <a><i class="fa-regular fa-heart"></i></a> -->
-                                        <a> <i class="fa-solid fa-heart"></i></a>
-                                    </div>
+                                    <a class="{{ ($card->wishlistCheck())?'remove-wishlist':'add-to-wishlist' }}" href="javascript:void(0);" data-id="{{$card->id}}">
+                                        <i class="{{ ($card->wishlistCheck())?'fa-solid':'fa-regular' }} fa-heart"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <!-- end card  -->
                     </div>
-         @endfor
+                    <!-- end card  -->
+                </div>
+            @endforeach
+        @endforeach
     </div>
 </div>
 <!-- card detail info modal-->
@@ -149,4 +153,50 @@
 
 @endsection
 @push('app-scripts')
+
+    <script type="text/javascript">
+
+
+        $('body').on('click', '.add-to-wishlist', function (e) {
+            let id = $(this).data('id'); let $this = $(this);
+            $.ajax({
+                type: "POST",
+                url: "../AddToWishlist",
+                dataType: "json",
+                data: {
+                    '_token': $('meta[name="csrf-token"]').attr('content'),
+                    'id': id,
+                },
+                success: function (object) {
+                    if (object.result === '1') {
+                        $this.addClass('remove-wishlist');
+                        $this.removeClass('add-to-wishlist');
+                        $this.children('.fa-heart').addClass('fa-solid');
+                        $this.children('.fa-heart').removeClass('fa-regular');
+                    }
+                }
+            });
+        });
+
+        $('body').on('click', '.remove-wishlist', function (e) {
+            let id = $(this).data('id'); let $this = $(this);
+            $.ajax({
+                type: "POST",
+                url: "../RemoveWishlist",
+                dataType: "json",
+                data: {
+                    '_token': $('meta[name="csrf-token"]').attr('content'),
+                    'id': id,
+                },
+                success: function (object) {
+                    if (object.result === '1') {
+                        $this.addClass('add-to-wishlist');
+                        $this.removeClass('remove-wishlist');
+                        $this.children('.fa-heart').addClass('fa-regular');
+                        $this.children('.fa-heart').removeClass('fa-solid');
+                    }
+                }
+            });
+        });
+    </script>
 @endpush

@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PtcgTwCard;
 use App\Models\PunchCard;
+use App\Models\Wishlist;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,35 +57,35 @@ class HomeController extends Controller
         $rarities =['C','U','R','RR','RRR','PR','TR','SR','K','AR','SAR','無標記'];
 
         $queried = ['keyword'=>'','supertypes'=>[''],'types'=>[''],'rarity'=>['']];
-        $TWCards = Card::whereNotNull('id');
+        $Cards = Card::whereNotNull('id');
 
         if($request->get('keyword')) {
             $keyword = $request->get('keyword');
-            $TWCards = $TWCards->where('name','LIKE',"%$keyword%");
+            $Cards = $Cards->where('name','LIKE',"%$keyword%");
             $queried['keyword'] = $request->get('keyword');
         }
         if($request->get('supertypes')) {
             $supertypesSelected = $request->get('supertypes');
-            $TWCards = $TWCards->whereIn('supertypes',$supertypesSelected);
+            $Cards = $Cards->whereIn('supertypes',$supertypesSelected);
             $queried['supertypes'] = $supertypesSelected;
         }
         if($request->get('types')) {
             $typesSelected = $request->get('types');
-            $TWCards = $TWCards->whereIn('type',$typesSelected);
+            $Cards = $Cards->whereIn('type',$typesSelected);
             $queried['types'] = $typesSelected;
         }
         if($request->get('rarity')) {
             $raritiesSelected = $request->get('rarity');
-            $TWCards = $TWCards->whereIn('rarity',$raritiesSelected);
+            $Cards = $Cards->whereIn('rarity',$raritiesSelected);
             $queried['rarity'] = $raritiesSelected;
         }
 
-        $TWCards = $TWCards->orderBy('created_at','ASC')->paginate(24);
+        $Cards = $Cards->orderBy('created_at','ASC')->paginate(24);
 
 
         return view('card',[
             'queried'=>$queried,
-            'TWCards'=>$TWCards,
+            'Cards'=>$Cards,
             'supertypes'=>$supertypes,
             'types'=>$types,
             'rarities'=>$rarities,
@@ -124,48 +125,6 @@ class HomeController extends Controller
     public function competitionsPost(){
 
         return view('competitionsPost');
-
-    }
-
-    public function dashboard()
-    {
-
-        return view('dashboard');
-
-    }
-
-    public function myDeck()
-    {
-
-        return view('myDeck');
-
-    }
-
-    public function myDeckDetail()
-    {
-
-        return view('myDeckDetail');
-
-    }
-
-    public function order()
-    {
-
-        return view('order');
-
-    }
-
-    public function wishlist()
-    {
-
-        return view('wishlist');
-
-    }
-
-    public function orderDetail()
-    {
-
-        return view('orderDetail');
 
     }
 
@@ -299,42 +258,92 @@ class HomeController extends Controller
         return 1;
     }
 
-    public function GetCardData(Request $request){
+    public function GetCardDataF(Request $request){
         $CID = $request->get('id');
-        $card = PtcgTwCard::find($CID)->toArray();
-        $skills = json_decode($card['skill'], true);
-        $infoHTML = '<div><div><h4>系列： '.$card['set'].'</h4></div>';
-        if($card['type']){
-            $infoHTML .= '<div class="d-flex"><h4>屬性</h4><img class="energy-image" src="/storage/image/ptcg/energy/'.$card['type'].'.jpg"></div>';
-        }
-        if($card['hp']){
-            $infoHTML .= '<div class="d-flex"><h4>HP</h4><span class="hp">'.$card['hp'].'</span></div>';
-        }
-        $infoHTML .= '<h4>技能</h4><div class="list-group">';
-
-
+        $card = Card::find($CID);
+        $cardArray = $card->toArray();
+        $skills = json_decode($cardArray['skill'], true);
+        $skillHTML = '';
+        $attributesImageByChinese = config('cards.Pokemon.attributesImageByChinese');
         foreach ($skills as $skill){
-            Log::info($skill);
+            $skillHTML .= "<div class='row mb-3'>";
             if($skill['name']!=''){
-                $infoHTML .= '<div class="list-group-item d-flex justify-content-between"><div class="d-flex h-100"><h4 class="list-group-item-heading">'.$skill['name'].'</h4>';
-                if(!empty($skill['type'])){
-                    foreach ($skill['type'] as $skillType){
-                        $infoHTML .= '<img class="energy-image" src="/storage/image/ptcg/energy/'.$skillType.'.jpg">';
-                    }
-                }
-                $infoHTML .='</div>';
-                if($skill['damage']!=''){
-                    $infoHTML .='<span>'.$skill['damage'].'</span>';
-                }
-                $infoHTML .= '</div> <div class="list-group-item"> 
-                    <p class="list-group-item-text"> '.$skill['desc'].' </p>
-                </div>';
+                $skillHTML .= "<p class='col-6 fs-5 fw-bold'>".$skill['name']."</p>";
             }
+            if($skill['damage']!=''){
+                $skillHTML .="<p class='col-6 fs-5 fw-bold'>".$skill['damage']."</p>";
+            }
+            if(!empty($skill['attribute'])){
+                $skillHTML.="<div class='mb-2'>";
+                foreach (explode(',',$skill['attribute']) as $skillType){
+                    $skillHTML .= "<img class='energy-image' src='/storage/image/ptcg/energy/".$skillType.".jpg'>";
+                }
+                $skillHTML.="</div>";
+            }
+            if($skill['desc']!=''){
+                $skillHTML.="<p>".$skill['desc']."</p>";
+            }
+            $skillHTML.="</div>";
         }
-        $infoHTML .= '</div>';
+        $wreHTML = "<div class='col-4'><div class='badge-sm badge-black mb-2'>弱點</div><span>";
+        if($card->weakpoint){
+            $wreHTML .= " <img class='energy-image' src='/storage/image/ptcg/energy/".$attributesImageByChinese[$card->weakpoint].".jpg'>";
+        }
+        $wreHTML .= $card->weakpoint_value."</span>";
+        $wreHTML .= "</div><div class='col-4'><div class='badge-sm badge-gray mb-2'>抵抗力</div><span>";
+        if($card->resist != ''){
+            $wreHTML .= "<img class='energy-image' src='/storage/image/ptcg/energy/".$attributesImageByChinese[$card->resist].".jpg'>";
+        }
+        $wreHTML .= $card->resist_value."</span>";
+        $wreHTML .= "</div><div class='col-4'><div class='badge-sm badge-gray mb-2'>撤退</div><span>";
+        for($i=1;$i<=$card->escape;$i++){
+            $wreHTML .= "<img class='energy-image' src='/storage/image/ptcg/energy/Colorless.jpg'>";
+        }
+        $wreHTML .= "</span></div>";
+        if($card->type != '寶可夢卡'){
+            $wreHTML = '';
+        }
+
+        $infoHTML = "<div class='col-lg-6 mb-3 mb-lg-0'>
+                        <img class='img-fluid w-100' src='{$card->image}' />
+                        <div class='row align-items-center my-4'>
+                            <div class='addtocart-selector col-6'>
+                                <div class='addtocart-qty'>
+                                    <div class='addtocart-button button-down'>
+                                    <span class='fas fa-minus' aria-label='increase quantity'></span></div>
+                                    <input type='text' class='addtocart-input' value='1' />
+                                    <div class='addtocart-button button-up'>
+                                        <span class='fas fa-plus' aria-label='increase quantity'></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='col-6 text-end'>
+                                <span class='price'>{$card->nowPrice()}元</span>
+                            </div>
+                        </div>
+                        <div class='d-flex'>
+                            <button type='submit' class='btn btn-sm btn-sm-yellow fs-5 w-50 me-2'>加入願望清單</button>
+                            <button type='submit' class='btn btn-sm btn-sm-black fs-5 w-50 ms-2'>加入購物車</button>
+                        </div>
+                    </div>
+                    <div class='col-lg-6'>
+                        <div class='d-flex align-items-center mb-3'>
+                            <span class='badge-pill badge-gray w-50 text-center fs-5 fw-bold p-2'>類型</span>
+                            <span class='w-50 fs-5 fw-bold text-center'>{$card->type}</span>
+                        </div>
+                        <div class='d-flex align-items-center mb-3'>
+                            <span class='badge-pill badge-gray w-50 text-center fs-5 fw-bold p-2'>稀有度</span>
+                            <span class='w-50 fs-5 fw-bold text-center'>{$card->rarity}</span>
+                            <span class='badge-pill badge-outline w-50 fs-5 fw-bold text-center'>{$card->competition_number}</span>
+                        </div>
+                        <div class='badge-pill badge-gray w-100 text-center fs-5 fw-bold p-2 mb-3'>招式</div>
+                        <div>{$skillHTML}</div>
+                        <div class='row'>{$wreHTML}</div>
+                    </div>";
+
 
         if($card){
-            $result = array_merge(['result'=>'1','html'=>$infoHTML],$card);
+            $result = array_merge(['result'=>'1','html'=>$infoHTML],$cardArray);
             return json_encode($result);
         }else{
             return json_encode(['result'=>'0','message'=>'找不到卡片資料!']);
@@ -386,11 +395,6 @@ class HomeController extends Controller
         }else{
             return redirect(route('deck'))->with('error', '沒有卡牌資料!');
         }
-
-
-
-
-
     }
 
 }

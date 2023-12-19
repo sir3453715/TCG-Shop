@@ -24,12 +24,14 @@ Route::get('/competitionsPost/{id}', 'HomeController@competitionsPost')->name('c
 
 
 Route::group(['prefix'=>'myAccount','as'=>'myAccount.'],function (){
-    Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
-    Route::get('/myDeck', 'HomeController@myDeck')->name('myDeck');
-    Route::get('/myDeckDetail', 'HomeController@myDeckDetail')->name('myDeckDetail');
-    Route::get('/order', 'HomeController@order')->name('order');
-    Route::get('/wishlist', 'HomeController@wishlist')->name('wishlist');
-    Route::get('/orderDetail', 'HomeController@orderDetail')->name('orderDetail');
+    Route::get('/dashboard', 'AccountController@dashboard')->name('dashboard');
+    Route::get('/myDeck', 'AccountController@myDeck')->name('myDeck');
+    Route::get('/myDeckDetail', 'AccountController@myDeckDetail')->name('myDeckDetail');
+    Route::get('/order', 'AccountController@order')->name('order');
+    Route::get('/wishlist', 'AccountController@wishlist')->name('wishlist');
+    Route::get('/orderDetail', 'AccountController@orderDetail')->name('orderDetail');
+
+    Route::post('/editUser', 'AccountController@editUser')->name('editUser');
 });
 
 Route::get('/cart', 'HomeController@cart')->name('cart');
@@ -45,10 +47,14 @@ Auth::routes(['verify' => true]);
 Route::get('/login/oauth/{provider}/{redirectURL}', 'SocialiteController@redirectToOAuth')->name('SocialLogin');
 Route::get('/login/callback/{provider}', 'SocialiteController@handleOAuthCallback')->name('SocialLoginCallBack');
 
+
 /** Ajax*/
 //Route::post('/ChangeDeckCard','Admin\Menu\DecksController@ChangeDeckCard')->name('ChangeDeckCard');
 //Route::post('/CleanDeck','Admin\Menu\DecksController@CleanDeck')->name('CleanDeck');
 //Route::post('/addToDeck','HomeController@addToDeck')->name('addToDeck');
+Route::post('/GetCardDataF','HomeController@GetCardDataF')->name('GetCardDataF');
+Route::post('/AddToWishlist','AccountController@AddToWishlist')->name('AddToWishlist');
+Route::post('/RemoveWishlist','AccountController@RemoveWishlist')->name('RemoveWishlist');
 
 
 /** Admin Ajax*/

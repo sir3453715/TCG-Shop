@@ -13,10 +13,12 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
 {
-    public function redirectToOAuth($provider)
+    public function redirectToOAuth(Request $request,$provider,$redirectURL)
     {
+        $binding = $request->get('binding') ?? 0;
         if ($provider === 'google' || $provider === 'facebook') {
-            return Socialite::driver($provider)->redirect();
+            $parameter = json_encode(['redirectURL'=>$redirectURL,'binding'=>$binding]);
+            return Socialite::driver($provider)->with(['state' => "parameter=$parameter"])->redirect();
         } else {
             return abort(401);
         }
@@ -24,11 +26,32 @@ class SocialiteController extends Controller
 
     public function handleOAuthCallback(Request $request,$provider)
     {
-        $previousUrl = $request->session()->previousUrl();
-        $previousArray = explode('/',$previousUrl);
-        $redirect = end($previousArray);
+        $state = $request->input('state');
+        parse_str($state, $result);
+        $parameter = json_decode($result['parameter']);
+        $binding = $parameter->binding;
+        $redirect = $parameter->redirectURL;
 
-        $oauthUser = Socialite::driver($provider)->user();
+
+        $oauthUser = Socialite::driver($provider)->stateless()->user();
+        if($binding){
+            $alreadyBindingSocial = User::where($provider,$oauthUser->id)->first();
+
+            if($alreadyBindingSocial){
+                return redirect(route($redirect))->with('Errormessage', $provider.'帳號已被綁定其他帳號!');
+            }
+
+            $user = Auth::user();
+            $data=[
+                $provider=>$oauthUser->id,
+            ];
+            $user->fill($data);
+            $user->save();
+
+            return redirect(route($redirect));
+        }
+
+
         if($provider === 'google'){
             $alreadyGoogleUser = User::where('google',$oauthUser->id)->first();
             if($alreadyGoogleUser){
@@ -36,12 +59,7 @@ class SocialiteController extends Controller
             }else{
                 $userEmailCheck = User::where('email',$oauthUser->email)->first();
                 if($userEmailCheck){
-                    $data=[
-                        'google'=>$oauthUser->id,
-                    ];
-                    $userEmailCheck->fill($data);
-                    $userEmailCheck->save();
-                    Auth::loginUsingId($userEmailCheck->id);
+                    return redirect(route($redirect))->with('Errormessage', 'Email已經被註冊過!');
                 }else{
                     $data=[
                         'google'=>$oauthUser->id,
@@ -64,12 +82,7 @@ class SocialiteController extends Controller
             }else{
                 $userEmailCheck = User::where('email',$oauthUser->email)->first();
                 if($userEmailCheck){
-                    $data=[
-                        'facebook'=>$oauthUser->id,
-                    ];
-                    $userEmailCheck->fill($data);
-                    $userEmailCheck->save();
-                    Auth::loginUsingId($userEmailCheck->id);
+                    return redirect(route($redirect))->with('Errormessage', 'Email已經被註冊過!');
                 }else{
                     $data=[
                         'facebook'=>$oauthUser->id,
@@ -87,6 +100,16 @@ class SocialiteController extends Controller
             return redirect(route($redirect));
         }else{
             return redirect(route($redirect))->with('Errormessage', '無法登入帳號!');
+        }
+    }
+
+
+    public function BindingRedirectToOAuth($provider)
+    {
+        if ($provider === 'google' || $provider === 'facebook') {
+            return Socialite::driver($provider)->with(['redirect'=>'test'])->redirect();
+        } else {
+            return abort(401);
         }
     }
 

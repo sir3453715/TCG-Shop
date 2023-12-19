@@ -30,6 +30,10 @@
                 </div>
             @endforeach
         </div>
+
+        <div class="frontend-pagination">
+            {{ $competitions->appends(request()->except('page'))->links() }}
+        </div>
     </div>
 @endsection
 

@@ -43,7 +43,7 @@
                             <img class="news-description-image" alt="Bootstrap Image Preview" src="{{$event->image}}" />
                         </div>
                         <div class="news-list-des">
-                            <h4 class="fs-5 fw-bold">{{$event->title}}</h4>
+                            <h4 class="fs-5 fw-bold news-description ">{{$event->title}}</h4>
                             <p class="news-description">{{ strip_tags($event->content) }}</p>
                         </div>
                     </div>
