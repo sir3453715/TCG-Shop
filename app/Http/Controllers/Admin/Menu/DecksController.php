@@ -9,6 +9,7 @@ use App\Models\Deck;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class DecksController extends Controller
 {
@@ -69,7 +70,6 @@ class DecksController extends Controller
      */
     public function store(Request $request)
     {
-
         $card_id = $request->get('card_id'); $card_num = $request->get('card_num');
 
         $cardSize = sizeof($request->get('card_id'));
@@ -88,6 +88,14 @@ class DecksController extends Controller
         $string = "abcdefghijklmnopqrstuvwxyz@$&*+-_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         $code = substr(str_shuffle($string), rand(1,10), 6);
 
+        $image = '';
+        if($request->hasFile('image')) {
+            $img = $request->file('image');
+            $image_name = date('YmdHis').uniqid().'.'.$img->getClientOriginalExtension();
+            Storage::disk('Decks')->putFileAs('/',$img,$image_name);
+            $image = Storage::url('decks/').$image_name;
+        }
+
         $data=[
             'user_id'=>'0',
             'title'=>$request->get('title'),
@@ -95,6 +103,7 @@ class DecksController extends Controller
             'is_recommend'=>$request->get('is_recommend'),
             'card_info'=>serialize($deckInfo),
             'code'=>$code,
+            'image'=>$image,
         ];
 
         $deck = Deck::create($data);
@@ -161,6 +170,19 @@ class DecksController extends Controller
             $deckInfo['count']=$deckCount;
         }
 
+        $image = $deck->image;
+        if($request->hasFile('image')) {
+            if($image){
+                $oldImageName = explode('/',$deck->image);
+                if(Storage::disk('Decks')->exists(end( $oldImageName))){
+                    Storage::disk('Decks')->delete(end( $oldImageName));
+                }
+            }
+            $img = $request->file('image');
+            $image_name = date('YmdHis').uniqid().'.'.$img->getClientOriginalExtension();
+            Storage::disk('Decks')->putFileAs('/',$img,$image_name);
+            $image = Storage::url('decks/').$image_name;
+        }
 
         $data=[
             'user_id'=>$request->get('user_id'),
@@ -168,6 +190,7 @@ class DecksController extends Controller
             'competition'=>$request->get('competition'),
             'is_recommend'=>$request->get('is_recommend'),
             'card_info'=>serialize($deckInfo),
+            'image'=>$image,
         ];
 
         $deck = $deck->fill($data);
