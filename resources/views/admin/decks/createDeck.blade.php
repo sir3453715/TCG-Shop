@@ -122,6 +122,17 @@
                             </div>
                             <div class="card-body">
                                 <div class="col-12 row">
+
+                                    <div class="form-group col-12">
+                                        <div class="col-12">
+                                            <label class="field-name" for="image">封面圖片</label>
+                                            <input type="file" class="form-control-file" name="image" id="image">
+                                        </div>
+                                        <div class="col-12">
+                                            <img id="cardUploadImg" class="w-100 p-3" src="/storage/image/Admin/600x400UploadImageBackground.webp">
+                                        </div>
+                                    </div>
+
                                     <div class="form-group col-12">
                                         <label class="field-name" for="competition">賽制</label>
                                         <select class="form-control" name="competition" id="competition">
@@ -151,6 +162,25 @@
 
 @push('admin-app-scripts')
     <script type="text/javascript">
+
+        $("body").on('click','#cardUploadImg',function () {
+            $('#image').click();
+        });
+        $(document.body).on('change', 'input[type=file]', e => {
+            let reader = new FileReader(),
+                $this = $(e.currentTarget),
+                $preview = $('#cardUploadImg');
+
+            if(!$this.val()) return;
+            if($preview.length) {
+                reader.onload = function(_e) {
+                    $preview.attr('src',_e.target.result);
+                }
+                reader.readAsDataURL(e.currentTarget.files[0]);
+
+            }
+        });
+
         $('#table-filter').DataTable({
             paging: true,
             searching: true,

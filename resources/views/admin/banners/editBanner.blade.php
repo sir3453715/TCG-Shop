@@ -46,7 +46,7 @@
                                             <input type="file" class="form-control-file" name="image" id="image">
                                         </div>
                                         <div class="col-12">
-                                            <img id="cardUploadImg" class="w-100 p-3" src="{{$banner->image}}">
+                                            <img id="cardUploadImg" class="w-100 p-3" src="{{$banner->image??"/storage/image/Admin/600x400UploadImageBackground.webp"}}">
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-8">
