@@ -22,5 +22,9 @@ return[
         'competitions'=>[
             'A','B','C','D','E','F','G'
         ],
+        'attributesImageByChinese'=>[
+            '草'=>'Grass', '火'=>'Fire', '水'=>'Water', '雷'=>'Lightning', '超'=>'Psychic','鬥'=>'Fighting',
+            '惡'=>'Darkness', '鋼'=>'Metal', '妖'=>'Fairy', '龍'=>'Dragon', '無'=>'Colorless',
+        ],
     ],
 ];

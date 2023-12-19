@@ -58,12 +58,6 @@ return [
             'url' => env('APP_URL').'/storage/uploads/portfolios',
             'visibility' => 'public',
         ],
-        'products' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public/uploads/products'),
-            'url' => env('APP_URL').'/storage/uploads/products',
-            'visibility' => 'public',
-        ],
 
         'google' => [
             'driver' => 'google',
@@ -98,7 +92,13 @@ return [
             'visibility' => 'public',
         ],
 
-
+        /** Deck相關儲存空間 */
+        'Decks' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/decks'),
+            'url' => env('APP_URL').'/storage/decks',
+            'visibility' => 'public',
+        ],
 
 
         /** PTCG 相關儲存空間 */
