@@ -11,7 +11,7 @@ class Deck extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'title', 'competition', 'is_recommend', 'card_info', 'code'
+        'user_id', 'title', 'competition', 'is_recommend', 'card_info', 'code', 'image'
     ];
 
 
