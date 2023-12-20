@@ -7,22 +7,27 @@ return[
             '1'=>[
                 'title'=>'等待付款中',
                 'badge'=>'badge-secondary',
+                'bg'=>'bg-secondary bg-opacity-50',
             ],
             '2'=>[
                 'title'=>'處理中',
                 'badge'=>'badge-warning',
+                'bg'=>'bg-warning',
             ],
             '3'=>[
                 'title'=>'已出貨',
                 'badge'=>'badge-info',
+                'bg'=>'bg-info',
             ],
             '4'=>[
                 'title'=>'完成',
                 'badge'=>'badge-success',
+                'bg'=>'bg-success',
             ],
             '5'=>[
                 'title'=>'取消',
                 'badge'=>'badge-danger',
+                'bg'=>'bg-danger',
             ],
         ],
         'payment'=>[

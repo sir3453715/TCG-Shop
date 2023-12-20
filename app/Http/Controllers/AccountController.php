@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ActionLog;
 use App\Models\Card;
 use App\Models\Deck;
+use App\Models\Order;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,7 @@ class AccountController extends Controller
 
     public function myDeck(){
         $decks = Deck::where('user_id',Auth::id())->paginate(16);
+
         return view('myDeck',[
             'decks'=>$decks,
         ]);
@@ -34,9 +36,13 @@ class AccountController extends Controller
     }
 
     public function order(){
+        $orders = Order::where('user_id',Auth::id())->orderBy('created_at','DESC')->paginate(16);
 
-        return view('order');
-
+        $orderDefaultSetting = config('defaultSetting.order');
+        return view('order',[
+            'orders'=>$orders,
+            'orderDefaultSetting'=>$orderDefaultSetting,
+        ]);
     }
 
     public function wishlist(){
