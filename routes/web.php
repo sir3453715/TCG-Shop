@@ -26,10 +26,10 @@ Route::get('/competitionsPost/{id}', 'HomeController@competitionsPost')->name('c
 Route::group(['prefix'=>'myAccount','as'=>'myAccount.'],function (){
     Route::get('/dashboard', 'AccountController@dashboard')->name('dashboard');
     Route::get('/myDeck', 'AccountController@myDeck')->name('myDeck');
-    Route::get('/myDeckDetail', 'AccountController@myDeckDetail')->name('myDeckDetail');
+    Route::get('/myDeckDetail/{deck_id}', 'AccountController@myDeckDetail')->name('myDeckDetail');
     Route::get('/order', 'AccountController@order')->name('order');
     Route::get('/wishlist', 'AccountController@wishlist')->name('wishlist');
-    Route::get('/orderDetail', 'AccountController@orderDetail')->name('orderDetail');
+    Route::get('/orderDetail/{order_id}', 'AccountController@orderDetail')->name('orderDetail');
 
     Route::post('/editUser', 'AccountController@editUser')->name('editUser');
 });
