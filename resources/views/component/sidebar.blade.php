@@ -19,11 +19,11 @@
         <div class="collapse {{ ( \Illuminate\Support\Facades\Request::segment(1)=='myAccount' )?'show':'' }}" id="account-collapse">
             <ul class="btn-toggle-nav list-unstyled">
                 <li class="nav-item sub-nav-item">
-                    <a class="nav-link" href="{{route('myAccount.dashboard')}}">會員資料</a>
-                    <a class="nav-link" href="{{route('myAccount.myDeck')}}">我的牌組</a>
-                    <a class="nav-link" href="{{route('myAccount.wishlist')}}">願望清單</a>
-                    <a class="nav-link" href="{{route('myAccount.order')}}">我的訂單</a>
                     @if(\Illuminate\Support\Facades\Auth::check())
+                        <a class="nav-link" href="{{route('myAccount.dashboard')}}">會員資料</a>
+                        <a class="nav-link" href="{{route('myAccount.myDeck')}}">我的牌組</a>
+                        <a class="nav-link" href="{{route('myAccount.wishlist')}}">願望清單</a>
+                        <a class="nav-link" href="{{route('myAccount.order')}}">我的訂單</a>
                         <li class="nav-item sub-nav-item">
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf

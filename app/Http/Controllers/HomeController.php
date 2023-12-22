@@ -303,6 +303,8 @@ class HomeController extends Controller
         if($card->type != '寶可夢卡'){
             $wreHTML = '';
         }
+        $wishlistCheck = ($card->wishlistCheck())?'remove-wishlist':'add-to-wishlist';
+        $wishlistCheckTitle = ($card->wishlistCheck())?'從願望清單移除':'加入願望清單';
 
         $infoHTML = "<div class='col-lg-6 mb-3 mb-lg-0'>
                         <img class='img-fluid w-100' src='{$card->image}' />
@@ -322,7 +324,7 @@ class HomeController extends Controller
                             </div>
                         </div>
                         <div class='d-flex'>
-                            <button type='submit' class='btn btn-sm btn-sm-yellow fs-5 w-50 me-2'>加入願望清單</button>
+                            <button type='submit' data-id='{$card->id}' class='btn btn-sm btn-sm-yellow fs-5 w-50 me-2 {$wishlistCheck}'>{$wishlistCheckTitle}</button>
                             <button type='submit' class='btn btn-sm btn-sm-black fs-5 w-50 ms-2'>加入購物車</button>
                         </div>
                     </div>

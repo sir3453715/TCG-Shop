@@ -3,7 +3,7 @@
 
 <div id="my-deck" class="m-4 m-lg-5">
     @foreach($decks as $deck)
-        <a class="text-decoration-none text-dark" href="{{route('myAccount.myDeckDetail',['deck',$deck->id])}}">
+        <a class="text-decoration-none text-dark" href="{{route('myAccount.myDeckDetail',['deck_id'=>$deck->id])}}">
             <div class="row deck-list bg-yellow rounded-3 p-3 mb-4 align-items-center">
                 <div class="col-sm-9 mb-2">
                     <div class="d-flex flex-wrap">
@@ -29,9 +29,7 @@
 
 @endsection
 @push('app-scripts')
-    <script>
-        $('.deck-btn, .deck-del').on('click',function (e) {
-            e.preventDefault();
+    <script>et();
         })
     </script>
 @endpush

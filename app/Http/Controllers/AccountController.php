@@ -30,9 +30,15 @@ class AccountController extends Controller
         ]);
     }
 
-    public function myDeckDetail(){
+    public function myDeckDetail($id){
+        $deck = Deck::find($id);
+        if($deck->user_id != Auth::id()){
+           return redirect(route('myAccount.myDeck'))->with(['Errormessage'=>'無法查看其他人的牌組!']);
+        }
 
-        return view('myDeckDetail');
+        return view('myDeckDetail',[
+            'deck'=>$deck
+        ]);
     }
 
     public function order(){

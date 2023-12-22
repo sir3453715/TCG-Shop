@@ -71,6 +71,8 @@ class LoginController extends Controller
 
             if($request->get('login_by') == 'admin'){ //判斷是否透過後台登入
                 return redirect('/admin');
+            }else{
+                return redirect(route('index'));
             }
         }
     }

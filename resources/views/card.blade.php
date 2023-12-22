@@ -186,12 +186,11 @@
             }
         });
     });
-
     $('body').on('click', '.add-to-wishlist', function (e) {
         let id = $(this).data('id'); let $this = $(this);
         $.ajax({
             type: "POST",
-            url: "./AddToWishlist",
+            url: "../AddToWishlist",
             dataType: "json",
             data: {
                 '_token': $('meta[name="csrf-token"]').attr('content'),
@@ -201,8 +200,12 @@
                 if (object.result === '1') {
                     $this.addClass('remove-wishlist');
                     $this.removeClass('add-to-wishlist');
-                    $this.children('.fa-heart').addClass('fa-solid');
-                    $this.children('.fa-heart').removeClass('fa-regular');
+                    if($this[0].tagName === 'BUTTON'){
+                        $this.html('從願望清單移除');
+                    }else{
+                        $this.children('.fa-heart').addClass('fa-regular');
+                        $this.children('.fa-heart').removeClass('fa-solid');
+                    }
                 }
             }
         });
@@ -212,7 +215,7 @@
         let id = $(this).data('id'); let $this = $(this);
         $.ajax({
             type: "POST",
-            url: "./RemoveWishlist",
+            url: "../RemoveWishlist",
             dataType: "json",
             data: {
                 '_token': $('meta[name="csrf-token"]').attr('content'),
@@ -222,11 +225,16 @@
                 if (object.result === '1') {
                     $this.addClass('add-to-wishlist');
                     $this.removeClass('remove-wishlist');
-                    $this.children('.fa-heart').addClass('fa-regular');
-                    $this.children('.fa-heart').removeClass('fa-solid');
+                    if($this[0].tagName === 'BUTTON'){
+                        $this.html('加入願望清單');
+                    }else{
+                        $this.children('.fa-heart').addClass('fa-regular');
+                        $this.children('.fa-heart').removeClass('fa-solid');
+                    }
                 }
             }
         });
     });
+
 </script>
 @endpush
