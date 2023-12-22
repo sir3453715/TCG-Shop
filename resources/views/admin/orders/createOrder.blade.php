@@ -49,8 +49,6 @@
                                                 <select name="user_id" class="form-control search-user" data-placeholder="Search User">
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="col-12 col-md-4 row align-content-start">
                                             <div class="form-group col-6 col-md-12">
                                                 <label class="field-name" for="payment">付款方式</label>
                                                 <select name="payment" id="payment" class="form-control">
@@ -68,7 +66,9 @@
                                                     <option value="1">已付款</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-6 col-md-12">
+                                        </div>
+                                        <div class="col-12 col-md-4 row align-content-start">
+                                            <div class="form-group col-12 col-md-12">
                                                 <label class="field-name" for="shipment">物流方式</label>
                                                 <select name="shipment" id="shipment" class="form-control">
                                                     <option value="" hidden>請選擇</option>
@@ -76,6 +76,10 @@
                                                         <option value="{{$value}}" >{{$shipment['title']}}</option>
                                                     @endforeach
                                                 </select>
+                                            </div>
+                                            <div class="form-group  col-6 col-md-12">
+                                                <label class="field-name" for="shipping">物流運費</label>
+                                                <input type="number" min="0" class="form-control" name="shipping" id="shipping" placeholder="物流運費" value="0">
                                             </div>
                                             <div class="form-group  col-6 col-md-12">
                                                 <label class="field-name" for="shipping_code">物流單號</label>
@@ -124,8 +128,8 @@
                                             <thead>
                                             <tr>
                                                 <th style="width: 2%">#</th>
-                                                <th>卡牌名稱</th>
-                                                <th>類型</th>
+                                                <th class="desktop">卡牌名稱</th>
+                                                <th class="desktop">類型</th>
                                                 <th>數量</th>
                                                 <th>金額</th>
                                                 <th>小計</th>

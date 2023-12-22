@@ -51,8 +51,6 @@
                                                     <option value="{{$order->user_id}}">{{ $order->user->name }} - {{$order->user->email}}</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="col-12 col-md-4 row align-content-start">
                                             <div class="form-group col-6 col-md-12">
                                                 <label class="field-name" for="payment">付款方式</label>
                                                 <select name="payment" id="payment" class="form-control">
@@ -70,7 +68,13 @@
                                                     <option value="1" {!! $html->selectSelected(1,$order->pay_status) !!}>已付款</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-6 col-md-12">
+                                            <div class="form-group col-12 col-md-12">
+                                                <label class="field-name" for="total">總金額</label>
+                                                <input type="number" min="0" class="form-control text-danger" name="total" id="total" placeholder="總金額" value="{{$order->total}}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-4 row align-content-start">
+                                            <div class="form-group col-12 col-md-12">
                                                 <label class="field-name" for="shipment">物流方式</label>
                                                 <select name="shipment" id="shipment" class="form-control">
                                                     <option value="" hidden>請選擇</option>
@@ -78,6 +82,10 @@
                                                         <option value="{{$value}}" {!! $html->selectSelected($value,$order->shipment) !!}>{{$shipment['title']}}</option>
                                                     @endforeach
                                                 </select>
+                                            </div>
+                                            <div class="form-group  col-6 col-md-12">
+                                                <label class="field-name" for="shipping">物流運費</label>
+                                                <input type="number" min="0" class="form-control" name="shipping" id="shipping" placeholder="物流運費" value="{{$order->shipping}}" >
                                             </div>
                                             <div class="form-group  col-6 col-md-12">
                                                 <label class="field-name" for="shipping_code">物流單號</label>
@@ -109,7 +117,7 @@
                                             </div>
                                             <div class="form-group col-12 col-md-12">
                                                 <label class="field-name" for="note">訂單備註</label>
-                                                <textarea class="form-control" name="note" id="note" rows="3" placeholder="訂單備註">{{nl2br($order->note)}}</textarea>
+                                                <textarea class="form-control" name="note" id="note" rows="4" placeholder="訂單備註">{{nl2br($order->note)}}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -127,13 +135,13 @@
                                     <table class="table-default table table-bordered w-100">
                                         <thead>
                                         <tr>
-                                            <th style="width: 2%">#</th>
-                                            <th>卡牌名稱</th>
-                                            <th>類型</th>
-                                            <th>數量</th>
-                                            <th>金額</th>
-                                            <th>小計</th>
-                                            <th>動作</th>
+                                            <th style="width: 2%" >#</th>
+                                            <th class="desktop">卡牌名稱</th>
+                                            <th class="desktop">類型</th>
+                                            <th >數量</th>
+                                            <th >單價</th>
+                                            <th >小計</th>
+                                            <th >動作</th>
                                         </tr>
                                         </thead>
                                         <tbody id="item-tbody">
@@ -277,6 +285,15 @@
 
 @push('admin-app-scripts')
     <script type="text/javascript">
+        //     breakpoints: [
+        //         { name: 'desktop',  width: Infinity },
+        //         { name: 'tablet-l', width: 1024 },
+        //         { name: 'tablet-p', width: 767 },//原本是768~1024不含768
+        //         { name: 'mobile-l', width: 480 },
+        //         { name: 'mobile-p', width: 320 }
+        //     ]
+
+
         $('.search-user').on('select2:select', function (e) {
             var user_id = e.params.data.id;
             $.ajax({

@@ -255,7 +255,7 @@ class OrdersController extends Controller
             }
             $total += $itemData['subtotal'];
         }
-
+        $total += $request->get('shipping');
 
         $data =[
             'user_id'=>$request->get('user_id'),
@@ -266,6 +266,7 @@ class OrdersController extends Controller
             "buyer_phone" => $request->get('buyer_phone'),
             "buyer_address" => $request->get('buyer_address'),
             "note" => $request->get('note'),
+            "shipping" => $request->get('shipping'),
             "total" => $total,
             "status" => $request->get('status'),
             "shipping_code" => $request->get('shipping_code'),
