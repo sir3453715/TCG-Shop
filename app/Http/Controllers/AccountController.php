@@ -41,15 +41,6 @@ class AccountController extends Controller
         ]);
     }
 
-    public function order(){
-        $orders = Order::where('user_id',Auth::id())->orderBy('created_at','DESC')->paginate(16);
-
-        $orderDefaultSetting = config('defaultSetting.order');
-        return view('order',[
-            'orders'=>$orders,
-            'orderDefaultSetting'=>$orderDefaultSetting,
-        ]);
-    }
 
     public function wishlist(){
         $wishlists = Wishlist::where('user_id',Auth::id())->get();
@@ -72,9 +63,24 @@ class AccountController extends Controller
         ]);
     }
 
-    public function orderDetail(){
+    public function order(){
+        $orders = Order::where('user_id',Auth::id())->orderBy('created_at','DESC')->paginate(16);
 
-        return view('orderDetail');
+        $orderDefaultSetting = config('defaultSetting.order');
+        return view('order',[
+            'orders'=>$orders,
+            'orderDefaultSetting'=>$orderDefaultSetting,
+        ]);
+    }
+
+    public function orderDetail($id){
+        $order = Order::find($id);
+        $orderDefaultSetting = config('defaultSetting.order');
+
+        return view('orderDetail',[
+            'order'=>$order,
+            'orderDefaultSetting'=>$orderDefaultSetting,
+        ]);
     }
 
 

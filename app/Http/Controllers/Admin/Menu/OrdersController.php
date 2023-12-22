@@ -137,6 +137,9 @@ class OrdersController extends Controller
             "buyer_address" => $request->get('buyer_address'),
             "note" => $request->get('note'),
             "status" => $request->get('status'),
+            "shipping_code" => $request->get('shipping_code'),
+            "CVS_name" => $request->get('CVS_name'),
+            "CVS_code" => $request->get('CVS_code'),
         ];
 
         $order = Order::create($data);
@@ -265,6 +268,9 @@ class OrdersController extends Controller
             "note" => $request->get('note'),
             "total" => $total,
             "status" => $request->get('status'),
+            "shipping_code" => $request->get('shipping_code'),
+            "CVS_name" => $request->get('CVS_name'),
+            "CVS_code" => $request->get('CVS_code'),
         ];
 
         $order->fill($data);

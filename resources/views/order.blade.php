@@ -3,7 +3,7 @@
 
 <div id="my-order" class="m-3 m-lg-5 pt-lg-0 pt-4">
     @foreach($orders as $order)
-        <a class="text-decoration-none text-dark" href="{{route('myAccount.orderDetail',['order_id',$order->id])}}">
+        <a class="text-decoration-none text-dark" href="{{route('myAccount.orderDetail',['order_id'=>$order->id])}}">
             <div class="row order-list bg-white rounded-3 border border-dark p-3 mb-4">
                 <div class="col-sm-1 d-flex justify-content-md-center align-items-center mb-2 mb-md-0">
                     <i class="fa-regular fa-file-lines fs-1"></i>

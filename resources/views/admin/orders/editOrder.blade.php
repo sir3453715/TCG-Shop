@@ -70,7 +70,7 @@
                                                     <option value="1" {!! $html->selectSelected(1,$order->pay_status) !!}>已付款</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-12 col-md-12">
+                                            <div class="form-group col-6 col-md-12">
                                                 <label class="field-name" for="shipment">物流方式</label>
                                                 <select name="shipment" id="shipment" class="form-control">
                                                     <option value="" hidden>請選擇</option>
@@ -79,6 +79,20 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div class="form-group  col-6 col-md-12">
+                                                <label class="field-name" for="shipping_code">物流單號</label>
+                                                <input type="text" class="form-control" name="shipping_code" id="shipping_code" placeholder="物流單號" value="{{$order->shipping_code}}">
+                                            </div>
+
+                                            <div class="form-group {{(in_array($order->shipment,['7-11','Family']))?'':'d-none'}} col-6 col-md-12 cvs-field">
+                                                <label class="field-name" for="CVS_name">超商門市名稱</label>
+                                                <input type="text" class="form-control" name="CVS_name" id="CVS_name" placeholder="超商門市名稱" value="{{$order->CVS_name}}">
+                                            </div>
+                                            <div class="form-group {{(in_array($order->shipment,['7-11','Family']))?'':'d-none'}} col-6 col-md-12 cvs-field">
+                                                <label class="field-name" for="CVS_code">超商店號</label>
+                                                <input type="text" class="form-control" name="CVS_code" id="CVS_code" placeholder="超商店號" value="{{$order->CVS_code}}">
+                                            </div>
+
                                         </div>
                                         <div class="col-12 col-md-4  row align-content-start">
                                             <div class="form-group  col-6 col-md-12">
@@ -487,5 +501,21 @@
             $('.keywordSearchHtml').html('');
             $('.importCodeHtml').html('');
         }
+
+
+        /** 物流欄位變動 */
+        $('body').on('change','#shipment',function (e){
+            let shipment = $(this).val(), CVS_option = ['7-11','Family'];
+            console.log(shipment);
+            console.log(CVS_option);
+            if($.inArray(shipment,CVS_option) != -1){
+                $('.cvs-field').removeClass('d-none');
+            }else{
+                $('.cvs-field').addClass('d-none');
+                $('#CVS_name').val('');
+                $('#CVS_code').val('');
+            }
+        });
+
     </script>
 @endpush

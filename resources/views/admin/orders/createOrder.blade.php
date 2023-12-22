@@ -68,7 +68,7 @@
                                                     <option value="1">已付款</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-12 col-md-12">
+                                            <div class="form-group col-6 col-md-12">
                                                 <label class="field-name" for="shipment">物流方式</label>
                                                 <select name="shipment" id="shipment" class="form-control">
                                                     <option value="" hidden>請選擇</option>
@@ -76,6 +76,18 @@
                                                         <option value="{{$value}}" >{{$shipment['title']}}</option>
                                                     @endforeach
                                                 </select>
+                                            </div>
+                                            <div class="form-group  col-6 col-md-12">
+                                                <label class="field-name" for="shipping_code">物流單號</label>
+                                                <input type="text" class="form-control" name="shipping_code" id="shipping_code" placeholder="物流單號" >
+                                            </div>
+                                            <div class="form-group d-none col-6 col-md-12 cvs-field">
+                                                <label class="field-name" for="CVS_name">超商門市名稱</label>
+                                                <input type="text" class="form-control" name="CVS_name" id="CVS_name" placeholder="超商門市名稱" >
+                                            </div>
+                                            <div class="form-group d-none col-6 col-md-12 cvs-field">
+                                                <label class="field-name" for="CVS_code">超商店號</label>
+                                                <input type="text" class="form-control" name="CVS_code" id="CVS_code" placeholder="超商店號" >
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-4  row align-content-start">
@@ -449,37 +461,6 @@
             });
         });
 
-
-        // /** 加入商品-已選商品加入表單 */
-        // $('body').on('click','#importItemBtn, #selectItemsBtn',function (e){
-        //     var card_ids = $("input[name='card_id[]']")
-        //         .map(function(){
-        //             return $(this).val();
-        //         }).get();
-        //     var card_nums = $("input[name='card_num[]']")
-        //         .map(function(){
-        //             return $(this).val();
-        //         }).get();
-        //
-        //     $.ajax({
-        //         type: "POST",
-        //         url:window.location.origin+"/addOrderItem",
-        //         dataType:"json",
-        //         data: {
-        //             '_token': $('meta[name="csrf-token"]').attr('content'),
-        //             'card_ids': card_ids,
-        //             'card_nums': card_nums,
-        //         },
-        //         success:function(object){
-        //             if(object.result === '1' ) {
-        //                 $('#item-tbody').append(object.html);
-        //             }else{
-        //                 alert('無法加入商品!');
-        //             }
-        //         }
-        //     });
-        // });
-
         /** 加入商品-金額動作 */
         $('body').on('change','.item_change',function (e){
             let id = $(this).data('id'),$sub=0,subtotal=$('#subtotal-'+id);
@@ -501,6 +482,20 @@
             $('.importCodeHtml').html('');
         }
 
+
+        /** 物流欄位變動 */
+        $('body').on('change','#shipment',function (e){
+            let shipment = $(this).val(), CVS_option = ['7-11','Family'];
+            console.log(shipment);
+            console.log(CVS_option);
+            if($.inArray(shipment,CVS_option) != -1){
+                $('.cvs-field').removeClass('d-none');
+            }else{
+                $('.cvs-field').addClass('d-none');
+                $('#CVS_name').val('');
+                $('#CVS_code').val('');
+            }
+        });
 
     </script>
 @endpush
