@@ -68,7 +68,7 @@
                                                     <option value="1" {!! $html->selectSelected(1,$order->pay_status) !!}>已付款</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-12 col-md-12">
+                                            <div class="form-group col-12 col-md-12 position-sticky top-0 h-100">
                                                 <label class="field-name" for="total">總金額</label>
                                                 <input type="number" min="0" class="form-control text-danger" name="total" id="total" placeholder="總金額" value="{{$order->total}}" disabled>
                                             </div>
@@ -195,10 +195,38 @@
                                 <button type="submit" class="submit_btn btn btn-info" >送出</button>
                             </div>
                         </div>
+                        <div class="card card-secondary">
+                            <div class="card-header">
+                                <h3 class="card-title">訂單紀錄</h3>
+                            </div>
+                            <div class="form-group pt-2 col-12  pre-scrollable border-bottom">
+                                @foreach($order->orderComment as $comment)
+                                    <div class="card-body bg-gray-light border rounded border-white mb-1 pb-2">
+                                        <span>{!! nl2br($comment->content)  !!}</span>
+                                        <small class="d-block text-right">By {{$comment->user->name}} - {{$comment->dateTime}}</small>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="form-group col-12">
+                                <input type="hidden" name="order_id" value="{{$order->id}}" form="comment-form">
+                                <div class="card-body p-1">
+                                    <div class="form-group">
+                                        <label for="comment">內容</label>
+                                        <textarea name="content" rows="4" id="content" class="form-control" form="comment-form"></textarea>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-outline-secondary" form="comment-form">送出</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+    </form>
+    <form id="comment-form" class="comment-form" action="{{route('admin.order.createComment')}}" method="post">
+        @csrf
     </form>
 
     <div class="modal fade" id="selectItems" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -429,6 +457,7 @@
                     if(object.result === '1' ) {
                         $('#ItemsImportWrapper').html('');
                         $('#ItemsImportWrapper').append(object.html);
+                        calculateTotal();
                     }else{
                         alert('無法加入牌組!');
                     }
@@ -490,6 +519,7 @@
                             }
                         });
                         cleanAddItemModelHtml();
+                        calculateTotal();
                     }else{
                         alert('無法加入商品!');
                     }
@@ -504,11 +534,13 @@
             let number=$('#number-'+id).val(),unit_price=$('#unit_price-'+id).val();
             $sub = number*unit_price;
             subtotal.val($sub);
+            calculateTotal();
         });
 
         /** 加入商品-刪除商品 */
         $('body').on('click','.item-delete',function (e){
             $(this).closest('tr').remove();
+            calculateTotal();
         });
 
 
@@ -534,5 +566,14 @@
             }
         });
 
+        function calculateTotal(){
+            var total = 0, subtotal = 0,shipping = Number($('#shipping').val());
+            $('.item_subtotal').each(function() {
+                subtotal += Number($(this).val());
+            });
+            total = subtotal + shipping;
+
+            $('#total').val(total);
+        }
     </script>
 @endpush

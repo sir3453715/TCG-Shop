@@ -458,6 +458,7 @@
                             }
                         });
                         cleanAddItemModelHtml();
+                        calculateTotal();
                     }else{
                         alert('無法加入商品!');
                     }
@@ -471,11 +472,13 @@
             let number=$('#number-'+id).val(),unit_price=$('#unit_price-'+id).val();
             $sub = number*unit_price;
             subtotal.val($sub);
+            calculateTotal();
         });
 
         /** 加入商品-刪除商品 */
         $('body').on('click','.item-delete',function (e){
             $(this).closest('tr').remove();
+            calculateTotal();
         });
 
 
@@ -501,5 +504,14 @@
             }
         });
 
+        function calculateTotal(){
+            var total = 0, subtotal = 0,shipping = Number($('#shipping').val());
+            $('.item_subtotal').each(function() {
+                subtotal += Number($(this).val());
+            });
+            total = subtotal + shipping;
+
+            $('#total').val(total);
+        }
     </script>
 @endpush

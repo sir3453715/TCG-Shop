@@ -114,6 +114,10 @@ Route::group(['prefix'=>'admin', 'middleware' => ['web', 'admin.area'],'as'=>'ad
             ->name('build');
     });
 
+    Route::group(['prefix' => 'order', 'as' => 'order.'], function(){
+        Route::post('createComment', 'Admin\Menu\OrdersController@createComment')
+            ->name('createComment');// 新增訂單紀錄
+    });
 });
 
 

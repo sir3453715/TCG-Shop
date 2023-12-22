@@ -422,4 +422,24 @@ class OrdersController extends Controller
 //        return json_encode($result);
 //
 //    }
+
+
+    public function createComment(Request $request)
+    {
+        if($request->get('content')){
+            $data=[
+                'user_id'=>Auth::id(),
+                'order_id'=>$request->get('order_id'),
+                'content'=>$request->get('content'),
+                'dateTime'=>date('Y-m-d H:i:s'),
+            ];
+            $comment = OrderComment::create($data);
+
+            return redirect()->back()->with('message', '已新增訂單紀錄!');
+        }else{
+            return redirect()->back()->with('error', '請輸入訂單紀錄內容後送出!');
+        }
+    }
+
+
 }
