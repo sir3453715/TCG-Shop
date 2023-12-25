@@ -1,7 +1,7 @@
 <div class="mini-cart-wrapper container-fluid">
     <div class="mini-cart">
         <button type="button" id="mini-cart-close" class="btn-close mb-2"></button>
-        <div class="row gy-3 gx-4">
+        <div class="row gy-3 gx-4 mini-cart-list">
             @for($i = 1; $i <= 12; $i++) <div class="mini-cart-items col-6 col-sm-3">
                 <img class="img-fluid" src="https://asia.pokemon-card.com/tw/card-img/tw00004614.png" alt="">
                 <div class="row align-items-center my-4">
@@ -22,7 +22,7 @@
         </div>
         @endfor
     </div>
-    <div class="row my-3">
+    <div class="row mt-3 sticky-bottom mini-cart-footer">
         <div class="col-sm-6 mb-2 mb-sm-0">
             <div class="fs-4 fw-bold">卡片張數：<span class="text-red fs-4 fw-bold">33 張</span></div>
             <div class="fs-4 fw-bold">商品總價：<span class="text-red fs-4 fw-bold">600 元</span></div>

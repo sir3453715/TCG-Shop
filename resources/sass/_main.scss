@@ -1117,6 +1117,14 @@ html {
         width: 100%;
         pointer-events: none;
     }
+    &-list{
+        overflow-y: scroll;
+        height: 60vh;
+    }
+    &-footer {
+        background: $white;
+        padding: 1rem 0;
+    }
     margin: 1rem;
     float: right;
     background: white;
@@ -1128,11 +1136,30 @@ html {
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
     display: none;
     pointer-events: auto;
-    height: 85vh;
-    overflow-y: scroll;
     .addtocart-selector .addtocart-qty .addtocart-button, .addtocart-selector .addtocart-qty .addtocart-input {
         height: 30px;
         line-height: 30px;
     }
-     
+  }
+
+  .mini-cart:after {
+    top: -32px;
+    right: 32%;
+    border: solid transparent;
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    border-bottom-color: white;
+    border-width: 20px;
+    margin-left: -20px;
+    @media (max-width: 768px){
+        right: 80px;
+    }
+}
+
+  #mini-cart-close {
+    position: relative;
+    top: -10px;
+    left: -5px;
   }
