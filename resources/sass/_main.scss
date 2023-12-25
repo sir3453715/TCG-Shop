@@ -282,11 +282,13 @@ html {
         &-yellow {
             background: $yellow;
             color: $black;
+            height: fit-content;
         }
 
         &-black {
             background: $black;
             color: $white;
+            height: fit-content;
         }
 
     }
@@ -1105,3 +1107,32 @@ html {
 
 
 }
+
+// mini cart 
+
+.mini-cart {
+    &-wrapper{
+        position: fixed;
+        z-index: 9999;
+        width: 100%;
+        pointer-events: none;
+    }
+    margin: 1rem;
+    float: right;
+    background: white;
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+    border-radius: 15px;
+    padding:20px;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: none;
+    pointer-events: auto;
+    height: 85vh;
+    overflow-y: scroll;
+    .addtocart-selector .addtocart-qty .addtocart-button, .addtocart-selector .addtocart-qty .addtocart-input {
+        height: 30px;
+        line-height: 30px;
+    }
+     
+  }

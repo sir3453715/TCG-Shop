@@ -91,6 +91,15 @@ $(() => {
             ordering : false,
         });
 
+        // mini-cart
+    (function(){
+ 
+         $("#mini-cart, #mini-cart-close").on("click", function() {
+             $(".mini-cart").fadeToggle( "fast");
+         });
+    
+        })();
+
 
     });
 

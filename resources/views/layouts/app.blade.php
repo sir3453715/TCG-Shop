@@ -21,7 +21,7 @@
     <div class="row sticky-top">
        @include('component.header') 
     </div>
-    
+    @include('component.mini-cart')
     <div class="row">
     <div class="d-none d-md-block col-md-3 col-lg-2 p-0">
     @include('component.sidebar')
@@ -54,8 +54,6 @@
   @include('component.sidebar')
   </div>
 </div>
-
-
 
 
 @section('app-scripts')
