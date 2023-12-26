@@ -21,6 +21,14 @@ class Card extends Model
         return $this->hasMany(HistoryPrice::class,'card_id');
     }
 
+    public function indexHistoryPrices()
+    {
+        $indexHistoryPrice = $this->historyPrices()->orderBy('dateTime','DESC')->limit(7)->get()->toArray();
+
+
+        return json_encode($indexHistoryPrice);
+    }
+
     public function nowPrice(){
         $price = $this->default_price;
         $productPrices = Product::where('card_id',$this->id)->pluck('price')->toArray();

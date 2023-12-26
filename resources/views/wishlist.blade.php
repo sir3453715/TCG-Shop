@@ -32,8 +32,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-6">
-                                    <a><i class="fas fa-minus me-3"></i></a>
-                                    <a><i class="fas fa-plus"></i></a>
+                                    <a class="btn-link" href="javascript:void(0);"><i class="fas fa-minus me-3 add-to-cart" data-id="{{$card->id}}" data-type="minus"></i></a>
+                                    <a class="btn-link" href="javascript:void(0);"><i class="fas fa-plus add-to-cart" data-id="{{$card->id}}" data-type="plus"></i></a>
                                 </div>
                                 <div class="col-6 text-end fw-bold">{{$card->rarity}}</div>
                             </div>

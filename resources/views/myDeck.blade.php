@@ -29,7 +29,9 @@
 
 @endsection
 @push('app-scripts')
-    <script>et();
+    <script>
+        $('.deck-btn, .deck-del').on('click',function (e) {
+            e.preventDefault();
         })
     </script>
 @endpush

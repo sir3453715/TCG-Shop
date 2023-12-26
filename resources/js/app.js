@@ -7,29 +7,10 @@ import 'select2/dist/js/i18n/zh-TW.js';
 $(() => {
     $( document ).ready(function() {
 
-        if($('.custom-editor').length){
-            $('.custom-editor').summernote({
-                placeholder: 'Hello Bootstrap 4',
-                tabsize: 2,
-                height: $('.custom-editor').attr('data-weight'),
-            });
-        }
         $('.select2').select2({
             placeholder:"enter keyword",
-            allowClear: true
-        });
-        $('.select2-limit').select2({
-            maximumSelectionLength: 2,
-        });
-        $('.select2-limit-zhTW').select2({
+            allowClear: true,
             language:'zh-TW',
-            maximumSelectionLength: 1,
-        });
-        $('.select2-min-input-length').select2({
-            minimumInputLength: 2
-        });
-        $('.select2-max-input-length').select2({
-            maximumInputLength: 4
         });
 
         $('.slider').slick({
@@ -37,50 +18,31 @@ $(() => {
             nextArrow:'<button type="button" class="slick-next"></button>',
             dots: true,
         });
-        $('.slider-multi').slick({
-            prevArrow:'<button type="button" class="slick-prev"></button>',
-            nextArrow:'<button type="button" class="slick-next"></button>',
-            dots: true,
-            infinite: true,
-            slidesToShow: 3,
-            slidesToScroll: 3
-        });
-        $('.slider-fade').slick({
-            prevArrow:'<button type="button" class="slick-prev"></button>',
-            nextArrow:'<button type="button" class="slick-next"></button>',
-            fade: true,
-        });
+
         $('.slider-syncing').slick({
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: false,
-            asNavFor: '.slider-nav'
+            asNavFor: '.slider-center'
         });
         $('.slider-nav').slick({
             prevArrow:'<button type="button" class="slick-prev"></button>',
             nextArrow:'<button type="button" class="slick-next"></button>',
             slidesToShow: 3,
             slidesToScroll: 1,
-            asNavFor: '.slider-syncing',
             dots: true,
             centerMode: true,
             focusOnSelect: true
         });
-        $('.slider-autoplay').slick({
-            slidesToScroll: 1,
-            autoplay: true,
-            arrows: false,
-            autoplaySpeed: 1000,
+
+        $('.slider-center').slick({
+            centerMode: true,
+            centerPadding: '0px',
+            slidesToShow: 3,
+            adaptiveHeight: true,
+            asNavFor: '.slider-syncing',
         });
 
-        $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
-            $('.slider').slick('refresh');
-            $('.slider-multi').slick('refresh');
-            $('.slider-fade').slick('refresh');
-            $('.slider-syncing').slick('refresh');
-            $('.slider-nav').slick('refresh');
-            $('.slider-autoplay').slick('refresh');
-        });
 
         $('.table-cart').DataTable({
             responsive: false,
@@ -90,6 +52,48 @@ $(() => {
             info: false,
             ordering : false,
         });
+
+        $('body').on('click','.add-to-cart',function (e){
+            let id = $(this).data('id');
+            $.ajax({
+                type: "POST",
+                url:"/AddToCart",
+                dataType:"json",
+                data: {
+                    '_token': $('meta[name="csrf-token"]').attr('content'),
+                    'id': id,
+                    'type': $(this).data('type'),
+                },
+                success:function(object){
+                    $('#mini-cart-list').html(object.html);
+                    $('#count').html(object.cart.count);
+                    $('#total').html(object.cart.total);
+                }
+            });
+        });
+
+
+        $('body').on('click','#cleanCart',function (e){
+            $.ajax({
+                type: "POST",
+                url:"/CleanCart",
+                dataType:"json",
+                data: {
+                    '_token': $('meta[name="csrf-token"]').attr('content'),
+                },
+                success:function(object){
+                    $('#mini-cart-list').html('購物車內目前沒有商品');
+                }
+            });
+        });
+
+
+
+
+
+
+
+
 
         // mini-cart
     (function(){

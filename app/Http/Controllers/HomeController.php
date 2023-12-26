@@ -35,6 +35,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function home()
+    {
+
+        return view('welcome');
+    }
     public function index()
     {
         $banners = Banner::where('status','1')->orderBy('sort','DESC')->get();
@@ -43,10 +48,13 @@ class HomeController extends Controller
         unset($events[0]);
         $eventsList = $events;
 
+        $cards = Card::inRandomOrder()->limit(5)->get();
+
         return view('home',[
             'banners'=>$banners,
             'biggestEvent'=>$biggestEvent,
             'eventsList'=>$eventsList,
+            'cards'=>$cards,
         ]);
     }
     public function card(Request $request)
@@ -98,6 +106,17 @@ class HomeController extends Controller
         ]);
     }
 
+    public function deckDetail($id){
+        $deck = Deck::find($id);
+        if($deck->user_id){
+            return redirect(route('deck'))->with(['Errormessage'=>'無法查看其他人的牌組!']);
+        }
+
+        return view('deckDetail',[
+            'deck'=>$deck
+        ]);
+    }
+
     public function news()
     {
         $news = Event::where('class_id',1)->paginate(12);
@@ -107,10 +126,12 @@ class HomeController extends Controller
 
     }
 
-    public function newsPost()
+    public function newsPost($id)
     {
-
-        return view('newsPost');
+        $new = Event::find($id);
+        return view('newsPost',[
+            'new'=>$new
+        ]);
 
     }
 
@@ -122,9 +143,13 @@ class HomeController extends Controller
         ]);
 
     }
-    public function competitionsPost(){
+    public function competitionsPost($id)
+    {
 
-        return view('competitionsPost');
+        $competition = Event::find($id);
+        return view('competitionsPost',[
+            'competition'=>$competition,
+        ]);
 
     }
 
@@ -253,10 +278,6 @@ class HomeController extends Controller
         return json_encode($result);
 
     }
-    public function CleanDeck(Request $request){
-        session()->forget('deck');
-        return 1;
-    }
 
     public function GetCardDataF(Request $request){
         $CID = $request->get('id');
@@ -341,6 +362,7 @@ class HomeController extends Controller
                         <div class='badge-pill badge-gray w-100 text-center fs-5 fw-bold p-2 mb-3'>招式</div>
                         <div>{$skillHTML}</div>
                         <div class='row'>{$wreHTML}</div>
+                        <div class='row'><canvas id='historyPriceChart' data-value='{$card->indexHistoryPrices()}' ></canvas></div>
                     </div>";
 
 

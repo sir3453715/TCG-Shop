@@ -941,88 +941,88 @@
                             </li>
                         </ul>
                         <div class="tab-content mt-5 mb-5" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-default" role="tabpanel" aria-labelledby="pills-default-slider">
-                                <div class="row slider">
-                                    @for($i=1;$i<=5;$i++)
-                                    <div class="col-lg-6">
-                                        <!-- small box -->
-                                        <div class="small-box bg-info">
-                                            <div class="inner">
-                                                <h3>{{$i}}</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endfor
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-multi" role="tabpanel" aria-labelledby="pills-multi-item">
-                                <div class="row slider-multi">
-                                    @for($i=1;$i<=12;$i++)
-                                        <div class="col-lg-6">
-                                            <!-- small box -->
-                                            <div class="small-box bg-info">
-                                                <div class="inner">
-                                                    <h3>{{$i}}</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endfor
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-fade" role="tabpanel" aria-labelledby="pills-fade-mode">
-                                <div class="row slider-fade">
-                                    @for($i=1;$i<=14;$i++)
-                                        <div class="col-lg-6">
-                                            <!-- small box -->
-                                            <div class="small-box bg-warning">
-                                                <div class="inner">
-                                                    <h3>{{$i}}</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endfor
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-syncing" role="tabpanel" aria-labelledby="pills-slider-syncing">
-                                <div class="row slider-syncing mb-3">
-                                    @for($i=1;$i<=5;$i++)
-                                        <div class="col-lg-6">
-                                            <!-- small box -->
-                                            <div class="small-box bg-secondary">
-                                                <div class="inner">
-                                                    <h3>{{$i}}</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endfor
-                                </div>
-                                <div class="row slider-nav">
-                                    @for($i=1;$i<=5;$i++)
-                                        <div class="col-lg-6">
-                                            <!-- small box -->
-                                            <div class="small-box bg-danger">
-                                                <div class="inner">
-                                                    <h3>{{$i}}</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endfor
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-autoplay" role="tabpanel" aria-labelledby="pills-slider-autoplay">
-                                <div class="row slider-autoplay">
-                                    @for($i=1;$i<=5;$i++)
-                                        <div class="col-lg-6">
-                                            <!-- small box -->
-                                            <div class="small-box bg-success">
-                                                <div class="inner">
-                                                    <h3>{{$i}}</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endfor
-                                </div>
-                            </div>
+{{--                            <div class="tab-pane fade show active" id="pills-default" role="tabpanel" aria-labelledby="pills-default-slider">--}}
+{{--                                <div class="row slider">--}}
+{{--                                    @for($i=1;$i<=5;$i++)--}}
+{{--                                    <div class="col-lg-6">--}}
+{{--                                        <!-- small box -->--}}
+{{--                                        <div class="small-box bg-info">--}}
+{{--                                            <div class="inner">--}}
+{{--                                                <h3>{{$i}}</h3>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    @endfor--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="tab-pane fade" id="pills-multi" role="tabpanel" aria-labelledby="pills-multi-item">--}}
+{{--                                <div class="row slider-multi">--}}
+{{--                                    @for($i=1;$i<=12;$i++)--}}
+{{--                                        <div class="col-lg-6">--}}
+{{--                                            <!-- small box -->--}}
+{{--                                            <div class="small-box bg-info">--}}
+{{--                                                <div class="inner">--}}
+{{--                                                    <h3>{{$i}}</h3>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    @endfor--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="tab-pane fade" id="pills-fade" role="tabpanel" aria-labelledby="pills-fade-mode">--}}
+{{--                                <div class="row slider-fade">--}}
+{{--                                    @for($i=1;$i<=14;$i++)--}}
+{{--                                        <div class="col-lg-6">--}}
+{{--                                            <!-- small box -->--}}
+{{--                                            <div class="small-box bg-warning">--}}
+{{--                                                <div class="inner">--}}
+{{--                                                    <h3>{{$i}}</h3>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    @endfor--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="tab-pane fade" id="pills-syncing" role="tabpanel" aria-labelledby="pills-slider-syncing">--}}
+{{--                                <div class="row slider-syncing mb-3">--}}
+{{--                                    @for($i=1;$i<=5;$i++)--}}
+{{--                                        <div class="col-lg-6">--}}
+{{--                                            <!-- small box -->--}}
+{{--                                            <div class="small-box bg-secondary">--}}
+{{--                                                <div class="inner">--}}
+{{--                                                    <h3>{{$i}}</h3>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    @endfor--}}
+{{--                                </div>--}}
+{{--                                <div class="row slider-nav">--}}
+{{--                                    @for($i=1;$i<=5;$i++)--}}
+{{--                                        <div class="col-lg-6">--}}
+{{--                                            <!-- small box -->--}}
+{{--                                            <div class="small-box bg-danger">--}}
+{{--                                                <div class="inner">--}}
+{{--                                                    <h3>{{$i}}</h3>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    @endfor--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="tab-pane fade" id="pills-autoplay" role="tabpanel" aria-labelledby="pills-slider-autoplay">--}}
+{{--                                <div class="row slider-autoplay">--}}
+{{--                                    @for($i=1;$i<=5;$i++)--}}
+{{--                                        <div class="col-lg-6">--}}
+{{--                                            <!-- small box -->--}}
+{{--                                            <div class="small-box bg-success">--}}
+{{--                                                <div class="inner">--}}
+{{--                                                    <h3>{{$i}}</h3>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    @endfor--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                 </div>
@@ -1033,247 +1033,247 @@
     <!-- PORTFOLIO END-->
 
     <!-- CLIENT START -->
-    <section class="section" id="Editor">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-7">
-                    <div class=" text-center">
-                        <h4 class="title-heading text-uppercase">WYSIWYG Editor</h4>
-                        <p class="title-desc text-muted mt-3">This Template Is Using Summernote For Text Editor</p>
-                    </div>
-                </div>
-            </div>
+{{--    <section class="section" id="Editor">--}}
+{{--        <div class="container">--}}
+{{--            <div class="row justify-content-center">--}}
+{{--                <div class="col-lg-7">--}}
+{{--                    <div class=" text-center">--}}
+{{--                        <h4 class="title-heading text-uppercase">WYSIWYG Editor</h4>--}}
+{{--                        <p class="title-desc text-muted mt-3">This Template Is Using Summernote For Text Editor</p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <div class="row justify-content-center mt-4">
-                <div class="col-lg-8">
-                    <div id="editor-demo" class="mt-4">
-                        <div class="testi-box">
-                            <div class="custom-editor" data-weight="300">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+{{--            <div class="row justify-content-center mt-4">--}}
+{{--                <div class="col-lg-8">--}}
+{{--                    <div id="editor-demo" class="mt-4">--}}
+{{--                        <div class="testi-box">--}}
+{{--                            <div class="custom-editor" data-weight="300">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
     <!-- CLIENT END -->
 
     <!-- BLOG START -->
-    <section class="section bg-white" id="Popup">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-7">
-                    <div class="text-center">
-                        <h4 class="title-heading text-uppercase">POPUP WINDOWS </h4>
-                        <p class="title-desc text-muted mt-3">This Template Is Using Bootstrap model For Popup Windows</p>
-                    </div>
-                </div>
-            </div>
+{{--    <section class="section bg-white" id="Popup">--}}
+{{--        <div class="container">--}}
+{{--            <div class="row justify-content-center">--}}
+{{--                <div class="col-lg-7">--}}
+{{--                    <div class="text-center">--}}
+{{--                        <h4 class="title-heading text-uppercase">POPUP WINDOWS </h4>--}}
+{{--                        <p class="title-desc text-muted mt-3">This Template Is Using Bootstrap model For Popup Windows</p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <div class="row mt-4">
-                <div class="col-lg-3">
-                    <div class="model-menu mt-4">
-                        <h2>Default Modal</h2>
-                        <!-- Button to Open the Modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                            Open
-                        </button>
-                        <!-- The Modal -->
-                        <div class="modal" id="myModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Modal Heading</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        Modal Body
-                                    </div>
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="model-menu mt-4">
-                        <h2>Fading Modal</h2>
-                        <!-- Button to Open the Modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#fadeModal">
-                            Open
-                        </button>
-                        <!-- The Modal -->
-                        <div class="modal fade" id="fadeModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Modal Heading</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        Fade Modal
-                                    </div>
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="model-menu mt-4">
-                        <h2>Centered Modal</h2>
-                        <!-- Button to Open the Modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CentereModal">
-                            Open
-                        </button>
-                        <!-- The Modal -->
-                        <div class="modal fade" id="CentereModal">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Modal Heading</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        Modal body..
-                                    </div>
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="model-menu mt-4">
-                        <h2>Scroll Modal</h2>
-                        <!-- Button to Open the Modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ScrollModal">
-                            Open
-                        </button>
-                        <!-- The Modal -->
-                        <div class="modal" id="ScrollModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h1 class="modal-title">Modal Heading</h1>
-                                        <button type="button" class="close" data-dismiss="modal">×</button>
-                                    </div>
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <h3>Some text to enable scrolling..</h3>
-                                        @for($i=1;$i<=4;$i++)
-                                           <p>Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..</p>
-                                        @endfor
-                                    </div>
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+{{--            <div class="row mt-4">--}}
+{{--                <div class="col-lg-3">--}}
+{{--                    <div class="model-menu mt-4">--}}
+{{--                        <h2>Default Modal</h2>--}}
+{{--                        <!-- Button to Open the Modal -->--}}
+{{--                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">--}}
+{{--                            Open--}}
+{{--                        </button>--}}
+{{--                        <!-- The Modal -->--}}
+{{--                        <div class="modal" id="myModal">--}}
+{{--                            <div class="modal-dialog">--}}
+{{--                                <div class="modal-content">--}}
+{{--                                    <!-- Modal Header -->--}}
+{{--                                    <div class="modal-header">--}}
+{{--                                        <h4 class="modal-title">Modal Heading</h4>--}}
+{{--                                        <button type="button" class="close" data-dismiss="modal">&times;</button>--}}
+{{--                                    </div>--}}
+{{--                                    <!-- Modal body -->--}}
+{{--                                    <div class="modal-body">--}}
+{{--                                        Modal Body--}}
+{{--                                    </div>--}}
+{{--                                    <!-- Modal footer -->--}}
+{{--                                    <div class="modal-footer">--}}
+{{--                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-3">--}}
+{{--                    <div class="model-menu mt-4">--}}
+{{--                        <h2>Fading Modal</h2>--}}
+{{--                        <!-- Button to Open the Modal -->--}}
+{{--                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#fadeModal">--}}
+{{--                            Open--}}
+{{--                        </button>--}}
+{{--                        <!-- The Modal -->--}}
+{{--                        <div class="modal fade" id="fadeModal">--}}
+{{--                            <div class="modal-dialog">--}}
+{{--                                <div class="modal-content">--}}
+{{--                                    <!-- Modal Header -->--}}
+{{--                                    <div class="modal-header">--}}
+{{--                                        <h4 class="modal-title">Modal Heading</h4>--}}
+{{--                                        <button type="button" class="close" data-dismiss="modal">&times;</button>--}}
+{{--                                    </div>--}}
+{{--                                    <!-- Modal body -->--}}
+{{--                                    <div class="modal-body">--}}
+{{--                                        Fade Modal--}}
+{{--                                    </div>--}}
+{{--                                    <!-- Modal footer -->--}}
+{{--                                    <div class="modal-footer">--}}
+{{--                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-3">--}}
+{{--                    <div class="model-menu mt-4">--}}
+{{--                        <h2>Centered Modal</h2>--}}
+{{--                        <!-- Button to Open the Modal -->--}}
+{{--                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CentereModal">--}}
+{{--                            Open--}}
+{{--                        </button>--}}
+{{--                        <!-- The Modal -->--}}
+{{--                        <div class="modal fade" id="CentereModal">--}}
+{{--                            <div class="modal-dialog modal-dialog-centered">--}}
+{{--                                <div class="modal-content">--}}
+{{--                                    <!-- Modal Header -->--}}
+{{--                                    <div class="modal-header">--}}
+{{--                                        <h4 class="modal-title">Modal Heading</h4>--}}
+{{--                                        <button type="button" class="close" data-dismiss="modal">&times;</button>--}}
+{{--                                    </div>--}}
+{{--                                    <!-- Modal body -->--}}
+{{--                                    <div class="modal-body">--}}
+{{--                                        Modal body..--}}
+{{--                                    </div>--}}
+{{--                                    <!-- Modal footer -->--}}
+{{--                                    <div class="modal-footer">--}}
+{{--                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-3">--}}
+{{--                    <div class="model-menu mt-4">--}}
+{{--                        <h2>Scroll Modal</h2>--}}
+{{--                        <!-- Button to Open the Modal -->--}}
+{{--                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ScrollModal">--}}
+{{--                            Open--}}
+{{--                        </button>--}}
+{{--                        <!-- The Modal -->--}}
+{{--                        <div class="modal" id="ScrollModal">--}}
+{{--                            <div class="modal-dialog">--}}
+{{--                                <div class="modal-content">--}}
+{{--                                    <!-- Modal Header -->--}}
+{{--                                    <div class="modal-header">--}}
+{{--                                        <h1 class="modal-title">Modal Heading</h1>--}}
+{{--                                        <button type="button" class="close" data-dismiss="modal">×</button>--}}
+{{--                                    </div>--}}
+{{--                                    <!-- Modal body -->--}}
+{{--                                    <div class="modal-body">--}}
+{{--                                        <h3>Some text to enable scrolling..</h3>--}}
+{{--                                        @for($i=1;$i<=4;$i++)--}}
+{{--                                           <p>Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..Some text to enable scrolling..</p>--}}
+{{--                                        @endfor--}}
+{{--                                    </div>--}}
+{{--                                    <!-- Modal footer -->--}}
+{{--                                    <div class="modal-footer">--}}
+{{--                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
     <!-- BLOG END -->
 
     <!-- CONTACT START -->
-    <section class="section" id="Form">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-7">
-                    <div class="contact-head text-center">
-                        <h4 class="title-heading text-uppercase">FORM VALIDATION</h4>
-                        <p class="title-desc text-muted mt-3">This Template Will Show Notifications That Form's Required Element</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4 vertical-content">
-                <div class="col-lg-12">
-                    <div class="row mt-5">
-                        <div class="col-lg-12">
-                            <div class="custom-form">
-                                <div id="notification-message" >
-                                    <div class="alert alert-success alert-dismissible">
-                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                        Submit Success
-                                    </div>
-                                </div>
-                                <form method="POST" action="" class="validation-form" name="contact-form" id="contact-form">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label for="name">Name<span class="required-text">*</span></label>
-                                                <input name="name" id="name" type="text" class="form-control form-required" placeholder="Your name...">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label for="email">Email<span class="required-text">*</span></label>
-                                                <input name="email" id="email" type="email" class="form-control form-required" placeholder="Your email...">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label for="sex">SEX<span class="required-text">*</span></label>
-                                                <select name="sex" id="sex" class="form-control form-required">
-                                                    <option value="">Select</option>
-                                                    <option value="1" >Male</option>
-                                                    <option value="2" >Female</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="subject">Subject<span class="required-text">*</span></label>
-                                                <input name="subject" id="subject" type="text" class="form-control form-required" placeholder="Your subject...">
-                                            </div>
-                                        </div>
-                                    </div>
+{{--    <section class="section" id="Form">--}}
+{{--        <div class="container">--}}
+{{--            <div class="row justify-content-center">--}}
+{{--                <div class="col-lg-7">--}}
+{{--                    <div class="contact-head text-center">--}}
+{{--                        <h4 class="title-heading text-uppercase">FORM VALIDATION</h4>--}}
+{{--                        <p class="title-desc text-muted mt-3">This Template Will Show Notifications That Form's Required Element</p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="row mt-4 vertical-content">--}}
+{{--                <div class="col-lg-12">--}}
+{{--                    <div class="row mt-5">--}}
+{{--                        <div class="col-lg-12">--}}
+{{--                            <div class="custom-form">--}}
+{{--                                <div id="notification-message" >--}}
+{{--                                    <div class="alert alert-success alert-dismissible">--}}
+{{--                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>--}}
+{{--                                        Submit Success--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <form method="POST" action="" class="validation-form" name="contact-form" id="contact-form">--}}
+{{--                                    <div class="row">--}}
+{{--                                        <div class="col-lg-4">--}}
+{{--                                            <div class="form-group">--}}
+{{--                                                <label for="name">Name<span class="required-text">*</span></label>--}}
+{{--                                                <input name="name" id="name" type="text" class="form-control form-required" placeholder="Your name...">--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="col-lg-4">--}}
+{{--                                            <div class="form-group">--}}
+{{--                                                <label for="email">Email<span class="required-text">*</span></label>--}}
+{{--                                                <input name="email" id="email" type="email" class="form-control form-required" placeholder="Your email...">--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="col-lg-4">--}}
+{{--                                            <div class="form-group">--}}
+{{--                                                <label for="sex">SEX<span class="required-text">*</span></label>--}}
+{{--                                                <select name="sex" id="sex" class="form-control form-required">--}}
+{{--                                                    <option value="">Select</option>--}}
+{{--                                                    <option value="1" >Male</option>--}}
+{{--                                                    <option value="2" >Female</option>--}}
+{{--                                                </select>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="row">--}}
+{{--                                        <div class="col-lg-12">--}}
+{{--                                            <div class="form-group">--}}
+{{--                                                <label for="subject">Subject<span class="required-text">*</span></label>--}}
+{{--                                                <input name="subject" id="subject" type="text" class="form-control form-required" placeholder="Your subject...">--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="comments">Comments</label>
-                                                <textarea name="comments" id="comments" rows="4" class="form-control " placeholder="Your message..."></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-lg-12">
-                                            <input type="submit" id="submit" name="send" class="submitBnt btn btn-custom" value="Send Message">
-                                            <div id="simple-msg">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+{{--                                    <div class="row">--}}
+{{--                                        <div class="col-lg-12">--}}
+{{--                                            <div class="form-group">--}}
+{{--                                                <label for="comments">Comments</label>--}}
+{{--                                                <textarea name="comments" id="comments" rows="4" class="form-control " placeholder="Your message..."></textarea>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="row mt-3">--}}
+{{--                                        <div class="col-lg-12">--}}
+{{--                                            <input type="submit" id="submit" name="send" class="submitBnt btn btn-custom" value="Send Message">--}}
+{{--                                            <div id="simple-msg">--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </form>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
     <!-- CONTACT END -->
 @endsection

@@ -95,8 +95,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <a class="btn-link" href="#"><i class="fas fa-minus me-3"></i></a>
-                                        <a class="btn-link" href="#"><i class="fas fa-plus"></i></a>
+                                        <a class="btn-link" href="javascript:void(0);"><i class="fas fa-minus me-3 add-to-cart" data-id="{{$Card->id}}" data-type="minus"></i></a>
+                                        <a class="btn-link" href="javascript:void(0);"><i class="fas fa-plus add-to-cart" data-id="{{$Card->id}}" data-type="plus"></i></a>
                                     </div>
                                     <div class="col-6 text-end fw-bold">{{$Card->rarity}}</div>
                                 </div>
@@ -133,7 +133,6 @@
                 <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="row gx-5" id="ModalCardInfoHtml"></div>
             </div>
-
         </div><!-- //modal-content -->
     </div><!-- modal-dialog -->
 </div><!-- modal -->
@@ -142,6 +141,7 @@
 @endsection
 
 @push('app-scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js"></script>
@@ -175,11 +175,27 @@
                 'id': id,
             },
             success: function (object) {
-                console.log(object);
                 if (object.result === '1') {
 
                     $('#ModalCardInfoHtml').html(object.html);
                     $('#ModelCardTitle').html(object.name);
+
+                    var today = new Date();
+                    let historyChart = new Chart($('#historyPriceChart'),{
+                        type: 'line',
+                        data: {
+                            labels: getDateChart(today,6),
+                            datasets: [{
+                                label: object.name,
+                                lineTension: 0, // 曲線的彎度，設0 表示直線
+                                backgroundColor: 'rgb(255, 99, 132)',
+                                borderColor: 'rgb(255, 99, 132)',
+                                data: getPriceChart($('#historyPriceChart').data('value')),
+                                fill: false, // 是否填滿色彩
+                            }]
+                        },
+                        options: {}
+                    });
                 } else {
                     alert(object.message);
                 }
@@ -235,6 +251,29 @@
             }
         });
     });
+
+    function getDateChart(today,days){
+        var labels = [];
+        var endDate = moment(today.toLocaleDateString('zh-TW'));
+        today.setDate(today.getDate() - days);
+        var startDate = moment(today.toLocaleDateString('zh-TW'));
+        while (endDate > startDate || startDate.format('M') === endDate.format('M') ) {
+            if (endDate >= startDate){
+                labels.push(startDate.format('YYYY-MM-DD'));
+            }
+            startDate.add(1,'day');
+        }
+
+        return labels;
+    }
+    function getPriceChart(chartValues){
+        var data = [];
+        chartValues.forEach(function (value){
+            let valueDate = moment(value.dateTime).format('YYYY-MM-DD');
+            data.push({'x':valueDate,'y': (value.price)??0 });
+        });
+        return data;
+    }
 
 </script>
 @endpush

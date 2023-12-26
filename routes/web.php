@@ -17,10 +17,11 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/card', 'HomeController@card')->name('card');
 Route::get('/deck', 'HomeController@deck')->name('deck');
+Route::get('/deckDetail/{deck_id}', 'HomeController@deckDetail')->name('deckDetail');
 Route::get('/news', 'HomeController@news')->name('news');
-Route::get('/newsPost/{id}', 'HomeController@newsPost')->name('newsPost');
+Route::get('/newsPost/{post_id}', 'HomeController@newsPost')->name('newsPost');
 Route::get('/competitions', 'HomeController@competitions')->name('competitions');
-Route::get('/competitionsPost/{id}', 'HomeController@competitionsPost')->name('competitionsPost');
+Route::get('/competitionsPost/{post_id}', 'HomeController@competitionsPost')->name('competitionsPost');
 
 
 Route::group(['prefix'=>'myAccount','as'=>'myAccount.'],function (){
@@ -51,7 +52,7 @@ Route::get('/login/callback/{provider}', 'SocialiteController@handleOAuthCallbac
 /** Ajax*/
 //Route::post('/ChangeDeckCard','Admin\Menu\DecksController@ChangeDeckCard')->name('ChangeDeckCard');
 //Route::post('/CleanDeck','Admin\Menu\DecksController@CleanDeck')->name('CleanDeck');
-//Route::post('/addToDeck','HomeController@addToDeck')->name('addToDeck');
+Route::post('/AddToCart','OrderController@AddToCart')->name('AddToCart');
 Route::post('/GetCardDataF','HomeController@GetCardDataF')->name('GetCardDataF');
 Route::post('/AddToWishlist','AccountController@AddToWishlist')->name('AddToWishlist');
 Route::post('/RemoveWishlist','AccountController@RemoveWishlist')->name('RemoveWishlist');

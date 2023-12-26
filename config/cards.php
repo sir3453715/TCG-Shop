@@ -3,7 +3,7 @@
 return[
 
     'kingdoms'=>[
-        'Pokemon'=>'寶可夢',
+        'PTCG'=>'寶可夢',
 //        'OnePiece'=>'海賊王',
     ],
 

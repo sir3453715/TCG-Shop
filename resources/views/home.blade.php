@@ -11,24 +11,34 @@
     @endforeach
 </div>
 <div class="m-4 m-lg-5">
-    <div class="row align-items-center">
-        <div class="col-lg-4 mb-4">
+    <div class="row align-items-center" id="price-wrapper">
+        <div class="col-lg-5 mb-4">
+            <div class="col-12 slider-syncing my-3">
+                @foreach($cards as $card)
+                    <canvas class="chart chartjs-render-monitor historyPriceChart" data-title="{{$card->name}}" data-value="{{ $card->indexHistoryPrices() }}"></canvas>
+                @endforeach
+            </div>
             <h2 class="fs-1 fw-bold">卡片價格更新</h2>
             <p class="fs-5">全台最大卡片販售平台就在這裡！！</p>
             <a href="#" type="button" class="btn btn-yellow">查看更多</a>
         </div>
-        <div class="col-lg-8">
-            <div class="col-12 slider">
-                @for($i = 1; $i <= 3; $i++)
-                    <img class="img-fluid" alt="Bootstrap Image Preview" src="/storage/uploads/news-card-price.webp" />
-                @endfor
+        <div class="col-lg-7" style="background-image:url({{'/storage/uploads/new-card-price-bg.jpg'}}); ">
+            <div>
+                <div class="col-12 slider-center">
+                    @foreach($cards as $card)
+                        <img class="img-fluid" alt="Bootstrap Image Preview" src="{{$card->image}}" />
+                    @endforeach
+    {{--                @for($i = 1; $i <= 3; $i++)--}}
+    {{--                    <img class="img-fluid" alt="Bootstrap Image Preview" src="/storage/uploads/news-card-price.webp" />--}}
+    {{--                @endfor--}}
+                </div>
             </div>
         </div>
     </div>
     <!-- news -->
     <div class="row mt-5 gx-5">
         <div class="col-lg-6 mb-5">
-            <a href="{{route('newsPost',['id'=>$biggestEvent->id])}}" target="_blank" class="text-decoration-none text-dark">
+            <a href="{{route('newsPost',['post_id'=>$biggestEvent->id])}}" target="_blank" class="text-decoration-none text-dark">
                 <h3 class="fs-1 fw-bold mb-3">最新消息</h3>
                 <img class="img-fluid w-100" alt="Bootstrap Image Preview" src="{{$biggestEvent->image}}" />
                 <p class="fs-5 mt-3">{{$biggestEvent->title}}</p>
@@ -37,7 +47,7 @@
         </div>
         <div class="col-lg-6 mt-lg-4">
             @foreach($eventsList as $event)
-                <a href="{{route('newsPost',['id'=>$event->id])}}" target="_blank" class="text-decoration-none text-dark">
+                <a href="{{route('newsPost',['post_id'=>$event->id])}}" target="_blank" class="text-decoration-none text-dark">
                     <div class="news-list-item mb-3">
                         <div class="news-list-img">
                             <img class="news-description-image" alt="Bootstrap Image Preview" src="{{$event->image}}" />
@@ -83,4 +93,56 @@
 @endsection
 
 @push('app-scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+    <script>
+
+        $( document ).ready(function() {
+            /** history price*/
+            var today = new Date();
+
+            $('.historyPriceChart').each(function (index, element) {
+
+                let historyChart = new Chart(element, {
+                    type: 'line',
+                    data: {
+                        labels: getDateChart(today, 6),
+                        datasets: [{
+                            label: $(this).data('title'),
+                            lineTension: 0, // 曲線的彎度，設0 表示直線
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: getPriceChart($(this).data('value')),
+                            fill: false, // 是否填滿色彩
+                        }]
+                    },
+                    options: {}
+                });
+            });
+        });
+
+        function getDateChart(today,days){
+            var labels = [];
+            var endDate = moment(today.toLocaleDateString('zh-TW'));
+            today.setDate(today.getDate() - days);
+            var startDate = moment(today.toLocaleDateString('zh-TW'));
+            while (endDate > startDate || startDate.format('M') === endDate.format('M') ) {
+                if (endDate >= startDate){
+                    labels.push(startDate.format('YYYY-MM-DD'));
+                }
+                startDate.add(1,'day');
+            }
+
+            return labels;
+        }
+        function getPriceChart(chartValues){
+            console.log(chartValues);
+            var data = [];
+            chartValues.forEach(function (value){
+                let valueDate = moment(value.dateTime).format('YYYY-MM-DD');
+                data.push({'x':valueDate,'y': (value.price)??0 });
+            });
+            return data;
+        }
+
+    </script>
 @endpush

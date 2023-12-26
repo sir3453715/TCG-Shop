@@ -1119,6 +1119,7 @@ html {
     }
     &-list{
         overflow-y: scroll;
+        overflow-x: unset;
         height: 60vh;
     }
     &-footer {
@@ -1163,3 +1164,21 @@ html {
     top: -10px;
     left: -5px;
   }
+
+.slider-center .slick-slide > div {
+    transform: scale(.8);
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+}
+.slider-center .slick-center > div {
+    transform: scale(1);
+}
+.slider-center .slider__item > img {
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px){
+    #price-wrapper{
+        flex-direction: column-reverse !important;
+    }
+}
