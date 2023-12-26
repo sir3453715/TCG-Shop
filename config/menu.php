@@ -21,6 +21,14 @@ return[
         ],
         [
             'type' => 'item',
+            'title' => '卡牌系列管理',
+            'func_name' => 'series',
+            'icon' => 'fa fa-layer-group',
+            'permission' => 'admin series',
+            'controller' => Menu\CardSeriesController::class,
+        ],
+        [
+            'type' => 'item',
             'title' => '卡牌管理',
             'func_name' => 'card',
             'icon' => 'fa fa-chess-king',

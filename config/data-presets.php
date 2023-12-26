@@ -23,6 +23,11 @@ return[
             'assignTo'     => ['manager'],
         ],
         [
+            'name'         => 'admin series',
+            'displayName'  => '卡牌系列管理',
+            'assignTo'     => ['manager'],
+        ],
+        [
             'name'         => 'admin card',
             'displayName'  => '卡牌管理',
             'assignTo'     => ['manager'],
