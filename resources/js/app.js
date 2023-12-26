@@ -82,7 +82,9 @@ $(() => {
                     '_token': $('meta[name="csrf-token"]').attr('content'),
                 },
                 success:function(object){
-                    $('#mini-cart-list').html('購物車內目前沒有商品');
+                    $('#mini-cart-list').html('<div class="col-12 align-self-center text-center">購物車內目前沒有商品</div>');
+                    $('#count').html(0);
+                    $('#total').html(0);
                 }
             });
         });

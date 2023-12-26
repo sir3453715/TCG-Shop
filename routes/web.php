@@ -50,9 +50,8 @@ Route::get('/login/callback/{provider}', 'SocialiteController@handleOAuthCallbac
 
 
 /** Ajax*/
-//Route::post('/ChangeDeckCard','Admin\Menu\DecksController@ChangeDeckCard')->name('ChangeDeckCard');
-//Route::post('/CleanDeck','Admin\Menu\DecksController@CleanDeck')->name('CleanDeck');
 Route::post('/AddToCart','OrderController@AddToCart')->name('AddToCart');
+Route::post('/CleanCart','OrderController@CleanCart')->name('CleanCart');
 Route::post('/GetCardDataF','HomeController@GetCardDataF')->name('GetCardDataF');
 Route::post('/AddToWishlist','AccountController@AddToWishlist')->name('AddToWishlist');
 Route::post('/RemoveWishlist','AccountController@RemoveWishlist')->name('RemoveWishlist');

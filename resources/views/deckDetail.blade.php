@@ -7,7 +7,13 @@
                 <div class="deck-title">{{$deck->title}}</div>
                 <a href="javascript:void(0);" class="btn deck-btn">{{$deck->code}}<i class="fa fa-sign-out ms-2"></i></a>
             </div>
-            <p class="deck-date m-0">{{$deck->created_at->format('Y/m/d')}}</p>
+            <p class="deck-date m-0 text-danger">
+                @if($deck->competition == 'standard')
+                    標準賽
+                @elseif($deck->competition == 'expanded')
+                    開放賽
+                @endif
+            </p>
         </div>
         <div class="col-sm-3 text-sm-end">
             <div class="deck-number mb-sm-3">{{$deck->deckBuildCategoryTotal()['total']}}張</div>

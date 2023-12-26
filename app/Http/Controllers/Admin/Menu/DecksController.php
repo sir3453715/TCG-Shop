@@ -86,7 +86,7 @@ class DecksController extends Controller
         }
 
         $string = "abcdefghijklmnopqrstuvwxyz@$&*+-_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        $code = substr(str_shuffle($string), rand(1,10), 6);
+        $code = substr(str_shuffle($string), rand(1,10), 7);
 
         $image = '';
         if($request->hasFile('image')) {

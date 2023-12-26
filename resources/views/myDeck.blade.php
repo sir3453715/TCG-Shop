@@ -8,14 +8,23 @@
                 <div class="col-sm-9 mb-2">
                     <div class="d-flex flex-wrap">
                         <div class="deck-title">{{$deck->title}}</div>
-                        <span class="btn deck-btn">{{$deck->code}}<i class="fa fa-sign-out ms-2"></i>
-                        </span>
+                        <span class="btn deck-btn">{{$deck->code}}<i class="fa fa-sign-out ms-2"></i></span>
+
+
                     </div>
 
                     <p class="deck-date m-0">{{$deck->created_at->format('Y/m/d')}}</p>
                 </div>
                 <div class="col-sm-3 text-sm-end">
-                    <div class="deck-number">{{$deck->deckBuildCategoryTotal()['total']}}張</div>
+
+                    <div class="deck-number">
+                        @if($deck->competition == 'standard')
+                            <span class="badge fs-5 bg-success">標準賽</span>
+                        @elseif($deck->competition == 'expanded')
+                            <span class="badge fs-5 bg-danger">開放賽</span>
+                        @endif
+                        {{$deck->deckBuildCategoryTotal()['total']}}張
+                    </div>
                     <button class="deck-del btn-text bg-yellow border-0">刪除</button>
                 </div>
             </div>

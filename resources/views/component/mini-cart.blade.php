@@ -24,7 +24,9 @@
                     </div>
                 @endforeach
             @else
-                購物車內目前沒有商品
+                <div class="col-12 align-self-center text-center">
+                    購物車內目前沒有商品
+                </div>
             @endif
         </div>
         <div class="row mt-3 sticky-bottom mini-cart-footer">

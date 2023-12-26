@@ -4,8 +4,6 @@
     <div class="news-top">
         <img class="img-fluid w-100" src="https://placehold.co/1000x250" alt="">
     </div>
-
-
     <div class="news-section m-4 m-lg-5">
         <div class="row">
             @foreach($decks as $deck)
@@ -16,6 +14,11 @@
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title fs-2">{{$deck->title}}</h5>
                                 <div class="d-flex mt-2 mb-2">
+                                        @if($deck->competition == 'standard')
+                                            <span class="badge fs-5 bg-success text-gray">標準賽</span>
+                                        @elseif($deck->competition == 'expanded')
+                                            <span class="badge fs-5 bg-danger text-gray">開放賽</span>
+                                        @endif
                                         <span class="w-100 fw-bold text-end">
                                             <span class="btn deck-btn">{{$deck->code}}<i class="fa fa-sign-out ms-2"></i>
                                             </span>
