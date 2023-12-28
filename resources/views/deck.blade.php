@@ -20,7 +20,7 @@
                                             <span class="badge fs-5 bg-danger text-gray">開放賽</span>
                                         @endif
                                         <span class="w-100 fw-bold text-end">
-                                            <span class="btn deck-btn">{{$deck->code}}<i class="fa fa-sign-out ms-2"></i>
+                                            <span class="btn deck-btn" data-code="{{$deck->code}}">{{$deck->code}}<i class="fa fa-sign-out ms-2"></i>
                                             </span>
                                         </span>
                                 </div>
@@ -39,9 +39,21 @@
 
 @push('app-scripts')
     <script>
-
-        $('.deck-btn, .deck-del').on('click',function (e) {
+        $('.deck-btn').on('click',function (e) {
             e.preventDefault();
-        })
+            var $temp = $(this).data('code');
+            var tempTextarea = $('<textarea>');
+            $('body').append(tempTextarea);
+            tempTextarea.val($temp).select();
+            document.execCommand('copy');
+            tempTextarea.remove();
+
+            swal({
+                title: "代碼複製成功!",
+                text: "可以分享給其他人",
+                timer: 1000
+            });
+        });
+
     </script>
 @endpush

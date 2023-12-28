@@ -42,6 +42,8 @@ class HomeController extends Controller
     }
     public function index()
     {
+
+
         $banners = Banner::where('status','1')->orderBy('sort','DESC')->get();
         $events = Event::where('status','1')->orderBy('top','DESC')->orderBy('dateTime','DESC')->limit(5)->get();
         $biggestEvent = $events[0];
@@ -168,114 +170,39 @@ class HomeController extends Controller
     }
 
 
-    public function addToDeck(Request $request){
-        $CID = $request->get('id');
-        $number = $request->get('number');
-        $card = PtcgTwCard::find($CID);
-        $deck = session()->get('deck');
-        if(!$deck){
-            $deck[$CID]=[
-                'name'=>$card->name,
-                'image'=>$card->image,
-                'number'=>$number
+    public function deckAddToCart(Request $request,$id){
+        session()->forget('cart');
+        $cart=[]; $cart['total']=0; $cart['count']=0;
+        $deck = Deck::find($id);
+        $deckCards = $deck->deckCardInfo();
+        foreach ($deckCards as $card_id => $deckCard){
+            $card = Card::find($card_id);
+            $cart['items'][$card_id]=[
+                'name'=>$deckCard['name'],
+                'image'=>$deckCard['image'],
+                'number'=>$deckCard['num'],
+                'price'=>$card->nowPrice(),
             ];
-            $deck['count']=1;
-            session()->put('deck', $deck);
-            $html=view('component.deck-cards')->with('deck', $deck)->render();
-            $result = ['result'=>'1','html'=>$html,'count'=>$deck['count']];
-            return json_encode($result);
-        }else{
-            if($deck['count']<60 ){
-                if(!isset($deck[$CID])){
-                    $deck[$CID]=[
-                        'name'=>$card->name,
-                        'image'=>$card->image,
-                        'number'=>$number
-                    ];
-                }else{
-                    if($card->supertypes != '基本能量卡'){
-                        if($deck[$CID]['number'] <4){
-                            $deck[$CID]=[
-                                'name'=>$card->name,
-                                'image'=>$card->image,
-                                'number'=>($deck[$CID]['number']+$number)
-                            ];
-                        }else{
-                            $result = ['result'=>'2','message'=>'每張卡牌最多只能加4張!'];
-                            return json_encode($result);
-                        }
-                    }else{
-                        $deck[$CID]=[
-                            'name'=>$card->name,
-                            'image'=>$card->image,
-                            'number'=>($deck[$CID]['number']+$number)
-                        ];
-                    }
-                }
-
-                $html=view('component.deck-cards')->with('deck', $deck)->render();
-                $deck['count']++;
-                session()->put('deck', $deck);
-                $result = ['result'=>'1','html'=>$html,'count'=>$deck['count'],'CardCount'=>$deck[$CID]['number']];
-                return json_encode($result);
-            }else{
-                $result = ['result'=>'2','message'=>'每份牌組最多只能有60張!'];
-                return json_encode($result);
-            }
+            $cart['total'] += ($card->nowPrice()*$deckCard['num']);
+            $cart['count'] += $deckCard['num'];
         }
+        $cart['edit'] = $deck->id;
+
+        session()->put('cart', $cart);;
+        return redirect(route('deckDetail',['deck_id'=>$id]))->with('message', '牌組已加入購物車!');
     }
 
-    public function ChangeDeckCard(Request $request){
-        $CID = $request->get('id');
-        $type = $request->get('type');
-        $deck = session()->get('deck');
-        $card = PtcgTwCard::find($CID);
-        $delete = false;
-        if($type == 'add'){
-            if($deck['count']<60 ){
-                if($card->supertypes != '基本能量卡'){
-                    if($deck[$CID]['number'] <4){
-                        $deck[$CID]=[
-                            'name'=>$card->name,
-                            'image'=>$card->image,
-                            'number'=>($deck[$CID]['number']+1)
-                        ];
-                    }else{
-                        $result = ['result'=>'2','message'=>'每張卡牌最多只能加4張!'];
-                        return json_encode($result);
-                    }
-                }else{
-                    $deck[$CID]=[
-                        'name'=>$card->name,
-                        'image'=>$card->image,
-                        'number'=>($deck[$CID]['number']+1)
-                    ];
-                }
-                $deck['count']++;
-            }else{
-                $result = ['result'=>'2','message'=>'每份牌組最多只能有60張!'];
-                return json_encode($result);
-            }
-        }elseif($type == 'minus'){
-            if($deck[$CID]['number'] == 1){
-                unset($deck[$CID]);
-                $delete = true;
-            }else{
-                $deck[$CID]=[
-                    'name'=>$card->name,
-                    'image'=>$card->image,
-                    'number'=>($deck[$CID]['number']-1)
-                ];
-            }
-            $deck['count']--;
+    public function deckAddToAccount(Request $request,$id){
+        if(!Auth::check()){
+            return redirect(route('deckDetail',['deck_id'=>$id]))->with('Errormessage', "請先<a href='".route('login')."'>登入</a>再將牌組加入帳號!!");
         }
-        if($delete){
-            $result = ['result'=>'1','CID'=>$CID,'number'=>0,'count'=>$deck['count'],'delete'=>$delete];
-        }else{
-            $result = ['result'=>'1','CID'=>$CID,'number'=>$deck[$CID]['number'],'count'=>$deck['count'],'delete'=>$delete];
-        }
-        session()->put('deck', $deck);
-        return json_encode($result);
+        $deck = Deck::find($id);
+        $new_deck = $deck->replicate();
+        $new_deck->user_id=Auth::id();
+        $new_deck->is_recommend=0;
+        $new_deck->save();
+
+        return redirect(route('myAccount.myDeck'))->with('message', '已加入牌組!');
 
     }
 
@@ -375,50 +302,50 @@ class HomeController extends Controller
     }
 
 
-    public function orderCreate(Request $request){
-        $requestData = $request->toArray();
-        $cardData = json_decode($requestData['cardData'],true);
-        if(empty($cardData)){
-            $cardData = session()->get('deck');
-            unset($cardData['count']);
-        }
-        if(!empty($cardData)){
-            $tempcode2 = 'TEST-'.date('ymd');
-            $seccode_order = Order::where('seccode','LIKE','%'.$tempcode2.'%')->orderBy('created_at','DESC')->get();
-            if($seccode_order){
-                $num = count($seccode_order);
-                do{
-                    $num ++;
-                    $tempseccode = $tempcode2.str_pad($num,3,0,STR_PAD_LEFT);
-                    $chk_seccode = Order::where('seccode','=',$tempseccode)->first();//判斷已產生的訂單編號是否存在
-                } while ($chk_seccode);
-            }else{
-                $tempseccode = $tempcode2.'001';
-            }
-            $data = [
-                'seccode'=>$tempseccode,
-                'sender'=>$requestData['sender'],
-                's_phone'=>$requestData['s_phone'],
-                's_email'=>$requestData['s_email'],
-                'user_id'=>$requestData['user_id'],
-                'note'=>$requestData['note'],
-            ];
-            $order = Order::create($data);
-            foreach ($cardData as $card_id => $item){
-                $itemData = [
-                    'order_id'=>$order->id,
-                    'product_id'=>$card_id,
-                    'num'=>$item['number'],
-                    'unit'=>'0',
-                    'subtotal'=>'0',
-                    'title'=>$item['name'],
-                ];
-                $orderItem = OrderItem::create($itemData);
-            }
-            return redirect(route('deck'))->with('message', '已發送訂單至貓腳印!');
-        }else{
-            return redirect(route('deck'))->with('error', '沒有卡牌資料!');
-        }
-    }
+//    public function orderCreate(Request $request){
+//        $requestData = $request->toArray();
+//        $cardData = json_decode($requestData['cardData'],true);
+//        if(empty($cardData)){
+//            $cardData = session()->get('deck');
+//            unset($cardData['count']);
+//        }
+//        if(!empty($cardData)){
+//            $tempcode2 = 'TEST-'.date('ymd');
+//            $seccode_order = Order::where('seccode','LIKE','%'.$tempcode2.'%')->orderBy('created_at','DESC')->get();
+//            if($seccode_order){
+//                $num = count($seccode_order);
+//                do{
+//                    $num ++;
+//                    $tempseccode = $tempcode2.str_pad($num,3,0,STR_PAD_LEFT);
+//                    $chk_seccode = Order::where('seccode','=',$tempseccode)->first();//判斷已產生的訂單編號是否存在
+//                } while ($chk_seccode);
+//            }else{
+//                $tempseccode = $tempcode2.'001';
+//            }
+//            $data = [
+//                'seccode'=>$tempseccode,
+//                'sender'=>$requestData['sender'],
+//                's_phone'=>$requestData['s_phone'],
+//                's_email'=>$requestData['s_email'],
+//                'user_id'=>$requestData['user_id'],
+//                'note'=>$requestData['note'],
+//            ];
+//            $order = Order::create($data);
+//            foreach ($cardData as $card_id => $item){
+//                $itemData = [
+//                    'order_id'=>$order->id,
+//                    'product_id'=>$card_id,
+//                    'num'=>$item['number'],
+//                    'unit'=>'0',
+//                    'subtotal'=>'0',
+//                    'title'=>$item['name'],
+//                ];
+//                $orderItem = OrderItem::create($itemData);
+//            }
+//            return redirect(route('deck'))->with('message', '已發送訂單至貓腳印!');
+//        }else{
+//            return redirect(route('deck'))->with('error', '沒有卡牌資料!');
+//        }
+//    }
 
 }

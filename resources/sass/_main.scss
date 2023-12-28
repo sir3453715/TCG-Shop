@@ -775,9 +775,10 @@ html {
     &-btn-group {
         @media (max-width: 576px) {
             display: flex;
-            flex-direction: column;
+            //flex-direction: column;
             float: right;
             text-align: right;
+            justify-content: space-between;
         }
     }
 
@@ -906,7 +907,7 @@ html {
         padding: 10px 20px;
         background: #000;
     }
-    
+
     tbody {
         outline: solid 1px #c6c6c6;
         border: transparent;
@@ -918,19 +919,19 @@ html {
             padding: 10px;
         }
     }
-    
+
     .product-title {
         font-size: 14px;
     }
-    
+
     td {
         vertical-align: middle;
     }
-    
+
     tr {
         text-align: center;
     }
-    
+
     .product-media {
         max-width: 70px;
         @media (max-width: 576px) {
@@ -962,9 +963,9 @@ html {
             border-top:none!important;
             border-bottom: none!important;
         }
-  
+
     }
-    
+
 }
 
 
@@ -1108,7 +1109,7 @@ html {
 
 }
 
-// mini cart 
+// mini cart
 
 .mini-cart {
     &-wrapper{
@@ -1182,3 +1183,44 @@ html {
         flex-direction: column-reverse !important;
     }
 }
+
+.deck-title {
+    &-input{
+        font-size: 20px;
+    }
+    &-disable{
+        background-color: #f9d61d;
+        border: 0;
+        pointer-events: none;
+    }
+}
+
+.deck-code{
+    flex-direction: column;
+}
+@media (max-width: 768px){
+    .deck-code{
+        flex-direction: row-reverse;
+        margin-bottom: 1rem;
+    }
+}
+
+.deck-group-action {
+    display: flex;
+    justify-content: end;
+}
+
+@media (max-width: 768px){
+    .deck-group-competition{
+        display: flex;
+        justify-content: space-between;
+    }
+    .deck-group-action{
+        display: flex;
+        justify-content: space-between;
+    }
+    .deck-group-action button{
+        padding: 0;
+    }
+}
+

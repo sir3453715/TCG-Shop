@@ -113,6 +113,61 @@ class AccountController extends Controller
         ]))->with('message', '資料已更新!');
 
     }
+    public function deckImport(Request $request){
+        $code = $request->get('code');
+        $deck = Deck::where('code',$code)->first();
+        $new_deck = $deck->replicate();
+        $new_deck->user_id=Auth::id();
+        $new_deck->is_recommend=0;
+        $new_deck->save();
+
+        return redirect(route('myAccount.myDeck'))->with('message', '已匯入牌組!');
+
+    }
+
+    public function deckSaveTitle(Request $request,$id){
+        $deck = Deck::find($id);
+        $data=[
+            'title'=>$request->get('title'),
+        ];
+        $deck = $deck->fill($data);
+        ActionLog::create_log($deck);
+        $deck = $deck->save();
+
+        return redirect(route('myAccount.myDeckDetail',['deck_id'=>$id]));
+    }
+    public function deckEdit(Request $request,$id){
+        session()->forget('cart');
+        $cart=[]; $cart['total']=0; $cart['count']=0;
+        $deck = Deck::find($id);
+        $deckCards = $deck->deckCardInfo();
+        foreach ($deckCards as $card_id => $deckCard){
+            $card = Card::find($card_id);
+            $cart['items'][$card_id]=[
+                'name'=>$deckCard['name'],
+                'image'=>$deckCard['image'],
+                'number'=>$deckCard['num'],
+                'price'=>$card->nowPrice(),
+            ];
+            $cart['total'] += ($card->nowPrice()*$deckCard['num']);
+            $cart['count'] += $deckCard['num'];
+        }
+        $cart['edit'] = $deck->id;
+
+        session()->put('cart', $cart);;
+        return redirect(route('card'))->with('message', '牌組已加入編輯!');
+    }
+
+    public function deckDel(Request $request,$id){
+        $deck = Deck::find($id);
+        if($deck){
+            $deck->delete();
+            ActionLog::create_log($deck,'刪除');
+        }
+
+        return redirect(route('myAccount.myDeck'))->with('message', '牌組已刪除!');
+
+    }
 
 
     public function AddToWishlist(Request $request){
@@ -141,4 +196,20 @@ class AccountController extends Controller
         return json_encode(['result'=>'0']);
     }
 
+    public function build($id,Request $request){
+
+        $deckCards = [];
+        $deck = Deck::find($id);
+        if($deck->user_id != Auth::id() && $deck->user_id != ''){
+            return redirect(route('myAccount.myDeck'))->with('Errormessage', '無法獲得此牌組的構築表!!');
+        }
+        $deckCards = $deck->deckBuildCategoryInfo();
+        $deckCategoryTotal = $deck->deckBuildCategoryTotal();
+
+        return view('admin.decks.buildImage',[
+            'deckCards'=>$deckCards,
+            'deckCategoryTotal'=>$deckCategoryTotal
+        ]);
+
+    }
 }

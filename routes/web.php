@@ -22,7 +22,12 @@ Route::get('/news', 'HomeController@news')->name('news');
 Route::get('/newsPost/{post_id}', 'HomeController@newsPost')->name('newsPost');
 Route::get('/competitions', 'HomeController@competitions')->name('competitions');
 Route::get('/competitionsPost/{post_id}', 'HomeController@competitionsPost')->name('competitionsPost');
+Route::get('/deckAddToCart/{deck_id}', 'HomeController@deckAddToCart')->name('deckAddToCart');
+Route::get('/deckAddToAccount/{deck_id}', 'HomeController@deckAddToAccount')->name('deckAddToAccount');
+Route::get('/build/{deck_id}', 'AccountController@build')->name('build');
 
+Route::get('/cart', 'HomeController@cart')->name('cart');
+Route::get('/invoice', 'HomeController@invoice')->name('invoice');
 
 Route::group(['prefix'=>'myAccount','as'=>'myAccount.'],function (){
     Route::get('/dashboard', 'AccountController@dashboard')->name('dashboard');
@@ -31,15 +36,21 @@ Route::group(['prefix'=>'myAccount','as'=>'myAccount.'],function (){
     Route::get('/order', 'AccountController@order')->name('order');
     Route::get('/wishlist', 'AccountController@wishlist')->name('wishlist');
     Route::get('/orderDetail/{order_id}', 'AccountController@orderDetail')->name('orderDetail');
+    Route::get('/deckEdit/{deck_id}', 'AccountController@deckEdit')->name('deckEdit');
 
     Route::post('/editUser', 'AccountController@editUser')->name('editUser');
-});
+    Route::post('/editUser', 'AccountController@editUser')->name('editUser');
+    Route::post('/deckImport', 'AccountController@deckImport')->name('deckImport');
 
-Route::get('/cart', 'HomeController@cart')->name('cart');
-Route::get('/invoice', 'HomeController@invoice')->name('invoice');
+    Route::delete('/deckDel/{deck_id}', 'AccountController@deckDel')->name('deckDel');
+    Route::post('/deckSaveTitle/{deck_id}', 'AccountController@deckSaveTitle')->name('deckSaveTitle');
+});
 
 
 Route::post('/orderCreate','HomeController@orderCreate')->name('orderCreate');
+Route::post('/cartSubmit','OrderController@cartSubmit')->name('cartSubmit');
+Route::post('/deckCreate','OrderController@deckCreate')->name('deckCreate');
+Route::post('/deckUpdate','OrderController@deckUpdate')->name('deckUpdate');
 
 Auth::routes(['verify' => true]);
 

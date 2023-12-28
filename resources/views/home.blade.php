@@ -23,7 +23,7 @@
             <a href="#" type="button" class="btn btn-yellow">查看更多</a>
         </div>
         <div class="col-lg-7" style="background-image:url({{'/storage/uploads/new-card-price-bg.jpg'}}); ">
-            <div>
+            <div class="h-100">
                 <div class="col-12 slider-center">
                     @foreach($cards as $card)
                         <img class="img-fluid" alt="Bootstrap Image Preview" src="{{$card->image}}" />

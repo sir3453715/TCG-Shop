@@ -6,35 +6,25 @@ import 'select2/dist/js/i18n/zh-TW.js';
 
 $(() => {
     $( document ).ready(function() {
-
+        /** select2 宣告與中文*/
         $('.select2').select2({
             placeholder:"enter keyword",
             allowClear: true,
             language:'zh-TW',
         });
-
+        /** 一般Slider*/
         $('.slider').slick({
             prevArrow:'<button type="button" class="slick-prev"></button>',
             nextArrow:'<button type="button" class="slick-next"></button>',
             dots: true,
         });
-
+        /** 雙層slider&Slider 置中 */
         $('.slider-syncing').slick({
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: false,
             asNavFor: '.slider-center'
         });
-        $('.slider-nav').slick({
-            prevArrow:'<button type="button" class="slick-prev"></button>',
-            nextArrow:'<button type="button" class="slick-next"></button>',
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            dots: true,
-            centerMode: true,
-            focusOnSelect: true
-        });
-
         $('.slider-center').slick({
             centerMode: true,
             centerPadding: '0px',
@@ -43,7 +33,7 @@ $(() => {
             asNavFor: '.slider-syncing',
         });
 
-
+        /** 訂單資料DataTable宣告 */
         $('.table-cart').DataTable({
             responsive: false,
             autoWidth: false,
@@ -53,6 +43,7 @@ $(() => {
             ordering : false,
         });
 
+        /** 購物車動作 */
         $('body').on('click','.add-to-cart',function (e){
             let id = $(this).data('id');
             $.ajax({
@@ -90,20 +81,40 @@ $(() => {
         });
 
 
+        /** sweet Alert 刪除資料提示*/
+        $('body').on('click','.sweet-delete-confirm',function (event){
+            var form =  $(this).closest("form");
+            event.preventDefault();
+            swal({
+                title: `您確定要刪除此牌組嗎?`,
+                text: "此操作將無法復原!",
+                icon: "warning",
+                buttons: {
+                    Btn: false,
+                    cancel: {
+                        text: "取消",
+                        visible: true
+                    },
+                    confirm: {
+                        text: "確認刪除",
+                        visible: true
+                    },
+                },
+                dangerMode: true,
+
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+        });
 
 
-
-
-
-
-
-        // mini-cart
-    (function(){
- 
-         $("#mini-cart, #mini-cart-close").on("click", function() {
-             $(".mini-cart").fadeToggle( "fast");
-         });
-    
+        /** mini cart */
+        (function(){
+             $("#mini-cart, #mini-cart-close").on("click", function() {
+                 $(".mini-cart").fadeToggle( "fast");
+             });
         })();
 
 

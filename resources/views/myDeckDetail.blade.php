@@ -9,17 +9,32 @@
     </nav>
     <div class="row deck-list bg-yellow rounded-3 p-3 align-items-center">
         <div class="col-sm-9 mb-2">
-            <div class="d-flex flex-wrap mb-sm-3">
-                <div class="deck-title">{{$deck->title}}</div>
-                <a href="" class="btn deck-btn">{{$deck->code}}<i class="fa fa-sign-out ms-2"></i></a>
-            </div>
+            <form action="{{route('myAccount.deckSaveTitle', ['deck_id' => $deck->id])}}" method="post"  class="w-100">
+                @csrf
+                <div class="d-flex flex-wrap mb-sm-3">
+                    <div class="deck-title d-flex col-12" >
+                        <a href="javascript:void(0);" class="btn-text mx-1" id="deck-title-edit"><i class="fas fa-edit"></i></a>
+                        <a href="javascript:void(0);" class="btn-text mx-1 d-none" id="deck-title-save"><i class="fas fa-save"></i></a>
+                        <input type="text" class="form-control deck-title-input deck-title-disable" name="title" id="deck_title" value="{{$deck->title}}">
+                    </div>
+                </div>
+            </form>
             <p class="deck-date m-0">{{$deck->created_at->format('Y/m/d')}}</p>
         </div>
         <div class="col-sm-3 text-sm-end">
-            <div class="deck-number mb-sm-3">{{$deck->deckBuildCategoryTotal()['total']}}張</div>
-            <div class="deck-btn-group">
-                <a href="" class="deck-edit btn-text me-sm-3">編輯</a>
-                <a href="" class="deck-del btn-text">刪除</a>
+            <div class="col-12 deck-code d-flex">
+                <a href="javascript:void(0);" class="btn deck-btn align-self-sm-end w-auto" data-code="{{$deck->code}}">{{$deck->code}}<i class="fa fa-sign-out ms-2"></i></a>
+                <div class="deck-number mb-sm-3">{{$deck->deckBuildCategoryTotal()['total']}}張</div>
+            </div>
+            <div class="deck-btn-group col-12 ">
+
+                <a href="{{route('build', ['deck_id' => $deck->id])}}" class="btn-text fs-5 get-build" target="_blank">生成構築表</a>
+                <form action="{{route('myAccount.deckDel', ['deck_id' => $deck->id])}}" method="post"  class="form-btn">
+                    @method('delete')
+                    @csrf
+                    <a href="{{route('myAccount.deckEdit', ['deck_id' => $deck->id])}}" class="deck-edit btn-text me-sm-3" id="deck-edit">編輯</a>
+                    <a href="javascript:void(0);" class="deck-del btn-text sweet-delete-confirm">刪除</a>
+                </form>
             </div>
         </div>
     </div>
@@ -37,4 +52,37 @@
 </div>
 @endsection
 @push('app-scripts')
+    <script>
+        $('#deck-title-edit').on('click',function (e) {
+            e.preventDefault();
+            $(this).siblings('.deck-title-input').removeClass('deck-title-disable');
+            $(this).siblings('#deck-title-save').removeClass('d-none');
+            $(this).addClass('d-none');
+        });
+        $('#deck-title-save').on('click',function (e) {
+            e.preventDefault();
+            $(this).siblings('.deck-title-input').addClass('deck-title-disable');
+            $(this).siblings('#deck-title-edit').removeClass('d-none');
+            $(this).addClass('d-none');
+            $(this).closest('form').submit();
+        });
+
+        $('.deck-btn').on('click',function (e) {
+            e.preventDefault();
+            var $temp = $(this).data('code');
+            var tempTextarea = $('<textarea>');
+            $('body').append(tempTextarea);
+            tempTextarea.val($temp).select();
+            document.execCommand('copy');
+            tempTextarea.remove();
+
+            swal({
+                title: "代碼複製成功!",
+                text: "可以分享給其他人",
+                timer: 1000
+            });
+        });
+
+    </script>
+
 @endpush
