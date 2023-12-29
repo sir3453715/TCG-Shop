@@ -9,11 +9,11 @@
                             <div class="row align-items-center my-2">
                                 <div class="addtocart-selector col-6">
                                     <div class="addtocart-qty">
-                                        <div class="addtocart-button button-down">
-                                            <span class="fas fa-minus add-to-cart" data-id="{{$card_id}}" data-type="minus" aria-label="increase quantity"></span></div>
+                                        <div class="addtocart-button button-down  add-to-cart" data-id="{{$card_id}}" data-type="minus">
+                                            <span class="fas fa-minus" aria-label="increase quantity"></span></div>
                                         <input type="text" class="addtocart-input" value="{{$item['number']}}">
-                                        <div class="addtocart-button button-up">
-                                            <span class="fas fa-plus add-to-cart" data-id="{{$card_id}}" data-type="plus" aria-label="increase quantity"></span>
+                                        <div class="addtocart-button button-up add-to-cart" data-id="{{$card_id}}" data-type="plus">
+                                            <span class="fas fa-plus" aria-label="increase quantity"></span>
                                         </div>
                                     </div>
                                 </div>

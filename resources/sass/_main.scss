@@ -1204,6 +1204,15 @@ html {
         margin-bottom: 1rem;
     }
 }
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+   -moz-appearance:textfield;
+}
+
 
 .deck-group-action {
     display: flex;
@@ -1211,16 +1220,18 @@ html {
 }
 
 @media (max-width: 768px){
-    .deck-group-competition{
-        display: flex;
-        justify-content: space-between;
-    }
-    .deck-group-action{
-        display: flex;
-        justify-content: space-between;
-    }
-    .deck-group-action button{
-        padding: 0;
+    .deck-group {
+        &-competition{
+            display: flex;
+            justify-content: space-between;
+        }
+        &-action{
+            display: flex;
+            justify-content: space-between;
+        }
+        &-action button{
+            padding: 0;
+        }
     }
 }
 

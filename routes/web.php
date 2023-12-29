@@ -26,8 +26,9 @@ Route::get('/deckAddToCart/{deck_id}', 'HomeController@deckAddToCart')->name('de
 Route::get('/deckAddToAccount/{deck_id}', 'HomeController@deckAddToAccount')->name('deckAddToAccount');
 Route::get('/build/{deck_id}', 'AccountController@build')->name('build');
 
-Route::get('/cart', 'HomeController@cart')->name('cart');
-Route::get('/invoice', 'HomeController@invoice')->name('invoice');
+Route::get('/cart', 'OrderController@cart')->name('cart');
+Route::get('/invoice/{seccode}', 'OrderController@invoice')->name('invoice');
+
 
 Route::group(['prefix'=>'myAccount','as'=>'myAccount.'],function (){
     Route::get('/dashboard', 'AccountController@dashboard')->name('dashboard');
@@ -47,7 +48,7 @@ Route::group(['prefix'=>'myAccount','as'=>'myAccount.'],function (){
 });
 
 
-Route::post('/orderCreate','HomeController@orderCreate')->name('orderCreate');
+Route::post('/orderCreate','OrderController@orderCreate')->name('orderCreate');
 Route::post('/cartSubmit','OrderController@cartSubmit')->name('cartSubmit');
 Route::post('/deckCreate','OrderController@deckCreate')->name('deckCreate');
 Route::post('/deckUpdate','OrderController@deckUpdate')->name('deckUpdate');

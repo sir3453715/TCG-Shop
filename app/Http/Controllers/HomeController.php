@@ -155,19 +155,7 @@ class HomeController extends Controller
 
     }
 
-    public function cart()
-    {
 
-        return view('cart');
-
-    }
-
-    public function invoice()
-    {
-
-        return view('invoice');
-
-    }
 
 
     public function deckAddToCart(Request $request,$id){
@@ -181,12 +169,13 @@ class HomeController extends Controller
                 'name'=>$deckCard['name'],
                 'image'=>$deckCard['image'],
                 'number'=>$deckCard['num'],
-                'price'=>$card->nowPrice(),
+                'unit'=>$card->nowPrice(),
+                'price'=>$card->nowPrice()*$deckCard['num'],
             ];
             $cart['total'] += ($card->nowPrice()*$deckCard['num']);
             $cart['count'] += $deckCard['num'];
         }
-        $cart['edit'] = $deck->id;
+        $cart['shipping']=0;
 
         session()->put('cart', $cart);;
         return redirect(route('deckDetail',['deck_id'=>$id]))->with('message', '牌組已加入購物車!');
@@ -197,9 +186,14 @@ class HomeController extends Controller
             return redirect(route('deckDetail',['deck_id'=>$id]))->with('Errormessage', "請先<a href='".route('login')."'>登入</a>再將牌組加入帳號!!");
         }
         $deck = Deck::find($id);
+
+        $string = "abcdefghijklmnopqrstuvwxyz@$&*+-_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        $code = substr(str_shuffle($string), rand(1,10), 7);
+
         $new_deck = $deck->replicate();
         $new_deck->user_id=Auth::id();
         $new_deck->is_recommend=0;
+        $new_deck->code = $code;
         $new_deck->save();
 
         return redirect(route('myAccount.myDeck'))->with('message', '已加入牌組!');
@@ -302,50 +296,5 @@ class HomeController extends Controller
     }
 
 
-//    public function orderCreate(Request $request){
-//        $requestData = $request->toArray();
-//        $cardData = json_decode($requestData['cardData'],true);
-//        if(empty($cardData)){
-//            $cardData = session()->get('deck');
-//            unset($cardData['count']);
-//        }
-//        if(!empty($cardData)){
-//            $tempcode2 = 'TEST-'.date('ymd');
-//            $seccode_order = Order::where('seccode','LIKE','%'.$tempcode2.'%')->orderBy('created_at','DESC')->get();
-//            if($seccode_order){
-//                $num = count($seccode_order);
-//                do{
-//                    $num ++;
-//                    $tempseccode = $tempcode2.str_pad($num,3,0,STR_PAD_LEFT);
-//                    $chk_seccode = Order::where('seccode','=',$tempseccode)->first();//判斷已產生的訂單編號是否存在
-//                } while ($chk_seccode);
-//            }else{
-//                $tempseccode = $tempcode2.'001';
-//            }
-//            $data = [
-//                'seccode'=>$tempseccode,
-//                'sender'=>$requestData['sender'],
-//                's_phone'=>$requestData['s_phone'],
-//                's_email'=>$requestData['s_email'],
-//                'user_id'=>$requestData['user_id'],
-//                'note'=>$requestData['note'],
-//            ];
-//            $order = Order::create($data);
-//            foreach ($cardData as $card_id => $item){
-//                $itemData = [
-//                    'order_id'=>$order->id,
-//                    'product_id'=>$card_id,
-//                    'num'=>$item['number'],
-//                    'unit'=>'0',
-//                    'subtotal'=>'0',
-//                    'title'=>$item['name'],
-//                ];
-//                $orderItem = OrderItem::create($itemData);
-//            }
-//            return redirect(route('deck'))->with('message', '已發送訂單至貓腳印!');
-//        }else{
-//            return redirect(route('deck'))->with('error', '沒有卡牌資料!');
-//        }
-//    }
 
 }

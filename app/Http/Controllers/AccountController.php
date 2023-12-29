@@ -147,12 +147,15 @@ class AccountController extends Controller
                 'name'=>$deckCard['name'],
                 'image'=>$deckCard['image'],
                 'number'=>$deckCard['num'],
-                'price'=>$card->nowPrice(),
+                'unit'=>$card->nowPrice(),
+                'price'=>$card->nowPrice()*$deckCard['num'],
             ];
             $cart['total'] += ($card->nowPrice()*$deckCard['num']);
             $cart['count'] += $deckCard['num'];
         }
         $cart['edit'] = $deck->id;
+
+        $cart['shipping']=0;
 
         session()->put('cart', $cart);;
         return redirect(route('card'))->with('message', '牌組已加入編輯!');

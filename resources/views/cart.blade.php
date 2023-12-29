@@ -24,7 +24,8 @@
         <hr>
     </div>
     <!--end .steps-col-->
-<form action="" method="">
+<form action="{{route('orderCreate')}}" method="post">
+    @csrf
     <div class="row mb-3 mb-lg-5">
         <div class="cus-table">
             <div class="cus-table-header">
@@ -42,39 +43,38 @@
                 </thead>
 
                 <tbody>
-                    @for($i = 1; $i <= 4; $i++) <tr>
-                        <td class="product-col">
-                            <div class="product d-block  d-sm-flex align-items-center">
-                                <img class="product-media me-sm-3"
-                                    src="https://asia.pokemon-card.com/tw/card-img/tw00004614.png">
-                                <h3 class="product-title">
-                                    老大的指令（赤日）
-                                </h3>
-                            </div>
-                        </td>
-                        <td class="quantity-col">
-                            <div class="addtocart-selector d-flex justify-content-center">
-                                <div class="addtocart-qty">
-                                    <div class="addtocart-button button-down"><span class="fas fa-minus"
-                                            aria-label="increase quantity"></span></div>
-                                    <input type="text" class="addtocart-input" value="1">
-                                    <div class="addtocart-button button-up">
-                                        <span class="fas fa-plus" aria-label="increase quantity"></span>
+                    @foreach($cart['items'] as $card_id => $item)
+                        <tr id="item-{{$card_id}}">
+                            <td class="product-col">
+                                <div class="product d-block  d-sm-flex align-items-center">
+                                    <img class="product-media me-sm-3" src="{{$item['image']}}">
+                                    <h3 class="product-title">{{$item['name']}}</h3>
+                                    <input type="hidden" name="item_card_id[]" value="{{$card_id}}">
+                                    <input type="hidden" name="item_name[]" value="{{$item['name']}}">
+                                </div>
+                            </td>
+                            <td class="quantity-col">
+                                <div class="addtocart-selector d-flex justify-content-center">
+                                    <div class="addtocart-qty">
+                                        <div class="addtocart-button button-down change-cart-item" data-id="{{$card_id}}" data-type="minus">
+                                            <span class="fas fa-minus"  aria-label="increase quantity"></span></div>
+                                        <input type="number" step="1" min="0" class="addtocart-input item-num" data-id="{{$card_id}}" data-type="change" id="number-{{$card_id}}" name="item_num[]" value="{{$item['number']}}">
+                                        <div class="addtocart-button button-up change-cart-item" data-id="{{$card_id}}" data-type="plus" >
+                                            <span class="fas fa-plus" aria-label="increase quantity"></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="price-col">
-                            $84.00
-                        </td>
-                        <td class="total-col">
-                            $11600
-                        </td>
-                        <td class="remove-col">
-                            <button class="btn btn-remove"><i class="fa-solid fa-xmark"></i></button>
-                        </td>
+                            </td>
+                            <td class="price-col" >
+                                $<span id="price-{{$card_id}}" >{{$item['unit']}}</span>
+                                <input type="hidden" name="item_unit[]" value="{{$item['unit']}}">
+                            </td>
+                            <td class="total-col" >$<span id="total-{{$card_id}}" class="item-subtotal" >{{$item['price']}}</span></td>
+                            <td class="remove-col">
+                                <button class="btn btn-remove remove-cart-item" data-id="{{$card_id}}"><i class="fa-solid fa-xmark"></i></button>
+                            </td>
                         </tr>
-                        @endfor
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -88,29 +88,33 @@
                 </div>
                 <div class="p-3">
                     <div class="col mb-2">
-                        <label for="" class="form-label">收件人:</label>
-                        <input type="text" class="form-control" id="">
+                        <label for="buyer_name" class="form-label">收件人:</label>
+                        <input type="text" class="form-control" id="buyer_name" name="buyer_name" value="{{$user->name}}">
                     </div>
                     <div class="col mb-2">
-                        <label for="" class="form-label">電話:</label>
-                        <input type="text" class="form-control" id="">
+                        <label for="buyer_phone" class="form-label">電話:</label>
+                        <input type="text" class="form-control" id="buyer_phone" name="buyer_phone" value="{{$user->phone}}">
+                    </div>
+{{--                    <div class="col mb-2">--}}
+{{--                        <label for="" class="form-label">信箱:</label>--}}
+{{--                        <input type="text" class="form-control" id="">--}}
+{{--                    </div>--}}
+                    <div class="col mb-2">
+                        <label for="buyer_address" class="form-label">詳細地址:</label>
+                        <input type="text" class="form-control" id="buyer_address" name="buyer_address" value="{{$user->address}}">
                     </div>
                     <div class="col mb-2">
-                        <label for="" class="form-label">信箱:</label>
-                        <input type="text" class="form-control" id="">
-                    </div>
-                    <div class="col mb-2">
-                        <label for="" class="form-label">詳細地址:</label>
-                        <input type="text" class="form-control" id="">
-                    </div>
-                    <div class="col mb-2">
-                        <label for="" class="form-label">送貨方式:</label>
-                        <select class="form-select bg-white" id="">
-                            <option selected>Choose...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <label for="shipment" class="form-label">取件方式:</label>
+                        <select class="form-select bg-white" id="shipment" name="shipment">
+                            <option value="" hidden>請選擇</option>
+                            @foreach($orderDefaultSetting['shipment'] as $value => $shipment)
+                                <option value="{{$value}}">{{$shipment['title']}}</option>
+                            @endforeach
                         </select>
+                    </div>
+                    <div class="col mb-2">
+                        <label for="note" class="form-label">訂單備註</label>
+                        <textarea class="form-control" name="note" id="note" rows="2" placeholder="有什麼想告訴我們的嗎?"></textarea>
                     </div>
                     <div class="my-3">
                         <p>※ 宅配物流週日不送件。</p>
@@ -131,7 +135,7 @@
                 <div class="p-3">
                     <div class="col mb-2 d-flex justify-content-between">
                         <div>小計:</div>
-                        <div class="fw-bold">NT$ 6700</div>
+                        <div class="fw-bold">NT$ <span id="item-subtotal">{{$cart['total']}}</span></div>
                     </div>
                     <div class="col mb-2 d-flex justify-content-between">
                         <div>折抵購物金:</div>
@@ -139,20 +143,20 @@
                     </div>
                     <div class="col mb-2 d-flex justify-content-between">
                         <div>運費:</div>
-                        <div class="fw-bold">NT$95</div>
+                        <div class="fw-bold">NT$ <span id="shipping-cost">{{$cart['shipping']}}</span></div>
                     </div>
                     <div class="col mb-2 d-flex justify-content-between border-top border-bottom mt-5 mb-4 py-4">
                         <div>合計</div>
-                        <div class="fw-bold">NT$6795</div>
+                        <div class="fw-bold">NT$ <span id="order-total">{{$cart['total']+$cart['shipping']}}</span></div>
                     </div>
 
                     <div class="col mb-2">
-                        <label for="" class="form-label">付款方式:</label>
-                        <select class="form-select bg-white" id="">
-                            <option selected>Choose...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <label for="payment" class="form-label">付款方式:</label>
+                        <select class="form-select bg-white" id="payment" name="payment">
+                            <option value="" hidden>請選擇</option>
+                            @foreach($orderDefaultSetting['payment'] as $value => $payment)
+                                <option value="{{$value}}" >{{$payment['title']}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="my-5">
@@ -160,8 +164,9 @@
                             【提醒您！】本公司不會透過電話要求顧客操作網路銀行或是ATM！若您接到不明來電提及上述內容，切勿提供個人資料！切勿聽信電話指示操作任何動作！並立刻撥打165反詐騙專線或者與我們聯繫！
                         </p>
                     </div>
-                    <a href="{{route('invoice')}}" class="btn btn-md btn-md-yellow fs-5 w-100 mb-5 bg-light-yellow">
-                        下一步</a>
+                    <button type="submit" class="btn btn-md btn-md-yellow fs-5 w-100 mb-5 bg-light-yellow">下一步</button>
+{{--                    <a href="{{route('invoice')}}" class="btn btn-md btn-md-yellow fs-5 w-100 mb-5 bg-light-yellow">--}}
+{{--                        下一步</a>--}}
                 </div>
 
             </div>
@@ -172,4 +177,79 @@
 
 @endsection
 @push('app-scripts')
+    <script>
+
+        $('body').on('click','.change-cart-item',function (e){
+            let $id = $(this).data('id');
+            $.ajax({
+                type: "POST",
+                url:"/AddToCart",
+                dataType:"json",
+                data: {
+                    '_token': $('meta[name="csrf-token"]').attr('content'),
+                    'id': $id,
+                    'type': $(this).data('type'),
+                },
+                success:function(object){
+                    let changeItem = object.cart.items[$id];
+                    $('#mini-cart-list').html(object.html);
+                    $('#count').html(object.cart.count);
+                    $('#total').html(object.cart.total);
+                    $('#item-subtotal').html(object.cart.total);
+                    $('#number-'+$id).val(changeItem['number']);
+                    $('#price-'+$id).html('$'+parseInt(changeItem['price'])/parseInt(changeItem['number']));
+                    $('#total-'+$id).html('$'+changeItem['price']);
+                }
+            });
+        });
+
+        $('body').on('change','.item-num',function (e){
+            let $id = $(this).data('id');
+            $.ajax({
+                type: "POST",
+                url:"/AddToCart",
+                dataType:"json",
+                data: {
+                    '_token': $('meta[name="csrf-token"]').attr('content'),
+                    'id': $id,
+                    'type': $(this).data('type'),
+                    'num': $(this).val(),
+                },
+                success:function(object){
+                    console.log(object)
+                    let changeItem = object.cart.items[$id];
+                    $('#mini-cart-list').html(object.html);
+                    $('#count').html(object.cart.count);
+                    $('#total').html(object.cart.total);
+                    $('#item-subtotal').html(object.cart.total);
+                    $('#number-'+$id).val(changeItem['number']);
+                    $('#price-'+$id).html(parseInt(changeItem['price'])/parseInt(changeItem['number']));
+                    $('#total-'+$id).html(changeItem['price']);
+                }
+            });
+        });
+
+        // $('body').on('click','.remove-cart-item',function (e){
+        //     let $id = $(this).data('id');
+        //     $.ajax({
+        //         type: "POST",
+        //         url:"/AddToCart",
+        //         dataType:"json",
+        //         data: {
+        //             '_token': $('meta[name="csrf-token"]').attr('content'),
+        //             'id': $id,
+        //             'type': $(this).data('type'),
+        //         },
+        //         success:function(object){
+        //             let changeItem = object.cart.items[$id];
+        //             $('#mini-cart-list').html(object.html);
+        //             $('#count').html(object.cart.count);
+        //             $('#total').html(object.cart.total);
+        //             $('#number-'+$id).val(changeItem['number']);
+        //             $('#price-'+$id).html('$'+parseInt(changeItem['price'])/parseInt(changeItem['number']));
+        //             $('#total-'+$id).html('$'+changeItem['price']);
+        //         }
+        //     });
+        // });
+    </script>
 @endpush
