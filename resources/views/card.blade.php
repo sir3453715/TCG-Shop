@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @inject('html', 'App\Presenters\Html\HtmlPresenter')
+@inject('html', 'App\Presenters\Html\HtmlPresenter')
 <!-- // 卡牌列表 start-->
 <div class="m-3 m-lg-5">
     <div class="row">
@@ -41,6 +41,13 @@
                     </div>
 
                     <div class="form-group col-lg-4 col-6">
+                        <label class="w-100" for="series">系列</label>
+                        <select name="series[]" id="series" class="form-control select2" multiple>
+                            <option value="" hidden>請選擇</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-lg-4 col-6">
                         <label class="w-100" for="competition">賽制</label>
                         <select name="competition" id="competition" class="form-control select2" >
                             <option value="" hidden>請選擇</option>
@@ -49,12 +56,6 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-lg-4 col-6">
-                        <label class="w-100" for="series">系列</label>
-                        <select name="series[]" id="series" class="form-control select2" multiple>
-                            <option value="" hidden>請選擇</option>
-                        </select>
-                    </div>
 
                 </div>
                 <button type="submit" class="btn btn-yellow col-12 mt-3">
