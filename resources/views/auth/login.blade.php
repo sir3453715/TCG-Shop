@@ -43,30 +43,42 @@
                     <button type="submit" class="btn btn-md btn-md-yellow fs-5 w-50 me-2">
                         登入
                     </button>
-                    <button type="submit" class="btn btn-md btn-md-black fs-5 w-50 ms-2">
+                    <a href="{{route('register')}}" class="btn btn-md btn-md-black fs-5 w-50 ms-2">
                         註冊
-                    </button>
+                    </a>
                 </div>
                 <div class="d-flex justify-content-center mb-3">
-                    <a id="account-social-btn-google" class="account-social-btn btn col-12 col-md-7" href="{{ route('SocialLogin',['provider'=>'google','redirectURL'=>'myAccount.dashboard','binding'=>1]) }}">
-                        <i class="fa-brands fa-google me-2"></i>使用 Google 註冊
+                    <a id="account-social-btn-google" class="account-social-btn btn col-12 col-md-7" href="{{ route('SocialLogin',['provider'=>'google','redirectURL'=>'myAccount.dashboard']) }}">
+                        <i class="fa-brands fa-google me-2"></i>使用 Google 登入
                     </a>
                 </div>
                 <div class="d-flex justify-content-center mb-3">
                     <a id="account-social-btn-facebook" class="account-social-btn btn col-12 col-md-7"
                         href="{{ route('SocialLogin',['provider'=>'facebook','redirectURL'=>'index']) }}">
                         <i class="fa-brands fa-facebook-f me-2"></i>
-                        使用 facebook 註冊
+                        使用 facebook 登入
                     </a>
                 </div>
-{{--                <div class="d-flex justify-content-center mb-5">--}}
-{{--                    <a id="account-social-btn-line" class="account-social-btn btn col-12 col-md-7"--}}
-{{--                        href="{{ route('SocialLogin',['provider'=>'facebook','redirectURL'=>'index']) }}">--}}
-{{--                        <i class="fa-brands fa-facebook-f me-2"></i>--}}
-{{--                        使用 Line 註冊--}}
-{{--                    </a>--}}
-{{--                </div>--}}
+                <div class="d-flex justify-content-center mb-5">
+                    <a id="account-social-btn-line" class="account-social-btn btn col-12 col-md-7"
+                        href="{{ route('SocialLogin',['provider'=>'line','redirectURL'=>'index']) }}">
+                        <i class="fa-brands fa-facebook-f me-2"></i>
+                        使用 Line 登入
+                    </a>
+                </div>
+                <input type="hidden" name="google_recaptcha" id="ctl-recaptcha-token">
             </form>
     </div>
 </div>
 @endsection
+
+@push('app-scripts')
+    <script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
+    <script>
+        grecaptcha.ready(function() {
+            grecaptcha.execute('{{ env("RECAPTCHA_SITE_KEY") }}').then(function(token) {
+                document.getElementById('ctl-recaptcha-token').value = token;
+            });
+        });
+    </script>
+@endpush

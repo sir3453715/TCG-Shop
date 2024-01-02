@@ -62,11 +62,16 @@ class HomeController extends Controller
     public function card(Request $request)
     {
 
-        $supertypes = ['基本能量卡','寶可夢卡','寶可夢道具','支援者卡','物品卡','特殊能量卡','競技場卡','能量卡'];
-        $types = ['Grass'=>'草', 'Fire'=>'火', 'Water'=>'水', 'Lightning'=>'雷', 'Psychic'=>'超', 'Fighting'=>'鬥','Darkness'=>'惡', 'Metal'=>'鋼', 'Fairy'=>'妖', 'Dragon'=>'龍', 'Colorless'=>'無'];
-        $rarities =['C','U','R','RR','RRR','PR','TR','SR','K','AR','SAR','無標記'];
+        $queried = ['keyword'=>'','attribute'=>'', 'rarity'=>'', 'type'=>'','competition'=>''];
 
-        $queried = ['keyword'=>'','supertypes'=>[''],'types'=>[''],'rarity'=>['']];
+        $types = config('cards.Pokemon.types');
+        $attributes = config('cards.Pokemon.attributes');
+        $rarities = config('cards.Pokemon.rarities');
+        $competitions = [
+            'standard'=>app('Option')->ptcg_standard,
+            'expanded'=>app('Option')->ptcg_expanded,
+        ];
+
         $Cards = Card::whereNotNull('id');
 
         if($request->get('keyword')) {
@@ -74,15 +79,15 @@ class HomeController extends Controller
             $Cards = $Cards->where('name','LIKE',"%$keyword%");
             $queried['keyword'] = $request->get('keyword');
         }
-        if($request->get('supertypes')) {
-            $supertypesSelected = $request->get('supertypes');
-            $Cards = $Cards->whereIn('supertypes',$supertypesSelected);
-            $queried['supertypes'] = $supertypesSelected;
+        if($request->get('attribute')) {
+            $attributeSelected = $request->get('attribute');
+            $Cards = $Cards->whereIn('attribute',$attributeSelected);
+            $queried['attribute'] = $attributeSelected;
         }
-        if($request->get('types')) {
-            $typesSelected = $request->get('types');
-            $Cards = $Cards->whereIn('type',$typesSelected);
-            $queried['types'] = $typesSelected;
+        if($request->get('type')) {
+            $typeSelected = $request->get('type');
+            $Cards = $Cards->whereIn('type',$typeSelected);
+            $queried['type'] = $typeSelected;
         }
         if($request->get('rarity')) {
             $raritiesSelected = $request->get('rarity');
@@ -96,9 +101,10 @@ class HomeController extends Controller
         return view('card',[
             'queried'=>$queried,
             'Cards'=>$Cards,
-            'supertypes'=>$supertypes,
             'types'=>$types,
             'rarities'=>$rarities,
+            'attributes'=>$attributes,
+            'competitions'=>$competitions,
         ]);
     }
     public function deck(Request $request){
@@ -155,8 +161,29 @@ class HomeController extends Controller
 
     }
 
+    public function search(Request $request){
 
+        $s = $request->get('s');
 
+        $decks = Deck::where('is_recommend',1)->where("title","LIKE","%$s%")->get();
+        $news = Event::where('class_id',1)
+            ->where(function ($query) use ($s){
+                $query->orwhere("title","LIKE","%$s%");
+                $query->orwhere("content","LIKE","%$s%");
+            })->get();
+        $competitions = Event::where('class_id',2)
+            ->where(function ($query) use ($s){
+                $query->orwhere("title","LIKE","%$s%");
+                $query->orwhere("content","LIKE","%$s%");
+            })->get();
+
+        return view('search',[
+            'decks'=>$decks,
+            'news'=>$news,
+            'competitions'=>$competitions,
+        ]);
+
+    }
 
     public function deckAddToCart(Request $request,$id){
         session()->forget('cart');

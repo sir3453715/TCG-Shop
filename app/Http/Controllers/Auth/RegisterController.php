@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Rules\GoogleRecaptcha;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -49,11 +50,20 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $messages = [
+            'password.confirmed' => '兩次密碼輸入不一樣',
+            'password_confirmation.same' => '兩次密碼輸入不一樣',
+        ];
+
+        $test =  Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'password_confirmation'=> ['required', 'same:password'],
+            'google_recaptcha' => ['required', new GoogleRecaptcha],
+        ],$messages);
+
+        return  $test;
     }
 
     /**
@@ -64,6 +74,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        dd('create');
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],

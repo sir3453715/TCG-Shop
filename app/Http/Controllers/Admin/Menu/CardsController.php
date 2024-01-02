@@ -78,7 +78,7 @@ class CardsController extends Controller
         $types = config('cards.Pokemon.types');
         $attributes = config('cards.Pokemon.attributes');
         $rarities = config('cards.Pokemon.rarities');
-        $competitions = config('cards.Pokemon.competitions');
+        $competitions = explode(',',app('Option')->ptcg_expanded);
         $kingdoms = config('cards.kingdoms');
 
         return view('admin.cards.createCard',[
@@ -172,7 +172,7 @@ class CardsController extends Controller
         $types = config('cards.Pokemon.types');
         $attributes = config('cards.Pokemon.attributes');
         $rarities = config('cards.Pokemon.rarities');
-        $competitions = config('cards.Pokemon.competitions');
+        $competitions = explode(',',app('Option')->ptcg_expanded);
         $kingdoms = config('cards.kingdoms');
 
         $day7 = json_encode($card->historyPrices()->orderBy('dateTime','DESC')->limit(7)->get()->toArray());

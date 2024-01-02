@@ -38,8 +38,8 @@
                                     </a>
                                 </div>
                                 <div class="col-4">
-                                    <a id="account-social-btn-line" class="account-social-btn  btn" href="#">
-                                        <i class="fa-brands fa-line me-2"></i>Line
+                                    <a id="account-social-btn-line" class="account-social-btn  btn {{($user->line == '')?'':"account-social-btn-disabled"}}" href="{{ route('SocialLogin',['provider'=>'line','redirectURL'=>'myAccount.dashboard','binding'=>1]) }}">
+                                        <i class="fa-brands fa-line me-2"></i>Line {{($user->line == '')?'':"已綁定"}}
                                     </a>
                                 </div>
                             </div>

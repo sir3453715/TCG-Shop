@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
-@push('app-styles')
-<style>
-
-</style>
-@endpush
 @section('content')
+    @inject('html', 'App\Presenters\Html\HtmlPresenter')
 <!-- // 卡牌列表 start-->
 <div class="m-3 m-lg-5">
     <div class="row">
@@ -15,48 +11,51 @@
                 <div class="row">
                     <div class="form-group col-lg-4 col-6">
                         <label class="w-100" for="keyword">關鍵字</label>
-                        <input class="form-control" type="text" id="keyword" name="keyword"
-                            value="{{$queried['keyword']}}" placeholder="輸入名稱">
+                        <input class="form-control" type="text" id="keyword" name="keyword" value="{{$queried['keyword']}}" placeholder="輸入關鍵字">
                     </div>
                     <div class="form-group col-lg-4 col-6">
-                        <label class="w-100" for="supertypes">卡牌類型</label>
-                        <select name="supertypes[]" id="supertypes" class="form-control select2" multiple>
-                            @foreach($supertypes as $supertype)
-                            <option value="{{$supertype}}"
-                                {{ in_array($supertype,$queried['supertypes'])?'selected':'' }}>{{$supertype}}</option>
+                        <label class="w-100" for="type">卡牌類型</label>
+                        <select name="type[]" id="type" class="form-control select2" multiple>
+                            <option value="" hidden>請選擇</option>
+                            @foreach($types as $type)
+                                <option value="{{$type}}" {{(in_array($type,$queried['type']))?'selected':''}}>{{ trans($type) }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group col-lg-4 col-6">
-                        <label class="w-100" for="supertypes">卡牌屬性</label>
-                        <select name="types[]" id="types" class="form-control select2" multiple>
-                            @foreach($types as $key=> $type)
-                            <option value="{{$key}}" {{ in_array($key,$queried['types'])?'selected':'' }}>{{$type}}
-                            </option>
+                        <label class="w-100" for="attribute">卡牌屬性</label>
+                        <select name="attribute[]" id="attribute" class="form-control select2" multiple>
+                            @foreach($attributes as $attribute)
+                                <option value="{{$attribute}}" {{(in_array($attribute,$queried['attribute']))?'selected':''}}>{{ trans($attribute) }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group col-lg-4 col-6">
-                        <label class="w-100" for="supertypes">稀有度</label>
+                        <label class="w-100" for="rarity">稀有度</label>
                         <select name="rarity[]" id="rarity" class="form-control select2" multiple>
+                            <option value="" hidden>請選擇</option>
                             @foreach($rarities as $rarity)
-                            <option value="{{$rarity}}" {{ in_array($rarity,$queried['rarity'])?'selected':'' }}>
-                                {{$rarity}}</option>
+                                <option value="{{$rarity}}" {{(in_array($rarity,$queried['rarity']))?'selected':''}}>{{ trans($rarity) }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group col-lg-4 col-6">
-                        <label for="supertypes">賽制</label>
-                        <select name="competition" id="competition" class="form-control">
 
+                    <div class="form-group col-lg-4 col-6">
+                        <label class="w-100" for="competition">賽制</label>
+                        <select name="competition" id="competition" class="form-control select2" >
+                            <option value="" hidden>請選擇</option>
+                            <option value="standard" {!! $html->selectSelected('standard',$queried['competition']) !!}>標準賽</option>
+                            <option value="expanded" {!! $html->selectSelected('expanded',$queried['competition']) !!}>開放賽</option>
                         </select>
                     </div>
-                    <div class="form-group col-lg-4 col-6">
-                        <label for="supertypes">系列</label>
-                        <select name="" id="" class="form-control">
 
+                    <div class="form-group col-lg-4 col-6">
+                        <label class="w-100" for="series">系列</label>
+                        <select name="series[]" id="series" class="form-control select2" multiple>
+                            <option value="" hidden>請選擇</option>
                         </select>
                     </div>
+
                 </div>
                 <button type="submit" class="btn btn-yellow col-12 mt-3">
                     搜尋

@@ -25,6 +25,7 @@ Route::get('/competitionsPost/{post_id}', 'HomeController@competitionsPost')->na
 Route::get('/deckAddToCart/{deck_id}', 'HomeController@deckAddToCart')->name('deckAddToCart');
 Route::get('/deckAddToAccount/{deck_id}', 'HomeController@deckAddToAccount')->name('deckAddToAccount');
 Route::get('/build/{deck_id}', 'AccountController@build')->name('build');
+Route::get('/search', 'HomeController@search')->name('search');
 
 Route::get('/cart', 'OrderController@cart')->name('cart');
 Route::get('/invoice/{seccode}', 'OrderController@invoice')->name('invoice');

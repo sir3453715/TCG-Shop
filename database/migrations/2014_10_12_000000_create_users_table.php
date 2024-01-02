@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('address')->comment('電話')->nullable();
             $table->string('google')->comment('Google帳號')->nullable();
             $table->string('facebook')->comment('Facebook帳號')->nullable();
+            $table->string('line')->comment('Line帳號')->nullable();
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
