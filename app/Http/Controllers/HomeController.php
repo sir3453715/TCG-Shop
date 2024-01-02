@@ -62,7 +62,7 @@ class HomeController extends Controller
     public function card(Request $request)
     {
 
-        $queried = ['keyword'=>'','attribute'=>'', 'rarity'=>'', 'type'=>'','competition'=>''];
+        $queried = ['keyword'=>'','attribute'=>[], 'rarity'=>[], 'type'=>[],'competition'=>''];
 
         $types = config('cards.Pokemon.types');
         $attributes = config('cards.Pokemon.attributes');
@@ -79,17 +79,17 @@ class HomeController extends Controller
             $Cards = $Cards->where('name','LIKE',"%$keyword%");
             $queried['keyword'] = $request->get('keyword');
         }
-        if($request->get('attribute')) {
+        if($request->get('attribute') && !empty($request->get('attribute'))) {
             $attributeSelected = $request->get('attribute');
             $Cards = $Cards->whereIn('attribute',$attributeSelected);
             $queried['attribute'] = $attributeSelected;
         }
-        if($request->get('type')) {
+        if($request->get('type') && !empty($request->get('type'))) {
             $typeSelected = $request->get('type');
             $Cards = $Cards->whereIn('type',$typeSelected);
             $queried['type'] = $typeSelected;
         }
-        if($request->get('rarity')) {
+        if($request->get('rarity') && !empty($request->get('rarity'))) {
             $raritiesSelected = $request->get('rarity');
             $Cards = $Cards->whereIn('rarity',$raritiesSelected);
             $queried['rarity'] = $raritiesSelected;
