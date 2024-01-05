@@ -20,7 +20,7 @@ class CreateCardsTable extends Migration
             $table->string('name')->comment('卡牌名稱')->nullable();
             $table->string('hp')->comment('卡牌血量(生命)')->nullable();
             $table->string('image')->comment('卡牌圖片')->nullable();
-            $table->string('series')->comment('系列名稱')->nullable();
+            $table->string('series_id')->comment('系列ID')->nullable();
             $table->string('serial_number')->comment('系列編號')->nullable();
             $table->string('attribute')->comment('屬性')->nullable();
             $table->string('type')->comment('卡牌類型')->nullable();

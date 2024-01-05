@@ -19,8 +19,8 @@
                       </li>
                     </ul>
                 <div id="to-top-btn">
-    <a href="#" class="scrollToTop"><i class="fa-solid fa-arrow-up"></i></a>
-</div>
+                    <a href="#" class="scrollToTop"><i class="fa-solid fa-arrow-up"></i></a>
+                </div>
             </div>
         </div>
 </section>

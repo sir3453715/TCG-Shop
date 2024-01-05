@@ -85,7 +85,7 @@
                                 <div class="row align-items-center mb-2">
                                     <div class="col-sm-10">
                                         <h5 class="card-title">{{$Card->name}}</h5>
-                                        <p class="card-text">{{$Card->series}}</p>
+                                        <p class="card-text">{{$Card->series->title}}</p>
                                     </div>
                                     <div class="col-2 text-end fs-3 d-none d-sm-block">
                                         <a class="btn-link {{ ($Card->wishlistCheck())?'remove-wishlist':'add-to-wishlist' }}" href="javascript:void(0);" data-id="{{$Card->id}}">

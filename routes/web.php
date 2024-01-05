@@ -121,6 +121,8 @@ Route::group(['prefix'=>'admin', 'middleware' => ['web', 'admin.area'],'as'=>'ad
             ->name('reinstall');
         Route::post('/rarity', 'Admin\Menu\CardsController@rarity')
             ->name('rarity');
+        Route::post('/changeRarity', 'Admin\Menu\CardsController@changeRarity')
+            ->name('changeRarity');
     });
     Route::group(['prefix' => 'deck', 'as' => 'deck.'], function(){
         Route::get('/build/{deck}', 'Admin\Menu\DecksController@build')

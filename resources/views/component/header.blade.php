@@ -19,8 +19,9 @@
 {{--                    <li class="nav-item">--}}
 {{--                        <a class="nav-link" href="">Q&A</a>--}}
 {{--                    </li>--}}
-                    <li class="nav-item">
+                    <li class="nav-item position-relative">
                         <a id="mini-cart" class="nav-link" href="javascript:void(0)">購物車</a>
+{{--                        <span class="deck-card-count">{{$card['num']}}</span>--}}
                     </li>
                 </ul>
             </div>

@@ -6,3 +6,4 @@ package.json
 vendor
 node_modules
 public
+.env

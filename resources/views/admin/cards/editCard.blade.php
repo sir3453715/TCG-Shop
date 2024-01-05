@@ -51,13 +51,14 @@
                                     </div>
                                     <div class="col-12 col-md-8">
                                         <div class="col-md-12 row">
-                                            <div class="form-group col-6 col-md-3">
+                                            <div class="form-group col-6 col-md-6">
                                                 <label class="field-name" for="series">系列名稱</label>
-                                                <input type="text" class="form-control" name="series" id="series" placeholder="系列名稱" value="{{$card->series}}">
-                                            </div>
-                                            <div class="form-group col-6 col-md-3">
-                                                <label class="field-name" for="serial_code">系列角標</label>
-                                                <input type="text" class="form-control" name="serial_code" id="serial_code" placeholder="系列角標" value="{{$card->serial_code}}">
+                                                <select class="form-control" name="series_id" id="series_id">
+                                                    <option value="" hidden>請選擇</option>
+                                                    @foreach($seriess as $series)
+                                                        <option value="{{$series->id}}"  {!! $html->selectSelected($card->series_id,$series->id) !!}>{{$series->title}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="form-group col-6 col-md-3">
                                                 <label class="field-name" for="serial_number">系列編號</label>

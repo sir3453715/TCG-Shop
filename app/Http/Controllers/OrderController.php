@@ -144,7 +144,6 @@ class OrderController extends Controller
                 }
             break;
             case 'change':
-
                 if(isset($cart['items'][$card_id])){
                     $original_num =$cart['items'][$card_id]['number'];
                     $new_number = $request->get('num');
@@ -156,9 +155,40 @@ class OrderController extends Controller
                         $cart['items'][$card_id]['unit']=$card->nowPrice();
                         $cart['items'][$card_id]['price']=$new_number*$card->nowPrice();
                     }
-                    $cart['count'] += $diff;
+                    if(isset($cart['count'])){
+                        $cart['count'] += $diff;
+                    }else{
+                        $cart['count'] = $diff;
+                    }
                 }
             break;
+            case 'modal':
+                $new_number = $request->get('num');
+
+                if(isset($cart['items'][$card_id])){
+                    $original_num =$cart['items'][$card_id]['number'];
+                    $cart['items'][$card_id]['number']=$original_num + $new_number;
+                    $cart['items'][$card_id]['unit']=$card->nowPrice();
+                    $cart['items'][$card_id]['price']=($original_num + $new_number)*$card->nowPrice();
+
+                    $cart['count'] += $new_number;
+                }else{
+                    $cart['items'][$card_id]=[
+                        'name'=>$card->name,
+                        'image'=>$card->image,
+                        'number'=>$new_number,
+                        'unit'=>$card->nowPrice(),
+                        'price'=>$new_number*$card->nowPrice(),
+                    ];
+
+                    if(isset($cart['count'])){
+                        $cart['count'] += $new_number;
+                    }else{
+                        $cart['count'] = $new_number;
+                    }
+                }
+            break;
+
         }
         if($cart['count']<0){
             $cart['count'] = 0;

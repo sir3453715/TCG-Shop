@@ -22,9 +22,9 @@
             <p class="fs-5">全台最大卡片販售平台就在這裡！！</p>
             <a href="#" type="button" class="btn btn-yellow">查看更多</a>
         </div>
-        <div class="col-lg-7" style="background-image:url({{'/storage/uploads/new-card-price-bg.jpg'}}); ">
+        <div class="col-lg-7 contain" style="background-image:url({{'/storage/uploads/new-card-price-bg.jpg'}});background-size: contain; ">
             <div class="h-100">
-                <div class="col-12 slider-center">
+                <div class="col-12 slider-center py-5">
                     @foreach($cards as $card)
                         <img class="img-fluid" alt="Bootstrap Image Preview" src="{{$card->image}}" />
                     @endforeach
@@ -38,12 +38,14 @@
     <!-- news -->
     <div class="row mt-5 gx-5">
         <div class="col-lg-6 mb-5">
+            @if($biggestEvent)
             <a href="{{route('newsPost',['post_id'=>$biggestEvent->id])}}" target="_blank" class="text-decoration-none text-dark">
                 <h3 class="fs-1 fw-bold mb-3">最新消息</h3>
                 <img class="img-fluid w-100" alt="Bootstrap Image Preview" src="{{$biggestEvent->image}}" />
                 <p class="fs-5 mt-3">{{$biggestEvent->title}}</p>
             </a>
             <a href="{{route('news')}}" type="button" class="btn btn-yellow">查看更多</a>
+            @endif
         </div>
         <div class="col-lg-6 mt-lg-4">
             @foreach($eventsList as $event)

@@ -46,11 +46,16 @@ class HomeController extends Controller
 
         $banners = Banner::where('status','1')->orderBy('sort','DESC')->get();
         $events = Event::where('status','1')->orderBy('top','DESC')->orderBy('dateTime','DESC')->limit(5)->get();
-        $biggestEvent = $events[0];
-        unset($events[0]);
+        if(sizeof($events)>1){
+            $biggestEvent = $events[0];
+            unset($events[0]);
+        }else{
+            $biggestEvent = [];
+        }
         $eventsList = $events;
 
         $cards = Card::inRandomOrder()->limit(5)->get();
+
 
         return view('home',[
             'banners'=>$banners,
@@ -260,7 +265,7 @@ class HomeController extends Controller
         }
         $wreHTML .= $card->weakpoint_value."</span>";
         $wreHTML .= "</div><div class='col-4'><div class='badge-sm badge-gray mb-2'>抵抗力</div><span>";
-        if($card->resist != ''){
+        if($card->resist != ''&& $card->resist != '--'){
             $wreHTML .= "<img class='energy-image' src='/storage/image/ptcg/energy/".$attributesImageByChinese[$card->resist].".jpg'>";
         }
         $wreHTML .= $card->resist_value."</span>";
@@ -280,10 +285,11 @@ class HomeController extends Controller
                         <div class='row align-items-center my-4'>
                             <div class='addtocart-selector col-6'>
                                 <div class='addtocart-qty'>
-                                    <div class='addtocart-button button-down'>
-                                    <span class='fas fa-minus' aria-label='increase quantity'></span></div>
-                                    <input type='text' class='addtocart-input' value='1' />
-                                    <div class='addtocart-button button-up'>
+                                    <div class='addtocart-button button-down modal-add' data-type='minus'>
+                                        <span class='fas fa-minus' aria-label='increase quantity'></span>
+                                    </div>
+                                    <input type='text' class='addtocart-input modal-number' value='1' />
+                                    <div class='addtocart-button button-up modal-add' data-type='plus'>
                                         <span class='fas fa-plus' aria-label='increase quantity'></span>
                                     </div>
                                 </div>
@@ -293,8 +299,8 @@ class HomeController extends Controller
                             </div>
                         </div>
                         <div class='d-flex'>
-                            <button type='submit' data-id='{$card->id}' class='btn btn-sm btn-sm-yellow fs-5 w-50 me-2 {$wishlistCheck}'>{$wishlistCheckTitle}</button>
-                            <button type='submit' class='btn btn-sm btn-sm-black fs-5 w-50 ms-2'>加入購物車</button>
+                            <button type='button' data-id='{$card->id}' class='btn btn-sm btn-sm-yellow fs-5 w-50 me-2 {$wishlistCheck}'>{$wishlistCheckTitle}</button>
+                            <button type='button' class='btn btn-sm btn-sm-black fs-5 w-50 ms-2' id='modal-add-to-cart' data-id='{$card->id}'>加入購物車</button>
                         </div>
                     </div>
                     <div class='col-lg-6'>

@@ -59,6 +59,10 @@ $(() => {
                     $('#mini-cart-list').html(object.html);
                     $('#count').html(object.cart.count);
                     $('#total').html(object.cart.total);
+                    // swal({
+                    //     title: '已成功加入購物車!',
+                    //     icon: "success",
+                    // });
                 }
             });
         });
@@ -76,6 +80,53 @@ $(() => {
                     $('#mini-cart-list').html('<div class="col-12 align-self-center text-center">購物車內目前沒有商品</div>');
                     $('#count').html(0);
                     $('#total').html(0);
+                }
+            });
+        });
+        $('body').on('click','.modal-add',function (e){
+            let $type = $(this).data('type'),$number = $('.modal-number').val(), $newNumber = 0;
+            if($type === 'plus'){
+                $newNumber = (parseInt($number) + 1);
+                $('.modal-number').val($newNumber);
+            }else if($type === 'minus'){
+                if($number > 1){
+                    $newNumber = (parseInt($number) - 1);
+                    $('.modal-number').val($newNumber);
+                }else{
+                    $('.modal-number').val(1);
+                }
+            }
+        });
+
+
+        $('body').on('click','#modal-add-to-cart',function (e){
+            let $id = $(this).data('id');
+            $.ajax({
+                type: "POST",
+                url:"/AddToCart",
+                dataType:"json",
+                data: {
+                    '_token': $('meta[name="csrf-token"]').attr('content'),
+                    'id': $id,
+                    'type': 'modal',
+                    'num': $('.modal-number').val(),
+                },
+                success:function(object){
+                    console.log(object)
+                    let changeItem = object.cart.items[$id];
+                    $('#mini-cart-list').html(object.html);
+                    $('#count').html(object.cart.count);
+                    $('#total').html(object.cart.total);
+                    $('#item-subtotal').html(object.cart.total);
+                    $('#number-'+$id).val(changeItem['number']);
+                    $('#price-'+$id).html(parseInt(changeItem['price'])/parseInt(changeItem['number']));
+                    $('#total-'+$id).html(changeItem['price']);
+                    // swal({
+                    //     title: '已成功加入購物車!',
+                    //     icon: "success",
+                    //     buttons: false,
+                    //     timer: 2000,
+                    // });
                 }
             });
         });
