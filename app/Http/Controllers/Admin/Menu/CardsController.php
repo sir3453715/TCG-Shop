@@ -52,13 +52,13 @@ class CardsController extends Controller
             $queried['competition'] = $competition;
         }
 
-        $cards = $cards->where('rarity','');
         $cards = $cards->orderBy('created_at','ASC')->paginate(25);
 
         $types = config('cards.Pokemon.types');
         $attributes = config('cards.Pokemon.attributes');
         $rarities = config('cards.Pokemon.rarities') ;
         rsort( $rarities);
+
         return view('admin.cards.cards',[
             'queried'=>$queried,
             'cards'=>$cards,

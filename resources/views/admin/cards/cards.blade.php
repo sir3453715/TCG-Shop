@@ -111,20 +111,20 @@
                                         <a href="{{route('admin.card.edit',['card'=>$card->id])}}">{{$card->name}}</a>
                                     </td>
                                     <td>
-{{--                                        <img class="zoomIn-img" src="{{$card->image}}" width="100px">--}}
-                                        <img src="{{$card->image}}" width="400px">
+                                        <img class="zoomIn-img" src="{{$card->image}}" width="100px">
+{{--                                        <img src="{{$card->image}}" width="400px">--}}
                                     </td>
                                     <td>{{$card->type}}</td>
                                     <td>{{$card->attribute}}</td>
-{{--                                    <td>{{$card->rarity}}</td>--}}
-                                    <td>
-                                        <select class="form-control form-required rarity-change {{($card->rarity)?'bg-info':''}}" data-id="{{$card->id}}">
-                                            <option value="" >請選擇</option>
-                                            @foreach($rarities as $rarity)
-                                                <option value="{{$rarity}}" {!! $html->selectSelected($rarity,$card->rarity) !!}>{{ trans($rarity) }}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
+                                    <td>{{$card->rarity}}</td>
+{{--                                    <td>--}}
+{{--                                        <select class="form-control form-required rarity-change {{($card->rarity)?'bg-info':''}}" data-id="{{$card->id}}">--}}
+{{--                                            <option value="" >請選擇</option>--}}
+{{--                                            @foreach($rarities as $rarity)--}}
+{{--                                                <option value="{{$rarity}}" {!! $html->selectSelected($rarity,$card->rarity) !!}>{{ trans($rarity) }}</option>--}}
+{{--                                            @endforeach--}}
+{{--                                        </select>--}}
+{{--                                    </td>--}}
                                     <td>{{$card->series->title}}</td>
                                     <td>
                                         @if(in_array($card->competition_number,explode(',',app('Option')->ptcg_standard)))
