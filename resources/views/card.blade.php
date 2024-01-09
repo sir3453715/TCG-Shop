@@ -33,7 +33,6 @@
                     <div class="form-group col-lg-4 col-6">
                         <label class="w-100" for="rarity">稀有度</label>
                         <select name="rarity[]" id="rarity" class="form-control select2" multiple>
-                            <option value="" hidden>請選擇</option>
                             @foreach($rarities as $rarity)
                                 <option value="{{$rarity}}" {{(in_array($rarity,$queried['rarity']))?'selected':''}}>{{ trans($rarity) }}</option>
                             @endforeach
@@ -43,7 +42,9 @@
                     <div class="form-group col-lg-4 col-6">
                         <label class="w-100" for="series">系列</label>
                         <select name="series[]" id="series" class="form-control select2" multiple>
-                            <option value="" hidden>請選擇</option>
+                            @foreach($CardSeries as $series)
+                                <option value="{{$series->id}}" {{(in_array($series->id,$queried['series']))?'selected':''}}>{{ trans($series->title) }}</option>
+                            @endforeach
                         </select>
                     </div>
 

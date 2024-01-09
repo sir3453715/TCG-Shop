@@ -32,6 +32,7 @@
                 <form action="{{route('myAccount.deckDel', ['deck_id' => $deck->id])}}" method="post"  class="form-btn">
                     @method('delete')
                     @csrf
+{{--                    <a href="javascript:void(0);" class="deck-edit btn-text me-sm-4 text-danger" id="deck-download">下載圖片</a>--}}
                     <a href="{{route('myAccount.deckEdit', ['deck_id' => $deck->id])}}" class="deck-edit btn-text me-sm-3" id="deck-edit">編輯</a>
                     <a href="javascript:void(0);" class="deck-del btn-text sweet-delete-confirm">刪除</a>
                 </form>
@@ -50,6 +51,20 @@
         </div>
     @endforeach
 </div>
+
+{{--<div id="deckDownload-image">--}}
+{{--    <div class="row col-12 p-5">--}}
+{{--        @foreach($deck->deckCardCategoryInfo() as $cardType => $cards)--}}
+{{--            @foreach($cards as $card)--}}
+{{--                <div class="col-1 deck-list-card" style="background-image: url('{{$card['image']}}'); background-size: contain; background-repeat: no-repeat;">--}}
+{{--                    <span class="deck-card-count text-danger">{{$card['num']}}</span>--}}
+{{--                    <img class="img-fluid w-100" src="{{$card['image']}}" >--}}
+{{--                </div>--}}
+{{--            @endforeach--}}
+{{--        @endforeach--}}
+{{--    </div>--}}
+{{--</div>--}}
+
 @endsection
 @push('app-scripts')
     <script>
@@ -85,4 +100,19 @@
 
     </script>
 
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            html2canvas(document.getElementById('deckDownload-image'),{
+            }).then(function(canvas) {
+                canvas.id = "h2canvas";
+                canvas.style='display:none';
+                document.body.appendChild(canvas);
+                var a = $('#deck-download');
+                a.attr('href' , canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream"));
+                a.attr('download', 'deckImage.jpg');
+            });
+
+        });
+    </script>
 @endpush

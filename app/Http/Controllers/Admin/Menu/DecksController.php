@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Admin\Menu;
 use App\Http\Controllers\Controller;
 use App\Models\ActionLog;
 use App\Models\Card;
+use App\Models\CardSeries;
 use App\Models\Deck;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class DecksController extends Controller
 {
@@ -20,6 +22,7 @@ class DecksController extends Controller
 
         $queried = ['keyword'=>'','is_recommend'=>'',];
         $decks = Deck::whereNotNull('id');
+
         if($request->get('keyword')) {
             $keyword = $request->get('keyword');
             $decks = $decks->where('title','LIKE',"%$keyword%");
@@ -210,6 +213,12 @@ class DecksController extends Controller
     public function destroy($id)
     {
 
+        $deck = Deck::find($id);
+
+        $deck->delete();
+        ActionLog::create_log($deck,'刪除');
+
+        return redirect(route('admin.deck.index'))->with('message', '該牌組已刪除!');
     }
 
 
@@ -242,13 +251,24 @@ class DecksController extends Controller
                 $keyword = $request->get('keyword');
                 $competition = 'ptcg_'.$request->get('competition');
                 $competition_number = app('Option')->$competition;
+                $series_ids = CardSeries::where(function ($query) use ($keyword){
+                    $keywordArray = explode('|',$keyword);
+                    foreach ($keywordArray as $keywordString){
+                        $query->orwhere('serial_number','LIKE','%'.$keywordString.'%');//產品編號
+                    }
+                })->pluck('id');
+                Log::info($series_ids);
                 $cards = Card::whereNotNull('id');
                 $cards = $cards->whereIn('competition_number',explode(',',$competition_number));
                 $cards = $cards->where(function ($query) use ($keyword){
-                    $query->orwhere('name','LIKE','%'.$keyword.'%');//產品編號
-                    $query->orwhere('series','LIKE','%'.$keyword.'%');//產品標題
-    //                $query->orwhere('skill','LIKE','%'.json_encode($keyword).'%');//技能
+                    $keywordArray = explode('|',$keyword);
+                    foreach ($keywordArray as $keywordString) {
+                        $query->orwhere('name', 'LIKE', '%' . $keywordString . '%');//產品編號
+                    }
                 });
+                if(!$series_ids->isEmpty()){
+                    $cards = $cards->whereIn('series_id', $series_ids);//產品標題
+                }
                 $cards = $cards->orderBy('created_at','ASC')->get();
             }else{
                 return json_encode(['result'=>'0']);

@@ -90,7 +90,10 @@ class Deck extends Model
         }
     }
     public function deckBuildCategoryTotal(){
-
+        $types = config('cards.Pokemon.types');
+        foreach ($types as $type){
+                $total[$type]=0;
+        }
         if($this->card_info){
             $total['total']=0;
             $deckInfo = unserialize($this->card_info);

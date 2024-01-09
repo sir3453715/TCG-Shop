@@ -170,64 +170,78 @@
                     <div id="deck-info">
                         <div>
                             <div id="pokemon" >
-                                @foreach($deckCards['寶可夢卡'] as $pokemonCard)
-                                    <div class="ptcgCard">
-                                        <div>{{$pokemonCard['name']}}</div>
-                                        <div>{{$pokemonCard['serial_code']}}</div>
-                                        <div>{{$pokemonCard['serial_number']}}</div>
-                                        <div>{{$pokemonCard['num']}}</div>
-                                    </div>
-                                @endforeach
+                                @if(isset($deckCards['寶可夢卡']))
+                                    @foreach($deckCards['寶可夢卡'] as $pokemonCard)
+                                        <div class="ptcgCard">
+                                            <div>{{$pokemonCard['name']}}</div>
+                                            <div>{{$pokemonCard['serial_code']}}</div>
+                                            <div>{{$pokemonCard['serial_number']}}</div>
+                                            <div>{{$pokemonCard['num']}}</div>
+                                        </div>
+                                    @endforeach
+                                @endif
                                 <div id="pokemon-subtotal">{{$deckCategoryTotal['寶可夢卡']}}</div>
                             </div>
                             <div id="energy" >
-                                @foreach($deckCards['基本能量卡'] as $pokemonCard)
-                                    <div class="energyCard">
-                                        <div>{{$pokemonCard['name']}}</div>
-                                        <div>{{$pokemonCard['num']}}</div>
-                                    </div>
-                                @endforeach
-                                @foreach($deckCards['特殊能量卡'] as $pokemonCard)
-                                    <div class="energyCard">
-                                        <div>{{$pokemonCard['name']}}</div>
-                                        <div>{{$pokemonCard['num']}}</div>
-                                    </div>
-                                @endforeach
+                                @if(isset($deckCards['基本能量卡']))
+                                    @foreach($deckCards['基本能量卡'] as $pokemonCard)
+                                        <div class="energyCard">
+                                            <div>{{$pokemonCard['name']}}</div>
+                                            <div>{{$pokemonCard['num']}}</div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                                @if(isset($deckCards['特殊能量卡']))
+                                    @foreach($deckCards['特殊能量卡'] as $pokemonCard)
+                                        <div class="energyCard">
+                                            <div>{{$pokemonCard['name']}}</div>
+                                            <div>{{$pokemonCard['num']}}</div>
+                                        </div>
+                                    @endforeach
+                                @endif
                                 <div id="energy-subtotal">{{($deckCategoryTotal['特殊能量卡']+$deckCategoryTotal['基本能量卡'])}}</div>
                             </div>
                         </div>
                         <div id="items" >
-                            @foreach($deckCards['物品卡'] as $pokemonCard)
-                                <div class="itemCard">
-                                    <div class="title {{(mb_strlen($pokemonCard['name'])>=7)?'fn-9':'' }}">{{$pokemonCard['name']}}</div>
-                                    <div class="title">{{$pokemonCard['num']}}</div>
-                                </div>
-                            @endforeach
-                            @foreach($deckCards['寶可夢道具'] as $pokemonCard)
-                                <div class="itemCard">
-                                    <div class="title {{(mb_strlen($pokemonCard['name'])>=7)?'fn-9':'' }}">{{$pokemonCard['name']}}</div>
-                                    <div class="title">{{$pokemonCard['num']}}</div>
-                                </div>
-                            @endforeach
+                            @if(isset($deckCards['物品卡']))
+                                @foreach($deckCards['物品卡'] as $pokemonCard)
+                                    <div class="itemCard">
+                                        <div class="title {{(mb_strlen($pokemonCard['name'])>=7)?'fn-9':'' }}">{{$pokemonCard['name']}}</div>
+                                        <div class="title">{{$pokemonCard['num']}}</div>
+                                    </div>
+                                @endforeach
+                            @endif
+                            @if(isset($deckCards['寶可夢道具']))
+                                @foreach($deckCards['寶可夢道具'] as $pokemonCard)
+                                    <div class="itemCard">
+                                        <div class="title {{(mb_strlen($pokemonCard['name'])>=7)?'fn-9':'' }}">{{$pokemonCard['name']}}</div>
+                                        <div class="title">{{$pokemonCard['num']}}</div>
+                                    </div>
+                                @endforeach
+                            @endif
                             <div id="item-subtotal">{{($deckCategoryTotal['物品卡']+$deckCategoryTotal['寶可夢道具'])}}</div>
                         </div>
                         <div>
                             <div id="support" >
-                                @foreach($deckCards['支援者卡'] as $pokemonCard)
-                                    <div class="supportCard">
-                                        <div class="title {{(mb_strlen($pokemonCard['name'])>=7)?'fn-9':'' }}">{{$pokemonCard['name']}}</div>
-                                        <div class="title">{{$pokemonCard['num']}}</div>
-                                    </div>
-                                @endforeach
+                                @if(isset($deckCards['支援者卡']))
+                                    @foreach($deckCards['支援者卡'] as $pokemonCard)
+                                        <div class="supportCard">
+                                            <div class="title {{(mb_strlen($pokemonCard['name'])>=7)?'fn-9':'' }}">{{$pokemonCard['name']}}</div>
+                                            <div class="title">{{$pokemonCard['num']}}</div>
+                                        </div>
+                                    @endforeach
+                                @endif
                                 <div id="support-subtotal">{{$deckCategoryTotal['支援者卡']}}</div>
                             </div>
                             <div id="area" >
-                                @foreach($deckCards['競技場卡'] as $pokemonCard)
-                                    <div class="areaCard">
-                                        <div class="title {{(mb_strlen($pokemonCard['name'])>=7)?'fn-9':'' }}">{{$pokemonCard['name']}}</div>
-                                        <div class="title">{{$pokemonCard['num']}}</div>
-                                    </div>
-                                @endforeach
+                                @if(isset($deckCards['競技場卡']))
+                                    @foreach($deckCards['競技場卡'] as $pokemonCard)
+                                        <div class="areaCard">
+                                            <div class="title {{(mb_strlen($pokemonCard['name'])>=7)?'fn-9':'' }}">{{$pokemonCard['name']}}</div>
+                                            <div class="title">{{$pokemonCard['num']}}</div>
+                                        </div>
+                                    @endforeach
+                                @endif
                                 <div id="area-subtotal">{{$deckCategoryTotal['競技場卡']}}</div>
                             </div>
                             <div id="deckTotal">

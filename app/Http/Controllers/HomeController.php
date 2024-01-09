@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Card;
+use App\Models\CardSeries;
 use App\Models\Deck;
 use App\Models\Event;
 use App\Models\Order;
@@ -67,7 +68,7 @@ class HomeController extends Controller
     public function card(Request $request)
     {
 
-        $queried = ['keyword'=>'','attribute'=>[], 'rarity'=>[], 'type'=>[],'competition'=>''];
+        $queried = ['keyword'=>'','attribute'=>[], 'rarity'=>[], 'type'=>[],'series'=>[],'competition'=>''];
 
         $types = config('cards.Pokemon.types');
         $attributes = config('cards.Pokemon.attributes');
@@ -89,6 +90,11 @@ class HomeController extends Controller
             $Cards = $Cards->whereIn('attribute',$attributeSelected);
             $queried['attribute'] = $attributeSelected;
         }
+        if($request->get('series') && !empty($request->get('series'))) {
+            $seriesSelected = $request->get('series');
+            $Cards = $Cards->whereIn('series_id',$seriesSelected);
+            $queried['series'] = $seriesSelected;
+        }
         if($request->get('type') && !empty($request->get('type'))) {
             $typeSelected = $request->get('type');
             $Cards = $Cards->whereIn('type',$typeSelected);
@@ -99,9 +105,16 @@ class HomeController extends Controller
             $Cards = $Cards->whereIn('rarity',$raritiesSelected);
             $queried['rarity'] = $raritiesSelected;
         }
+        if($request->get('competition')) {
+            $competition = 'ptcg_'.$request->get('competition');
+            $competition_number = app('Option')->$competition;
+            $Cards = $Cards->whereIn('competition_number',explode(',',$competition_number));
+            $queried['competition'] = $request->get('competition');
+        }
 
         $Cards = $Cards->orderBy('created_at','ASC')->paginate(24);
 
+        $CardSeries = CardSeries::all();
 
         return view('card',[
             'queried'=>$queried,
@@ -110,6 +123,7 @@ class HomeController extends Controller
             'rarities'=>$rarities,
             'attributes'=>$attributes,
             'competitions'=>$competitions,
+            'CardSeries'=>$CardSeries,
         ]);
     }
     public function deck(Request $request){

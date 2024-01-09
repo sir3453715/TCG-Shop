@@ -161,6 +161,7 @@ class AccountController extends Controller
         return redirect(route('card'))->with('message', '牌組已加入編輯!');
     }
 
+
     public function deckDel(Request $request,$id){
         $deck = Deck::find($id);
         if($deck){
