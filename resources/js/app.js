@@ -58,6 +58,7 @@ $(() => {
                 success:function(object){
                     $('#mini-cart-list').html(object.html);
                     $('#count').html(object.cart.count);
+                    $('.cart-count').html(object.cart.count);
                     $('#total').html(object.cart.total);
                     // swal({
                     //     title: '已成功加入購物車!',
@@ -79,6 +80,7 @@ $(() => {
                 success:function(object){
                     $('#mini-cart-list').html('<div class="col-12 align-self-center text-center">購物車內目前沒有商品</div>');
                     $('#count').html(0);
+                    $('.cart-count').html(0);
                     $('#total').html(0);
                 }
             });
@@ -116,6 +118,7 @@ $(() => {
                     let changeItem = object.cart.items[$id];
                     $('#mini-cart-list').html(object.html);
                     $('#count').html(object.cart.count);
+                    $('.cart-count').html(object.cart.count);
                     $('#total').html(object.cart.total);
                     $('#item-subtotal').html(object.cart.total);
                     $('#number-'+$id).val(changeItem['number']);

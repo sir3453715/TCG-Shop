@@ -194,6 +194,7 @@
                     let changeItem = object.cart.items[$id];
                     $('#mini-cart-list').html(object.html);
                     $('#count').html(object.cart.count);
+                    $('.cart-count').html(object.cart.count);
                     $('#total').html(object.cart.total);
                     $('#item-subtotal').html(object.cart.total);
                     $('#number-'+$id).val(changeItem['number']);
@@ -220,6 +221,7 @@
                     let changeItem = object.cart.items[$id];
                     $('#mini-cart-list').html(object.html);
                     $('#count').html(object.cart.count);
+                    $('.cart-count').html(object.cart.count);
                     $('#total').html(object.cart.total);
                     $('#item-subtotal').html(object.cart.total);
                     $('#number-'+$id).val(changeItem['number']);

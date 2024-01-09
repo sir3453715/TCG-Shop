@@ -53,10 +53,15 @@
 </div>
 
 {{--<div id="deckDownload-image">--}}
+{{--    <div class="text-center">--}}
+{{--        <img src="/storage/image/RHanWorkLogo.png" width="200px">--}}
+{{--        <h3>TCG Shop</h3>--}}
+{{--    </div>--}}
 {{--    <div class="row col-12 p-5">--}}
 {{--        @foreach($deck->deckCardCategoryInfo() as $cardType => $cards)--}}
 {{--            @foreach($cards as $card)--}}
 {{--                <div class="col-1 deck-list-card" style="background-image: url('{{$card['image']}}'); background-size: contain; background-repeat: no-repeat;">--}}
+{{--                <div class="col-1 deck-list-card">--}}
 {{--                    <span class="deck-card-count text-danger">{{$card['num']}}</span>--}}
 {{--                    <img class="img-fluid w-100" src="{{$card['image']}}" >--}}
 {{--                </div>--}}
