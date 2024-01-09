@@ -10,8 +10,12 @@
             <form role="form" class="cus-card-search">
                 <div class="row">
                     <div class="form-group col-lg-4 col-6">
-                        <label class="w-100" for="keyword">關鍵字</label>
-                        <input class="form-control" type="text" id="keyword" name="keyword" value="{{$queried['keyword']}}" placeholder="輸入關鍵字">
+                        <label class="w-100" for="series">系列</label>
+                        <select name="series[]" id="series" class="form-control select2" multiple>
+                            @foreach($CardSeries as $series)
+                                <option value="{{$series->id}}" {{(in_array($series->id,$queried['series']))?'selected':''}}>{{ trans($series->title) }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group col-lg-4 col-6">
                         <label class="w-100" for="type">卡牌類型</label>
@@ -39,14 +43,6 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-lg-4 col-6">
-                        <label class="w-100" for="series">系列</label>
-                        <select name="series[]" id="series" class="form-control select2" multiple>
-                            @foreach($CardSeries as $series)
-                                <option value="{{$series->id}}" {{(in_array($series->id,$queried['series']))?'selected':''}}>{{ trans($series->title) }}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
                     <div class="form-group col-lg-4 col-6">
                         <label class="w-100" for="competition">賽制</label>
@@ -57,6 +53,10 @@
                         </select>
                     </div>
 
+                    <div class="form-group col-lg-4 col-6">
+                        <label class="w-100" for="keyword">關鍵字</label>
+                        <input class="form-control" type="text" id="keyword" name="keyword" value="{{$queried['keyword']}}" placeholder="輸入關鍵字">
+                    </div>
 
                 </div>
                 <button type="submit" class="btn btn-yellow col-12 mt-3">
@@ -220,8 +220,8 @@
                     if($this[0].tagName === 'BUTTON'){
                         $this.html('從願望清單移除');
                     }else{
-                        $this.children('.fa-heart').addClass('fa-regular');
-                        $this.children('.fa-heart').removeClass('fa-solid');
+                        $this.children('.fa-heart').addClass('fa-solid');
+                        $this.children('.fa-heart').removeClass('fa-regular');
                     }
                 }
             }
