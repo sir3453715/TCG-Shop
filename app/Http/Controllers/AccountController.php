@@ -202,10 +202,11 @@ class AccountController extends Controller
 
     public function build($id,Request $request){
 
-        $deckCards = [];
         $deck = Deck::find($id);
-        if($deck->user_id != Auth::id() && $deck->user_id != ''){
-            return redirect(route('myAccount.myDeck'))->with('Errormessage', '無法獲得此牌組的構築表!!');
+        if($deck->user_id != ''&&$deck->user_id != 0){
+            if($deck->user_id != Auth::id()){
+                return redirect(route('myAccount.myDeck'))->with('Errormessage', '無法獲得此牌組的構築表!!');
+            }
         }
         $deckCards = $deck->deckBuildCategoryInfo();
         $deckCategoryTotal = $deck->deckBuildCategoryTotal();
