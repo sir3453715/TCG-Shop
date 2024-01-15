@@ -20,7 +20,7 @@
             </div>
             <h2 class="fs-1 fw-bold">卡片價格更新</h2>
             <p class="fs-5">全台最大卡片販售平台就在這裡！！</p>
-            <a href="#" type="button" class="btn btn-yellow">查看更多</a>
+            <a href="{{route('card')}}" type="button" class="btn btn-yellow">查看更多</a>
         </div>
         <div class="col-lg-7 contain" style="background-image:url({{'/storage/uploads/new-card-price-bg.jpg'}});background-size: contain; ">
             <div class="h-100">
@@ -89,6 +89,20 @@
 </div>
 
 
+<div class="modal fade" id="cus-card-info-modal" tabindex="-1" role="dialog" aria-labelledby="">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header row">
+                <div class="modal-tag-1 text-center col-6" id="ModelCardTitle"></div>
+                <div class="modal-tag-2 text-center col-6">卡片詳情</div>
+            </div>
+            <div class="modal-body">
+                <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="row gx-5" id="ModalCardInfoHtml"></div>
+            </div>
+        </div><!-- //modal-content -->
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
 
 
 
@@ -137,7 +151,6 @@
             return labels;
         }
         function getPriceChart(chartValues){
-            console.log(chartValues);
             var data = [];
             chartValues.forEach(function (value){
                 let valueDate = moment(value.dateTime).format('YYYY-MM-DD');
