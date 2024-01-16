@@ -27,8 +27,12 @@ Route::get('/deckAddToAccount/{deck_id}', 'HomeController@deckAddToAccount')->na
 Route::get('/build/{deck_id}', 'AccountController@build')->name('build');
 Route::get('/search', 'HomeController@search')->name('search');
 
+Route::get('/terms', 'HomeController@terms')->name('terms');
+Route::get('/privacy', 'HomeController@privacy')->name('privacy');
+
 Route::get('/cart', 'OrderController@cart')->name('cart');
 Route::get('/invoice/{seccode}', 'OrderController@invoice')->name('invoice');
+
 
 
 Route::group(['prefix'=>'myAccount','as'=>'myAccount.'],function (){

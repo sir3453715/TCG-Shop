@@ -12,10 +12,10 @@
                         <p class="m-0">© 2024 Trading Card. All rights reserved.</p>
                       </li>
                       <li class="list-group-item">
-                        <a href="">Terms of Service.</a>
+                        <a href="{{route('terms')}}">Terms of Service.</a>
                       </li>
                       <li class="list-group-item">
-                        <a href="">Privacy Policy</a>
+                        <a href="{{route('privacy')}}">Privacy Policy</a>
                       </li>
                     </ul>
                 <div id="to-top-btn">

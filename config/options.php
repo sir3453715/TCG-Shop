@@ -33,5 +33,15 @@ return [
             'placeholder'=>'請用,分隔賽制標',
             'help'=>'請用,分隔賽制標'
         ],
+        'TOS' => [
+            'label' => '服務條款',
+            'type'=>'editor',
+            'height'=>300,
+        ],
+        'Privacy' => [
+            'label' => '隱私權政策',
+            'type'=>'editor',
+            'height'=>300,
+        ],
     ],
 ];
