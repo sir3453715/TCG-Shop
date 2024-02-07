@@ -121,6 +121,8 @@ Route::group(['prefix'=>'admin', 'middleware' => ['web', 'admin.area'],'as'=>'ad
 
 
     Route::group(['prefix' => 'card', 'as' => 'card.'], function(){
+        Route::post('/importCard', 'Admin\Menu\CardsController@importCard')
+            ->name('importCard');
         Route::get('/reinstall', 'Admin\Menu\CardsController@reinstall')
             ->name('reinstall');
         Route::post('/rarity', 'Admin\Menu\CardsController@rarity')

@@ -27,9 +27,17 @@
                 @role('administrator')
                 <a href="{{route('admin.card.reinstall')}}"><button type="button" class="btn btn-info">重置卡牌資料</button></a>
                 @endrole
-
                 <a href="{{route('admin.card.create')}}"><button type="button" class="btn btn-primary">新增</button></a>
             </div>
+            @role('administrator')
+            <div class="text-left form-group">
+                <form action="{{ route('admin.card.importCard') }}" method="post" class="form-btn form-inline" enctype="multipart/form-data">
+                    @csrf
+                    <input type="file" class="form-control-file w-auto" name="file" id="file">
+                    <button type="submit" class="btn btn-danger">匯入新卡</button>
+                </form>
+            </div>
+            @endrole
             <form class="filter">
                 <div class="card">
                     <div class="card-body">
@@ -67,6 +75,15 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-6 col-sm-2">
+                                    <label class="field-name" for="series">系列</label>
+                                    <select id="series" class="form-control form-required " name="series" >
+                                        <option value="" >請選擇</option>
+                                        @foreach($seriess as $series)
+                                            <option value="{{$series->id}}"  {!! $html->selectSelected($series->id,$queried['series']) !!}>{{$series->title}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-6 col-sm-2">
                                     <label class="field-name" for="competition">賽制</label>
                                     <select id="competition" class="form-control form-required " name="competition" >
                                         <option value="" >請選擇</option>
@@ -95,6 +112,7 @@
                                 <th>#</th>
                                 <th>名稱</th>
                                 <th>圖片</th>
+                                <th>卡價</th>
                                 <th>類型</th>
                                 <th>屬性</th>
                                 <th>稀有度</th>
@@ -111,20 +129,15 @@
                                         <a href="{{route('admin.card.edit',['card'=>$card->id])}}">{{$card->name}}</a>
                                     </td>
                                     <td>
-                                        <img class="zoomIn-img" src="{{$card->image}}" width="100px">
-{{--                                        <img src="{{$card->image}}" width="400px">--}}
+{{--                                        <img class="zoomIn-img" src="{{$card->image}}" width="100px">--}}
+                                        <img src="{{$card->image}}" width="400px">
+                                    </td>
+                                    <td>
+                                        <input type="number" step="1" class="change_price form-control" data-id="{{$card->id}}" value="{{$card->default_price}}">
                                     </td>
                                     <td>{{$card->type}}</td>
                                     <td>{{$card->attribute}}</td>
                                     <td>{{$card->rarity}}</td>
-{{--                                    <td>--}}
-{{--                                        <select class="form-control form-required rarity-change {{($card->rarity)?'bg-info':''}}" data-id="{{$card->id}}">--}}
-{{--                                            <option value="" >請選擇</option>--}}
-{{--                                            @foreach($rarities as $rarity)--}}
-{{--                                                <option value="{{$rarity}}" {!! $html->selectSelected($rarity,$card->rarity) !!}>{{ trans($rarity) }}</option>--}}
-{{--                                            @endforeach--}}
-{{--                                        </select>--}}
-{{--                                    </td>--}}
                                     <td>{{$card->series->title}}</td>
                                     <td>
                                         @if(in_array($card->competition_number,explode(',',app('Option')->ptcg_standard)))
@@ -169,7 +182,7 @@
 @push('admin-app-scripts')
     <script type="text/javascript">
 
-        $('body').on('change','.rarity-change',function (e){
+        $('body').on('change','.change_price',function (e){
             let $this = $(this);
             if($(this).val() != ''){
                 $.ajax({
@@ -179,7 +192,7 @@
                     data: {
                         '_token': $('meta[name="csrf-token"]').attr('content'),
                         'id': $(this).data('id'),
-                        'rarity': $(this).val(),
+                        'price': $(this).val(),
                     },
                     success:function(object){
                         $this.addClass("bg-info");

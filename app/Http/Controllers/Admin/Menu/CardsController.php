@@ -18,7 +18,7 @@ class CardsController extends Controller
      */
     function index(Request $request){
 
-        $queried = ['keyword'=>'','attribute'=>'', 'rarity'=>'', 'type'=>'','competition'=>''];
+        $queried = ['keyword'=>'','attribute'=>'', 'rarity'=>'', 'type'=>'','competition'=>'','series'=>''];
         $cards = Card::whereNotNull('id');
         if($request->get('keyword')) {
             $keyword = $request->get('keyword');
@@ -40,10 +40,10 @@ class CardsController extends Controller
             $cards = $cards->where('type',$type);
             $queried['type'] = $type;
         }
-        if($request->get('seriess')) {
-            $seriess = $request->get('seriess');
-            $cards = $cards->whereIn('set_id', $seriess);
-            $queried['seriess'] = $seriess;
+        if($request->get('series')) {
+            $series = $request->get('series');
+            $cards = $cards->where('series_id', $series);
+            $queried['series'] = $series;
         }
         if($request->get('competition')) {
             $competition = $request->get('competition');
@@ -54,6 +54,7 @@ class CardsController extends Controller
 
         $cards = $cards->orderBy('created_at','ASC')->paginate(25);
 
+        $seriess = CardSeries::orderBy('created_at','ASC')->get();
         $types = config('cards.Pokemon.types');
         $attributes = config('cards.Pokemon.attributes');
         $rarities = config('cards.Pokemon.rarities') ;
@@ -65,6 +66,7 @@ class CardsController extends Controller
             'rarities'=>$rarities,
             'types'=>$types,
             'attributes'=>$attributes,
+            'seriess'=>$seriess,
         ]);
 
     }
@@ -419,11 +421,11 @@ class CardsController extends Controller
     }
 
     public function changeRarity(Request $request){
-        $rarity = $request->get('rarity');
+        $price = $request->get('price');
         $card = Card::find($request->get('id'));
-        if($rarity) {
+        if($price) {
             $data = [
-                'rarity'=>$request->get('rarity'),
+                'default_price'=>$request->get('price'),
             ];
             $card->fill($data);
             $card->save();
@@ -479,4 +481,100 @@ class CardsController extends Controller
         ]);
     }
 
+
+    public function importCard(Request $request)
+    {
+        $attributes = config('cards.Pokemon.attributes');
+        $attributes['--']='--';
+
+        if($request->hasFile('file')) {
+            $extension = $request->file('file')->getClientOriginalExtension(); //副檔名
+            $path1 = time() . "." . $extension;    //重新命名
+            $request->file('file')->move(storage_path('app') . '/temp', $path1); //移動至指定目錄
+            $path = storage_path('app') . '/temp/' . $path1;
+//
+            $excel = Excel::toCollection('', $path);
+            foreach ($excel as $key => $sheets){ // 各個表分別撈出來
+                unset($sheets[0]);
+                foreach ($sheets  as $card){
+                    $nameClean = str_replace(' ','',$card[3]);
+                    $nameArray = explode(PHP_EOL,$nameClean);
+                    $name = end($nameArray);
+                    $attribute= ($card[9])? $attributes[str_replace(['https://asia.pokemon-card.com/various_images/energy/','.png'],'',$card[9])] :'';
+                    $series_code= ($card[6])?str_replace(['https://asia.pokemon-card.com/tw/card-img/mark/','.png'],'',$card[6]):'';
+                    if($card[11]){
+                        $type = ($card[11]=='招式')?'寶可夢卡':$card[11];
+                    }else{
+                        $type = ($name == '雙重渦輪能量')?'特殊能量卡':'';
+                    }
+                    $skill = [];
+
+                    $skill[0]=[
+                        'name'=>($card[13])??'',
+                        'attribute'=>($card[14])?$this->cleanImportUselessImageHTML($card[14],'skill'):'',
+                        'damage'=>($card[15])??'',
+                        'desc'=>($card[16])??'',
+                    ];
+                    $skill[1]=[
+                        'name'=>($card[17])??'',
+                        'attribute'=>($card[18])?$this->cleanImportUselessImageHTML($card[18],'skill'):'',
+                        'damage'=>($card[19])??'',
+                        'desc'=>($card[20])??'',
+                    ];
+                    $skill[2]=[
+                        'name'=>($card[21])??'',
+                        'attribute'=>($card[22])?$this->cleanImportUselessImageHTML($card[22],'skill'):'',
+                        'damage'=>($card[23])??'',
+                        'desc'=>($card[24])??'',
+                    ];
+                    $skill[3]=[
+                        'name'=>($card[25])??'',
+                        'attribute'=>($card[26])?$this->cleanImportUselessImageHTML($card[26],'skill'):'',
+                        'damage'=>($card[27])??'',
+                        'desc'=>($card[28])??'',
+                    ];
+
+                    $series = CardSeries::where('title',$card[5])->first();
+                    if($series){
+                        $series_id = $series->id;
+                    }else{
+                        $seriesData = [
+                            'title'=>$card[5],
+                            'serial_number'=>($series_code)??null,
+                            'sort'=>'10',
+                            'kingdom'=>'PTCG',
+                        ];
+                        $series = CardSeries::create($seriesData);
+                        $series_id = $series->id;
+                    }
+
+                    $cardData = [
+                        'lang' => 'tw',
+                        'tw_id' => '0',
+                        'name' => $name,
+                        'image'=>$card[4],
+                        'series_id'=>$series_id,
+                        'serial_number'=>($card[8])??null,
+                        'attribute'=>$attribute,
+                        'type'=>$type,
+                        'hp'=>(is_numeric($card[10]))?$card[10]:null,
+                        'skill'=>json_encode($skill),
+                        'weakpoint'=>($card[29])?$attributes[$this->WRE_Datacheck($card[29],'attribute')]:'',
+                        'weakpoint_value'=>($card[29])?$this->WRE_Datacheck($card[29]):'',
+                        'resist'=>($card[30])?$attributes[$this->WRE_Datacheck($card[30],'attribute')]:'',
+                        'resist_value'=>($card[30])?$this->WRE_Datacheck($card[30]):'',
+                        'escape'=>($card[31])?count($this->cleanImportUselessImageHTML($card[31])):'',
+                        'rarity'=>'',
+                        'competition_number'=>($card[7])??null,
+                        'default_price'=>'50',
+                        'kingdom'=>'PTCG',
+                    ];
+                    $ptcgTWCard = Card::create($cardData);
+                }
+            }
+            unlink(storage_path('app/temp/'.$path1));
+        }
+
+        return redirect(route('admin.card.index'))->with('message', '卡牌已全部重置匯入!');
+    }
 }
