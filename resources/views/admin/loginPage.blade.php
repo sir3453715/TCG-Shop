@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Colorlib">
-    <title>global Meihao Express 後台系統</title>
+    <title>TCG Shop後台系統</title>
     <link href="{{ asset('css/admin/admin.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/custom-admin.css') }}" rel="stylesheet">
     <style>
