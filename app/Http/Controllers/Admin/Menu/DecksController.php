@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DecksController extends Controller
 {
@@ -380,5 +381,79 @@ class DecksController extends Controller
             'deckCategoryTotal'=>$deckCategoryTotal
         ]);
 
+    }
+
+
+    public function importDeck(Request $request)
+    {
+        $attributes = config('cards.Pokemon.attributes');
+        $attributes['--']='--';
+
+        if($request->hasFile('file')) {
+            $extension = $request->file('file')->getClientOriginalExtension(); //副檔名
+            $path1 = time() . "." . $extension;    //重新命名
+            $request->file('file')->move(storage_path('app') . '/temp', $path1); //移動至指定目錄
+            $path = storage_path('app') . '/temp/' . $path1;
+
+            $energy = ['PSY','FIR','MET','DAR','FIG','LIG','WAT','GRA'];
+            $excel = Excel::toCollection('', $path);
+            foreach ($excel as $key => $sheets){ // 各個表分別撈出來
+                $deckTitle = $sheets[0][0];
+                $competition = 'expanded';
+                if($sheets[0][1]=='標準賽'){
+                    $competition = 'standard';
+                }
+                unset($sheets[0]);
+                unset($sheets[1]);
+                $deckCount = 0;
+                $deckInfo = [];
+                foreach ($sheets  as $importCard){
+                    if(in_array($importCard[2],$energy)){
+                        $card = Card::where('serial_number',$importCard[2])->first();
+                        if($card){
+                            $deckInfo['card'][]=[
+                                'card_id' => $card->id,
+                                'card_num' => $importCard[3],
+                            ];
+                            $deckCount +=  $importCard[3];
+                        }
+                    }else{
+                        $series = CardSeries::where('serial_number',$importCard[0])->first();
+                        if($series){
+                            $card = Card::where('series_id',$series->id)->where('serial_number',$importCard[2])->first();
+                            if($card){
+                                $deckInfo['card'][]=[
+                                    'card_id' => $card->id,
+                                    'card_num' => $importCard[3],
+                                ];
+                                $deckCount +=  $importCard[3];
+                            }
+                        }
+                    }
+
+                }
+                $deckInfo['count']=$deckCount;
+
+                $string = "abcdefghijklmnopqrstuvwxyz@$&*+-_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+                $code = substr(str_shuffle($string), rand(1,10), 7);
+
+                $data=[
+                    'user_id'=>0,
+                    'title'=>$deckTitle,
+                    'competition'=>$competition,
+                    'is_recommend'=>'1',
+                    'card_info'=>serialize($deckInfo),
+                    'code'=>$code,
+                    'image'=>'',
+                ];
+
+                $deck = Deck::create($data);
+                ActionLog::create_log($deck,'新增');
+
+            }
+            unlink(storage_path('app/temp/'.$path1));
+        }
+
+        return redirect(route('admin.deck.index'))->with('message', '牌組已匯入!');
     }
 }

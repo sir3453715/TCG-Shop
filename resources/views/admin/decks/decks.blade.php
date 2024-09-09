@@ -26,6 +26,15 @@
             <div class="text-right form-group">
                 <a href="{{route('admin.deck.create')}}"><button type="button" class="btn btn-primary">新增</button></a>
             </div>
+            @role('administrator')
+            <div class="text-left form-group">
+                <form action="{{ route('admin.deck.importDeck') }}" method="post" class="form-btn form-inline" enctype="multipart/form-data">
+                    @csrf
+                    <input type="file" class="form-control-file w-auto" name="file" id="file">
+                    <button type="submit" class="btn btn-danger">匯入牌組</button>
+                </form>
+            </div>
+            @endrole
             <form class="filter">
                 <div class="card">
                     <div class="card-body">

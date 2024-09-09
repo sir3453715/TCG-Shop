@@ -2,8 +2,8 @@
 <project version="4">
   <component name="SshConfigs">
     <configs>
-      <sshConfig authType="PASSWORD" host="139.162.76.12" id="65993a48-539b-415f-923c-a972b3372163" port="22" customName="demo" nameFormat="CUSTOM" username="root">
-        <option name="customName" value="demo" />
+      <sshConfig authType="PASSWORD" host="172.234.94.231" id="5c128617-af14-42dc-86f9-e2df339f7e48" port="22" customName="rhan.work" nameFormat="CUSTOM" username="www-data">
+        <option name="customName" value="rhan.work" />
       </sshConfig>
     </configs>
   </component>

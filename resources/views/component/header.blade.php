@@ -13,6 +13,8 @@
         <div class="d-flex">
             <div id="navbarNav" class="me-3">
                 <ul class="navbar-nav">
+{{--                    <li class="nav-item position-relative"><a href="{{ url('/lang/en') }}">English</a></li>--}}
+{{--                    <li class="nav-item position-relative"><a href="{{ url('/lang/zh_tw') }}">繁體中文</a></li>--}}
 {{--                    <li class="nav-item">--}}
 {{--                        <a class="nav-link" href="">需求詢價</a>--}}
 {{--                    </li>--}}

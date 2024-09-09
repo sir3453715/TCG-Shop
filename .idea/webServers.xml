@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="86ea2f6c-5337-4e55-a844-17986ee01f3f" name="demo host" url="https://rhan.work/">
-        <fileTransfer rootFolder="/var/www/rhan.work/htdocs" accessType="SFTP" host="139.162.76.12" port="22" sshConfigId="65993a48-539b-415f-923c-a972b3372163" sshConfig="demo">
+      <webServer id="131736bf-62cc-4002-86b4-8450b9ebf899" name="RHan-Work">
+        <fileTransfer rootFolder="/rhan.work/htdocs" accessType="SFTP" host="172.234.94.231" port="22" sshConfigId="5c128617-af14-42dc-86f9-e2df339f7e48" sshConfig="rhan.work">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

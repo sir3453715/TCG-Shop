@@ -14,9 +14,12 @@ use App\Models\PunchCard;
 use App\Models\Wishlist;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -351,5 +354,12 @@ class HomeController extends Controller
     }
 
 
+    public function setLang(Request $request, $lang){
+
+        App::setLocale($lang);
+        Session::put('locale', App::getLocale());
+
+        return Redirect::back();
+    }
 
 }

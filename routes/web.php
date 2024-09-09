@@ -33,7 +33,7 @@ Route::get('/privacy', 'HomeController@privacy')->name('privacy');
 Route::get('/cart', 'OrderController@cart')->name('cart');
 Route::get('/invoice/{seccode}', 'OrderController@invoice')->name('invoice');
 
-
+Route::get('/lang/{lang}', 'HomeController@setLang');
 
 Route::group(['prefix'=>'myAccount','as'=>'myAccount.'],function (){
     Route::get('/dashboard', 'AccountController@dashboard')->name('dashboard');
@@ -133,6 +133,8 @@ Route::group(['prefix'=>'admin', 'middleware' => ['web', 'admin.area'],'as'=>'ad
     Route::group(['prefix' => 'deck', 'as' => 'deck.'], function(){
         Route::get('/build/{deck}', 'Admin\Menu\DecksController@build')
             ->name('build');
+        Route::post('/importDeck', 'Admin\Menu\DecksController@importDeck')
+            ->name('importDeck');
     });
 
     Route::group(['prefix' => 'order', 'as' => 'order.'], function(){

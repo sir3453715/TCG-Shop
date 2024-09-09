@@ -60,10 +60,10 @@ $(() => {
                     $('#count').html(object.cart.count);
                     $('.cart-count').html(object.cart.count);
                     $('#total').html(object.cart.total);
-                    // swal({
-                    //     title: '已成功加入購物車!',
-                    //     icon: "success",
-                    // });
+                    swal({
+                        title: '已成功加入購物車!',
+                        icon: "success",
+                    });
                 }
             });
         });
@@ -124,12 +124,12 @@ $(() => {
                     $('#number-'+$id).val(changeItem['number']);
                     $('#price-'+$id).html(parseInt(changeItem['price'])/parseInt(changeItem['number']));
                     $('#total-'+$id).html(changeItem['price']);
-                    // swal({
-                    //     title: '已成功加入購物車!',
-                    //     icon: "success",
-                    //     buttons: false,
-                    //     timer: 2000,
-                    // });
+                    swal({
+                        title: '已成功加入購物車!',
+                        icon: "success",
+                        buttons: false,
+                        timer: 2000,
+                    });
                 }
             });
         });

@@ -89,11 +89,11 @@
                 <div class="p-3">
                     <div class="col mb-2">
                         <label for="buyer_name" class="form-label">收件人:</label>
-                        <input type="text" class="form-control" id="buyer_name" name="buyer_name" value="{{$user->name}}">
+                        <input type="text" class="form-control" id="buyer_name" name="buyer_name" value="{{($user)?$user->name:''}}" required>
                     </div>
                     <div class="col mb-2">
                         <label for="buyer_phone" class="form-label">電話:</label>
-                        <input type="text" class="form-control" id="buyer_phone" name="buyer_phone" value="{{$user->phone}}">
+                        <input type="text" class="form-control" id="buyer_phone" name="buyer_phone" value="{{($user)?$user->phone:''}}" required>
                     </div>
 {{--                    <div class="col mb-2">--}}
 {{--                        <label for="" class="form-label">信箱:</label>--}}
@@ -101,11 +101,11 @@
 {{--                    </div>--}}
                     <div class="col mb-2">
                         <label for="buyer_address" class="form-label">詳細地址:</label>
-                        <input type="text" class="form-control" id="buyer_address" name="buyer_address" value="{{$user->address}}">
+                        <input type="text" class="form-control" id="buyer_address" name="buyer_address" value="{{($user)?$user->address:''}}" required>
                     </div>
                     <div class="col mb-2">
                         <label for="shipment" class="form-label">取件方式:</label>
-                        <select class="form-select bg-white" id="shipment" name="shipment">
+                        <select class="form-select bg-white" id="shipment" name="shipment" required>
                             <option value="" hidden>請選擇</option>
                             @foreach($orderDefaultSetting['shipment'] as $value => $shipment)
                                 <option value="{{$value}}">{{$shipment['title']}}</option>
@@ -152,7 +152,7 @@
 
                     <div class="col mb-2">
                         <label for="payment" class="form-label">付款方式:</label>
-                        <select class="form-select bg-white" id="payment" name="payment">
+                        <select class="form-select bg-white" id="payment" name="payment" required>
                             <option value="" hidden>請選擇</option>
                             @foreach($orderDefaultSetting['payment'] as $value => $payment)
                                 <option value="{{$value}}" >{{$payment['title']}}</option>

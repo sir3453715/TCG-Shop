@@ -28,7 +28,8 @@
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
                                 <div class="form-inline">
-                                    <span class="mr-3"> Hi! {{ \Illuminate\Support\Facades\Auth::user()->name  }}</span>
+                                    <span class="mr-3"> 嗨! {{ \Illuminate\Support\Facades\Auth::user()->name  }}</span>
+{{--                                    <span class="mr-3"> {{ __('index.index.Hi') }}! {{ \Illuminate\Support\Facades\Auth::user()->name  }}</span>--}}
                                     <button class="nav-link btn btn-sm text-danger">登出</button>
                                 </div>
                             </form>
